@@ -23,7 +23,7 @@ with io.open('README.md', encoding='utf-8') as readme_file:
 setup(
     name='wagtail_content_import',
     version=__version__,
-    description='A module for Wagtail that provides functionality for importing page content from third-party sources.'
+    description='A module for Wagtail that provides functionality for importing page content from third-party sources.',
     author='Samir Shah',
     author_email='samir.shah@torchbox.com',
     url='https://github.com/torchbox/wagtail-content-import',
@@ -55,7 +55,7 @@ setup(
         'google-auth-oauthlib<0.4',
     ],
     extras_require={
-        'test': testing_extras,
+        'test': test_requires,
     },
     zip_safe=False,
 )
