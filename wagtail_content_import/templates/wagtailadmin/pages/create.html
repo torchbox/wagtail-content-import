@@ -1,0 +1,11 @@
+{% extends "wagtailadmin/pages/create.html" %}
+{% load i18n %}
+{% load wagtailadmin_tags %}
+
+{% block extra_footer_actions %}
+{% if content_type.model_class.can_import_from_google %}
+    <li style="float: right">
+        <a href="/" class="button icon icon-site">Import from Google Documents</a>
+    </li>
+{% endif %}
+{% endblock %}
