@@ -3,7 +3,9 @@ import logging
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.http import urlencode
 from django.views.generic import TemplateView, View
+from django.shortcuts import render
 
 from wagtail.admin.forms.search import SearchForm
 
@@ -49,9 +51,12 @@ class GoogleDocImportChooserView(TemplateView):
         return super().get(request, *args, *kwargs)
 
     def post(self, request, *args, **kwargs):
-        redirect_url = reverse('cms_news_google_doc_select_parent')
-        redirect_url += '?' + urlencode({'google-doc-id': request.POST['docid']})
-        return HttpResponseRedirect(redirect_url)
+        return HttpResponseRedirect(
+            reverse(
+                'wagtailadmin_pages:add',
+                args=(kwargs['app_label'], kwargs['model_name'], kwargs['parent_page_id'])
+            ) + '?google-doc-id={}'.format(request.POST['docid'])
+        )
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)

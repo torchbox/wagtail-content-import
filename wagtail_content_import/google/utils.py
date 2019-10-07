@@ -1,4 +1,5 @@
 import json
+import uuid
 
 from django.conf import settings
 from django.urls import reverse
@@ -9,6 +10,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from .models import OAuthCredentials
+from .parser import GoogleDocumentParser
 
 
 def get_flow(request):
@@ -92,3 +94,8 @@ def parse_document(credentials, doc_id):
     service = build('docs', 'v1', credentials=credentials)
     document = service.documents().get(documentId=doc_id).execute()
     return GoogleDocumentParser(document).parse()
+
+def create_streamfield_block(block):
+    # Add an ID to the block, because wagtail-react-streamfield borks without one
+    block['id'] = str(uuid.uuid4())
+    return block
