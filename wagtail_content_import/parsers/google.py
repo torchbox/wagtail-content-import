@@ -1,4 +1,4 @@
-from ..base import DocumentParser, StreamElement
+from wagtail_content_import.wagtail_content_import.base import DocumentParser, StreamElement
 from django.utils.html import escape
 
 

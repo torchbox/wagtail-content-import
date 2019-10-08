@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include
 
 import json
 
@@ -13,13 +13,12 @@ from wagtail.core import hooks
 from .utils import parse_document, get_oauth_credentials, create_streamfield_block
 
 from . import urls
-from . import views
 
 
 @hooks.register('register_admin_urls')
 def register_admin_urls():
     return [
-        path('content-import-google/', include(urls, namespace='content_import_google')),
+        path('import/', include(urls, namespace='content_import_google')),
     ]
 
 @hooks.register("before_create_page")

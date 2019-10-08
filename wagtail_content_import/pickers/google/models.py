@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from ..models import ContentImportMixin
+from ...models import ContentImportMixin
 
 
 class OAuthCredentials(models.Model):

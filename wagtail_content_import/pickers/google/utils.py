@@ -10,7 +10,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from .models import OAuthCredentials
-from .parser import GoogleDocumentParser
+from ...parsers.google import GoogleDocumentParser
 
 
 def get_flow(request):
