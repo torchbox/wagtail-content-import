@@ -10,9 +10,10 @@ from wagtail.admin.action_menu import PageActionMenu
 from wagtail.admin.views.pages import get_valid_next_url_from_request
 from wagtail.core import hooks
 
-from .utils import parse_document, get_oauth_credentials, create_streamfield_block
+from .utils import parse_document, get_oauth_credentials
 
 from . import urls
+from ...mappers.default import Mapper
 
 
 @hooks.register('register_admin_urls')
@@ -28,14 +29,14 @@ def create_from_google_doc(request, parent_page, page_class):
             get_oauth_credentials(request.user), request.GET["google-doc-id"]
         )
         title = parsed_doc['title']
-        body = [create_streamfield_block(element) for element in parsed_doc['elements']]
+        mapper = Mapper()
+        body = mapper.map(parsed_doc['elements'])
         page = page_class(
             title=title,
             slug=slugify(title),
             body=json.dumps(body),
             owner=request.user,
         )
-        # import pdb; pdb.set_trace()
         edit_handler = page_class.get_edit_handler()
         edit_handler = edit_handler.bind_to(request=request, instance=page)
         form_class = edit_handler.get_form_class()

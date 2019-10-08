@@ -128,7 +128,7 @@ class GoogleDocumentParser(DocumentParser):
         def close_current_block():
             if current_block:
                 blocks.append({
-                    'type': 'paragraph',
+                    'type': 'html',
                     'value': ''.join(current_block)
                 })
                 current_block.clear()
