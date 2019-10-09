@@ -29,7 +29,8 @@ def create_from_google_doc(request, parent_page, page_class):
             get_oauth_credentials(request.user), request.GET["google-doc-id"]
         )
         title = parsed_doc['title']
-        mapper = StreamFieldMapper(parsed_doc['elements'])
+        mapper_class = page_class.mapper
+        mapper = mapper_class(parsed_doc['elements'])
         body = mapper.map()
         page = page_class(
             title=title,

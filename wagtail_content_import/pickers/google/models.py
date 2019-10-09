@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from ...mappers.streamfield import StreamFieldMapper
 
 
 class OAuthCredentials(models.Model):
@@ -17,5 +18,4 @@ class GoogleContentImportMixin:
 
     can_import_from_google = True
 
-    class Meta:
-        abstract = True
+    mapper = StreamFieldMapper
