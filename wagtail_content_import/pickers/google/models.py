@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.db import models
 
-from ...models import ContentImportMixin
-
 
 class OAuthCredentials(models.Model):
 
@@ -15,12 +13,9 @@ class OAuthCredentials(models.Model):
     data = models.TextField(blank=True)
 
 
-class GoogleContentImportMixin(ContentImportMixin):
+class GoogleContentImportMixin:
 
     can_import_from_google = True
-
-    def parse_document(self, document):
-        raise NotImplementedError
 
     class Meta:
         abstract = True

@@ -19,7 +19,7 @@ from ...mappers.streamfield import StreamFieldMapper
 @hooks.register('register_admin_urls')
 def register_admin_urls():
     return [
-        path('import/', include(urls, namespace='content_import_google')),
+        path('content-import-google/', include(urls, namespace='content_import_google')),
     ]
 
 @hooks.register("before_create_page")
