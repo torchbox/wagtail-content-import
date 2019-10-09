@@ -13,7 +13,7 @@ from wagtail.core import hooks
 from .utils import parse_document, get_oauth_credentials
 
 from . import urls
-from ...mappers.default import Mapper
+from ...mappers.default import StreamFieldMapper
 
 
 @hooks.register('register_admin_urls')
@@ -29,8 +29,8 @@ def create_from_google_doc(request, parent_page, page_class):
             get_oauth_credentials(request.user), request.GET["google-doc-id"]
         )
         title = parsed_doc['title']
-        mapper = Mapper()
-        body = mapper.map(parsed_doc['elements'])
+        mapper = StreamFieldMapper(parsed_doc['elements'])
+        body = mapper.map()
         page = page_class(
             title=title,
             slug=slugify(title),

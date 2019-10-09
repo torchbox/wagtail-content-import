@@ -94,8 +94,3 @@ def parse_document(credentials, doc_id):
     service = build('docs', 'v1', credentials=credentials)
     document = service.documents().get(documentId=doc_id).execute()
     return GoogleDocumentParser(document).parse()
-
-def create_streamfield_block(block):
-    # Add an ID to the block, because wagtail-react-streamfield borks without one
-    block['id'] = str(uuid.uuid4())
-    return block
