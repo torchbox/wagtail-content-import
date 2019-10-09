@@ -1,11 +1,13 @@
 from wagtail.utils.apps import get_app_submodules
+from .google import GoogleDocumentParser
 
 _searched_for_parsers = False
 
 _parser_registry = {}
+_parser_registry_default = {'application/vnd.google-apps.document': GoogleDocumentParser}
 
 
-class register_parser:
+class registerParser:
 
     def __init__(self, mime_type):
         self.mime_type = mime_type
@@ -26,4 +28,11 @@ def search_for_parsers():
 
 def get_parser(mime_type):
     search_for_parsers()
-    return _parser_registry.get(mime_type)
+    if _parser_registry.get(mime_type):
+        return _parser_registry.get(mime_type)
+    elif _parser_registry_default.get(mime_type):
+        return _parser_registry_default.get(mime_type)
+    return None
+
+
+

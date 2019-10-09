@@ -1,9 +1,7 @@
-from wagtail_content_import.wagtail_content_import.base import DocumentParser
+from .base import DocumentParser
 from django.utils.html import escape
 
-from .registry import register_parser
 
-@register_parser('application/vnd.google-apps.document')
 class GoogleDocumentParser(DocumentParser):
 
     def __init__(self, document):

@@ -13,7 +13,7 @@ from wagtail.core import hooks
 from .utils import parse_document, get_oauth_credentials
 
 from . import urls
-from ...mappers.default import StreamFieldMapper
+from ...mappers.streamfield import StreamFieldMapper
 
 
 @hooks.register('register_admin_urls')

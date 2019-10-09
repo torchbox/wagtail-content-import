@@ -6,8 +6,6 @@ def add_streamfield_block_id(block):
     block['id'] = str(uuid4())
     return block
 
-
-
 def rename(element, new_type):
     element['type'] = new_type
     return element
