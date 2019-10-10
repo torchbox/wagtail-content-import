@@ -12,10 +12,3 @@ class OAuthCredentials(models.Model):
     )
     # Data is stored as JSON, but we use a TextField for database compatibility
     data = models.TextField(blank=True)
-
-
-class GoogleContentImportMixin:
-
-    can_import_from_google = True
-
-    mapper = StreamFieldMapper

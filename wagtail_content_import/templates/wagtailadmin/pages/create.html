@@ -3,7 +3,7 @@
 {% load wagtailadmin_tags %}
 
 {% block extra_footer_actions %}
-{% if content_type.model_class.can_import_from_google %}
+{% if content_type.model_class.can_import %}
     <li style="float: right">
         <a href="{% url 'content_import_google:choose' content_type.app_label content_type.model parent_page.id %}{% if next %}?next={{ next }}{% endif %}" class="button icon icon-site">Import from Google Documents</a>
     </li>
