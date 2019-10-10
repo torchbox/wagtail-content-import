@@ -6,6 +6,7 @@ def add_streamfield_block_id(block):
     block['id'] = str(uuid4())
     return block
 
-def rename(element, new_type):
-    element['type'] = new_type
-    return element
+
+def to_tuple(element, new_type=None):
+    type = new_type if new_type else element['type']
+    return (type, element['value'])

@@ -35,7 +35,7 @@ def create_from_google_doc(request, parent_page, page_class):
         page = page_class(
             title=title,
             slug=slugify(title),
-            body=json.dumps(body),
+            body=body,
             owner=request.user,
         )
         edit_handler = page_class.get_edit_handler()
