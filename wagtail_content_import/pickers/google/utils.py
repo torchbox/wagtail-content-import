@@ -2,7 +2,9 @@ import json
 import uuid
 
 from django.conf import settings
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from dateutil.parser import parse
 import google.oauth2.credentials
@@ -10,6 +12,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from .models import OAuthCredentials
+from .. import Picker
 from ...parsers.registry import get_parser
 
 
@@ -90,8 +93,40 @@ def search_documents(credentials, q=''):
     return files
 
 
-def parse_document(credentials, doc_id):
-    service = build('docs', 'v1', credentials=credentials)
-    document = service.documents().get(documentId=doc_id).execute()
+def parse_document(document):
     parser = get_parser('application/vnd.google-apps.document')
     return parser(document).parse()
+
+
+class GooglePicker(Picker):
+    def __init__(self, oauth_client_config, picker_api_key):
+        self.oauth_client_config = json.loads(oauth_client_config)
+        self.picker_api_key = picker_api_key
+
+    @property
+    def app_id(self):
+        return self.oauth_client_config['web']['project_id']
+
+    @property
+    def client_id(self):
+        return self.oauth_client_config['web']['client_id']
+
+    def get_context(self):
+        return {
+            'picker': self,
+            'app_id': self.app_id,
+            'client_id': self.client_id,
+            'picker_api_key': self.picker_api_key,
+        }
+
+    js_template = 'wagtail_content_import/google_picker_js_init.html'
+
+    def render_js_init(self, request):
+        return mark_safe(render_to_string(self.js_template, self.get_context(), request=request))
+
+    class Media:
+        css = {}
+        js = [
+            'https://apis.google.com/js/api.js',
+            'wagtail_content_import/google_picker.js',
+        ]
