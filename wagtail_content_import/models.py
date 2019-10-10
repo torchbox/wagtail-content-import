@@ -5,3 +5,4 @@ class ContentImportMixin:
     can_import = True
 
     mapper = StreamFieldMapper
+
