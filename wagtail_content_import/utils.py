@@ -6,6 +6,9 @@ from wagtail.admin.views.pages import get_valid_next_url_from_request
 
 
 def create_page_from_import(request, parent_page, page_class, parsed_doc):
+    """
+    Renders a pre-populated create page based on a parsed document for a Page model with ContentImportMixin
+    """
 
     page = page_class.create_from_import(parsed_doc, request.user)
 
