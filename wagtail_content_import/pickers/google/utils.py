@@ -10,7 +10,7 @@ import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 
 from .models import OAuthCredentials
-from ...parsers.registry import get_parser
+from ...parsers import get_google_parser
 
 
 def get_flow(request):
@@ -93,5 +93,5 @@ def search_documents(credentials, q=''):
 def parse_document(credentials, doc_id):
     service = build('docs', 'v1', credentials=credentials)
     document = service.documents().get(documentId=doc_id).execute()
-    parser = get_parser('application/vnd.google-apps.document')
+    parser = get_google_parser()
     return parser(document).parse()
