@@ -4,17 +4,11 @@ from django.utils.text import slugify
 from wagtail.admin.action_menu import PageActionMenu
 from wagtail.admin.views.pages import get_valid_next_url_from_request
 
+
 def create_page_from_import(request, parent_page, page_class, parsed_doc):
-    title = parsed_doc['title']
-    mapper_class = page_class.mapper
-    mapper = mapper_class(parsed_doc['elements'])
-    imported_data = mapper.map()
-    page = page_class(
-        title=title,
-        slug=slugify(title),
-        body=imported_data,
-        owner=request.user,
-    )
+
+    page = page_class.create_from_import(parsed_doc, request.user)
+
     edit_handler = page_class.get_edit_handler()
     edit_handler = edit_handler.bind_to(request=request, instance=page)
     form_class = edit_handler.get_form_class()
