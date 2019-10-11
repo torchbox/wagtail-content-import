@@ -17,8 +17,8 @@ class ContentImportMixin:
         """
         title = parsed_doc['title']
         mapper_class = cls.mapper_class
-        mapper = mapper_class(parsed_doc['elements'])
-        imported_data = mapper.map()
+        mapper = mapper_class()
+        imported_data = mapper.map(parsed_doc['elements'])
         return cls(
             title=title,
             slug=slugify(title),
