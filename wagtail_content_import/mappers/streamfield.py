@@ -1,5 +1,5 @@
 from .base import BaseMapper
-from .utils import to_tuple
+from .utils import to_tuple, image_element_to_tuple
 
 
 class StreamFieldMapper(BaseMapper):
@@ -13,6 +13,7 @@ class StreamFieldMapper(BaseMapper):
     """
 
     type_to_conversion_function_dict = {
+        'image': image_element_to_tuple
     }
 
     def map(self):
