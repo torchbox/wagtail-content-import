@@ -5,11 +5,11 @@ from django.utils.safestring import mark_safe
 
 
 from .. import Picker
-from ...parsers.registry import get_parser
+from ...parsers import get_google_parser
 
 
 def parse_document(document):
-    parser = get_parser('application/vnd.google-apps.document')
+    parser = get_google_parser()
     return parser(document).parse()
 
 
@@ -45,3 +45,5 @@ class GooglePicker(Picker):
             'https://apis.google.com/js/api.js',
             'wagtail_content_import/google_picker.js',
         ]
+
+

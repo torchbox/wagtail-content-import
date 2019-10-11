@@ -1,23 +1,25 @@
-from functools import partial
 from .base import BaseMapper
-from .utils import add_streamfield_block_id, rename
+from .utils import to_tuple
 
 
 class StreamFieldMapper(BaseMapper):
+    """
+    On self.map(), converts a parsed document (self.intermediate_stream) composed of a list of {'type': str, 'value': value} element
+    dictionaries to a StreamField-compatible list of (block_type_str, block_contents) tuples. By default, the
+    block_type_str is set to element['type'] and block_contents to element[value].
+
+    This can be customised by subclassing and populating type_to_conversion_function_dict, where the keys should be element['type'] strings,
+    and the values should be functions, taking an element and returning a StreamField-compatible tuple.
+    """
 
     type_to_conversion_function_dict = {
-        'html': partial(rename, new_type='paragraph')
     }
 
     def map(self):
         output_streamfield = []
         for element in self.intermediate_stream:
-            try:
-                conversion_function = self.type_to_conversion_function_dict[element["type"]]
-                converted_element = conversion_function(element)
-            except KeyError:
-                converted_element = element
-            streamfield_element = add_streamfield_block_id(converted_element)
-            output_streamfield.append(streamfield_element)
+            conversion_function = self.type_to_conversion_function_dict.get(element["type"], to_tuple)
+            converted_element = conversion_function(element)
+            output_streamfield.append(converted_element)
         return output_streamfield
 
