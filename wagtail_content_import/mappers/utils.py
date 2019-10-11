@@ -11,13 +11,13 @@ def to_tuple(element, new_type=None):
     return (type, element['value'])
 
 
-def image_element_to_tuple(element):
+def image_element_to_tuple(element, user):
     url = element['value']
-    image = import_image_from_url(url)
+    image = import_image_from_url(url, user)
     return ('image', image)
 
 
-def import_image_from_url(url):
+def import_image_from_url(url, user):
     response = requests.get(url)
 
     if not response.status_code == 200:
@@ -26,8 +26,16 @@ def import_image_from_url(url):
     file_name = url.split("/")[-1]
 
     Image = get_image_model()
-    image = Image(title=file_name)
-    image.file.save(file_name, ContentFile(response.content))
+    image = Image(title=file_name, uploaded_by_user=user)
+    image.file = ContentFile(response.content, name=file_name)
+    # Set image file size
+    image.file_size = image.file.size
+
+    # Set image file hash
+    image.file.seek(0)
+    image._set_file_hash(image.file.read())
+    image.file.seek(0)
+
     image.save()
 
     return image
