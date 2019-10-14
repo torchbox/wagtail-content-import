@@ -14,5 +14,4 @@ class StreamFieldMapper(BaseMapper):
             if conversion_method:
                 converted_element = conversion_method(element, **kwargs)
                 output_streamfield.append(converted_element)
-        import pdb; pdb.set_trace()
         return output_streamfield
