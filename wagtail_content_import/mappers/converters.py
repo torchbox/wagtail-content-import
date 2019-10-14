@@ -25,12 +25,12 @@ class TextConverter(BaseConverter):
 
 class ImageConverter(BaseConverter):
     def __call__(self, element, user, **kwargs):
-        image_name, image_content = self.get_image(element['value'])
+        image_name, image_content = self.fetch_image(element['value'])
         image = self.import_as_image_model(image_name, image_content, owner=user)
         return (self.block_name, image)
 
     @staticmethod
-    def get_image(url):
+    def fetch_image(url):
         response = requests.get(url)
 
         if not response.status_code == 200:
