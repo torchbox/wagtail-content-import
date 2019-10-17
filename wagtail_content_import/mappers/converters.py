@@ -56,6 +56,7 @@ class ImageConverter(BaseConverter):
         image.save()
         return image
 
+
 class TableConverter(BaseConverter):
     def __call__(self, element, **kwargs):
         table = element['value']
