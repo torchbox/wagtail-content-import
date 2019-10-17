@@ -1,5 +1,6 @@
 from .base import DocumentParser
 from django.utils.html import escape
+from .tables import Table, Cell
 
 
 class GoogleDocumentParser(DocumentParser):
@@ -117,6 +118,22 @@ class GoogleDocumentParser(DocumentParser):
         html += f'</{list_tag}>'
         return html
 
+    def process_table(self, table):
+        imported_rows = [[Cell(self.get_cell_text(cell)) for cell in row['tableCells']] for row in table['tableRows']]
+        return Table(imported_rows)
+
+    @staticmethod
+    def get_cell_text(cell):
+        text = ''
+        for content_element in cell['content']:
+            if 'paragraph' not in content_element:
+                continue
+            for paragraph_element in content_element['paragraph']['elements']:
+                if 'textRun' not in paragraph_element:
+                    continue
+                text += paragraph_element['textRun']['content']
+        return text.strip()
+
     def parse(self):
         """
         Parse the document and return a set of blocks that represent it.
@@ -153,7 +170,16 @@ class GoogleDocumentParser(DocumentParser):
 
         for part in body['content']:
             # Part can contain one of sectionBreak, table, tableOfContents, paragraph
-            # Currently we only process paragraph
+            # Currently we only process paragraph and table
+            if 'table' in part:
+                close_current_block()
+                close_current_list()
+                table = self.process_table(part['table'])
+                blocks.append({
+                    'type': 'table',
+                    'value': table
+                })
+
             if 'paragraph' not in part:
                 continue
 
@@ -193,7 +219,8 @@ class GoogleDocumentParser(DocumentParser):
 
                 content = self.elements_to_html(paragraph, outer_tag=outer_tag)
                 unprocessed_embeds += content['embeds']
-                current_block.append(content['html'])
+                if content['html']:
+                    current_block.append(content['html'])
 
                 # If any embeds were encountered since the last paragraph processed
                 # (including within headings / list items that aren't processed as
