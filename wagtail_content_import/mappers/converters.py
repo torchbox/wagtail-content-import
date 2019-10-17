@@ -55,3 +55,9 @@ class ImageConverter(BaseConverter):
 
         image.save()
         return image
+
+class TableConverter(BaseConverter):
+    def __call__(self, element, **kwargs):
+        table = element['value']
+        text_table = [[cell.get_text() for cell in row] for row in table.cells]
+        return ('table', {'data': text_table})
