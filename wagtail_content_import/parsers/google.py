@@ -119,8 +119,8 @@ class GoogleDocumentParser(DocumentParser):
         return html
 
     def process_table(self, table):
-        imported_cells = [[Cell(self.get_cell_text(cell)) for cell in row['tableCells']] for row in table['tableRows']]
-        return Table(imported_cells)
+        imported_rows = [[Cell(self.get_cell_text(cell)) for cell in row['tableCells']] for row in table['tableRows']]
+        return Table(imported_rows)
 
     @staticmethod
     def get_cell_text(cell):

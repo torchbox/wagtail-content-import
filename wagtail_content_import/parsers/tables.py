@@ -1,7 +1,7 @@
 class Table:
 
-    def __init__(self, cells):
-        self.cells = cells
+    def __init__(self, rows):
+        self.rows = rows
 
 
 class Cell:
