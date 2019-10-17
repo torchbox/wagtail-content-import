@@ -1,6 +1,6 @@
 class Table:
 
-    def __init__(self, cells=[]):
+    def __init__(self, cells):
         self.cells = cells
 
 
