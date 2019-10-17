@@ -2,6 +2,7 @@ from wagtail.core.rich_text import RichText
 
 from django.core.files.base import ContentFile
 from wagtail.images import get_image_model
+from wagtail.core.whitelist import Whitelister
 
 import requests
 
@@ -14,13 +15,21 @@ class BaseConverter:
 
 
 class RichTextConverter(BaseConverter):
+
+    whitelister = Whitelister()
+
     def __call__(self, element, **kwargs):
-        return (self.block_name, RichText(element['value']))
+        cleaned_html = self.whitelister.clean(element['value'])
+        return (self.block_name, RichText(cleaned_html))
 
 
 class TextConverter(BaseConverter):
+
+    whitelister = Whitelister()
+
     def __call__(self, element, **kwargs):
-        return (self.block_name, element['value'])
+        cleaned_text = self.whitelister.clean(element['value'])
+        return (self.block_name, cleaned_text)
 
 
 class ImageConverter(BaseConverter):
