@@ -122,7 +122,8 @@ class GoogleDocumentParser(DocumentParser):
         imported_cells = [[Cell(self.get_cell_text(cell)) for cell in row['tableCells']] for row in table['tableRows']]
         return Table(imported_cells)
 
-    def get_cell_text(self, cell):
+    @staticmethod
+    def get_cell_text(cell):
         text = ''
         for content_element in cell['content']:
             if 'paragraph' not in content_element:
@@ -218,7 +219,8 @@ class GoogleDocumentParser(DocumentParser):
 
                 content = self.elements_to_html(paragraph, outer_tag=outer_tag)
                 unprocessed_embeds += content['embeds']
-                current_block.append(content['html'])
+                if content['html']:
+                    current_block.append(content['html'])
 
                 # If any embeds were encountered since the last paragraph processed
                 # (including within headings / list items that aren't processed as
