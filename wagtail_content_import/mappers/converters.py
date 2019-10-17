@@ -1,9 +1,12 @@
 from wagtail.core.rich_text import RichText
 
+from django.utils.functional import cached_property
 from django.core.files.base import ContentFile
 from wagtail.images import get_image_model
+from wagtail.admin.rich_text.converters.editor_html import EditorHTMLConverter
 
 import requests
+
 
 class BaseConverter:
     def __init__(self, block_name):
@@ -14,8 +17,17 @@ class BaseConverter:
 
 
 class RichTextConverter(BaseConverter):
+    def __init__(self, block_name, features=None):
+        self.features = features
+        super().__init__(block_name)
+
+    @cached_property
+    def editor_html_converter(self):
+        return EditorHTMLConverter(self.features)
+
     def __call__(self, element, **kwargs):
-        return (self.block_name, RichText(element['value']))
+        cleaned_html = self.editor_html_converter.to_database_format(element['value'])
+        return (self.block_name, RichText(cleaned_html))
 
 
 class TextConverter(BaseConverter):
