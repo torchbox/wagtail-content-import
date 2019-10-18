@@ -1,0 +1,1 @@
+recursive-include wagtail_content_import/templates *

@@ -49,10 +49,6 @@ setup(
     ],
     install_requires=[
         'wagtail>=2.2',
-        'python-dateutil',
-        'google-api-python-client>=1.7.8',
-        # Pinned because of https://github.com/googleapis/google-auth-library-python-oauthlib/issues/46
-        'google-auth-oauthlib<0.4',
     ],
     extras_require={
         'test': test_requires,
