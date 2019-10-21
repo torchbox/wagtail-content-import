@@ -3,8 +3,6 @@ import io
 
 from setuptools import setup, find_packages
 
-from wagtail_content_import import __version__
-
 test_requires = [
     # Required for running the tests
     'mock>=1.0.0',
@@ -22,7 +20,7 @@ with io.open('README.md', encoding='utf-8') as readme_file:
 
 setup(
     name='wagtail_content_import',
-    version=__version__,
+    version="0.1.2",
     description='A module for Wagtail that provides functionality for importing page content from third-party sources.',
     author='Samir Shah',
     author_email='samir.shah@torchbox.com',
