@@ -73,4 +73,4 @@ class TableConverter(BaseConverter):
     def __call__(self, element, **kwargs):
         table = element['value']
         text_table = [[cell.get_text() for cell in row] for row in table.rows]
-        return ('table', {'data': text_table})
+        return (self.block_name, {'data': text_table})
