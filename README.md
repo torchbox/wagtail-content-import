@@ -179,24 +179,20 @@ class HeadingBlockConverter(BaseConverter):
 
 ### Settings
 
-`GOOGLE_OAUTH_CLIENT_CONFIG`: 
-
-**Required** 
+#### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):  
 
 The app's Google client secret. (See: [Getting Started](#getting-started))
 
-`GOOGLE_PICKER_API_KEY`:
-
-**Required**
+#### `GOOGLE_PICKER_API_KEY` (Required):
 
 The app's Google Picker API key, allowing selection of Google Docs. (See: [Getting Started](#getting-started))
 
-`WAGTAILCONTENTIMPORT_DEFAULT_MAPPER`:
+#### `WAGTAILCONTENTIMPORT_DEFAULT_MAPPER`:
 
 The Mapper class used by default for Page models with ContentImportMixin, unless mapper_class is overridden.
 Defaults to StreamFieldMapper.
 
-`WAGTAILCONTENTIMPORT_GOOGLE_PARSER`:
+#### `WAGTAILCONTENTIMPORT_GOOGLE_PARSER`:
 
 The DocumentParser class used for Google Docs. Defaults to `GoogleDocumentParser`.
 
