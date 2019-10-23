@@ -3,18 +3,18 @@
 A module for Wagtail that provides functionality for importing page content from third-party sources.
 Currently supports importing Google Docs into a StreamField.
 
-### Getting Started
+## Getting Started
 
-#### Requirements:
+### Requirements:
 * Django 2.2
 * Wagtail 2.2
 * Python 3
 
-#### To install:
+### To install:
  1. Run `python3 pip install wagtail-content-import`.
  2. Add `'wagtail_content_import'` and `'wagtail_content_import.pickers.google'` to `INSTALLED_APPS`.
  
-#### To set up:
+### To set up:
  Wagtail Google Docs integration relies on Google APIs, which you will first need to enable for your project:
 
 1. Navigate to the [Google API Library](https://console.developers.google.com/apis/library). Select a project for your Wagtail site, or create a new one now.
@@ -47,7 +47,7 @@ Currently supports importing Google Docs into a StreamField.
 
  10. Copy the text from this file, and use it to set `GOOGLE_OAUTH_CLIENT_CONFIG`.
 
-### Basic Usage
+## Basic Usage
 
 1. To enable Google Docs import for a Page model, it should inherit from `ContentImportMixin` 
 (`wagtail_content_import.models.ContentImportMixin`). By default, content will be imported into into a StreamField called body
@@ -72,7 +72,7 @@ Currently supports importing Google Docs into a StreamField.
 
 4. You should now see a button near the action menu when creating a new Page of your class in the admin, giving you the option to import a document.
 
-### The Content Import Flow
+## The Content Import Flow
 
 The Wagtail Content Import app provides:
 * **Pickers** - which select and import raw document data 
@@ -99,9 +99,9 @@ Converter for each {'type': type, 'value': value} element. This returns a Stream
 
 8. The Create view is then rendered with the Page model instance bound to the form.
 
-### Customising Content Import
+## Customising Content Import
 
-#### Changing Import Fields
+### Changing Import Fields
 
 To change how the document's data is imported to the Page model - for example, importing to a StreamField other than `body`,
 you'll need to override the `create_from_import` method. On the `ContentImportMixin`, this is defined as:
@@ -127,7 +127,7 @@ you'll need to override the `create_from_import` method. On the `ContentImportMi
 
 So to import into a different field, simply replace `body` with the name of your custom field.
 
-#### Working with StructBlocks
+### Working with StructBlocks
 
 To convert elements in the parsed document to a StructBlock, you'll need to write a custom converter.
 Converters should inherit from `wagtail_content_import.mappers.converters.BaseConverter`, and implement 
@@ -175,9 +175,9 @@ class HeadingBlockConverter(BaseConverter):
         return (self.block_name, {'heading_text': element['value'], 'size': 'h2'})
 ```
 
-### Reference
+## Reference
 
-#### Settings
+### Settings
 
 `GOOGLE_OAUTH_CLIENT_CONFIG`: 
 
