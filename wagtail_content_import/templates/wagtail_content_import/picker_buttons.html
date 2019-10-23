@@ -1,0 +1,15 @@
+<li class="actions" style="float:right">
+    <div class="dropdown dropup dropdown-button">
+        <a href="#" data-content-import-picker="{{ default_picker.source }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="button button-longrunning icon icon-doc-full-inverse">Import from {{ default_picker.verbose_source }}</a>
+        {% if pickers %}
+            <div class="dropdown-toggle icon icon-arrow-up"></div>
+                <ul>
+                    {% for picker in pickers %}
+                        <li>
+                            <a href="#" data-content-import-picker="{{ picker.source }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="button button-longrunning icon icon-doc-full-inverse">Import from {{ picker.verbose_source }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+        {% endif %}
+    </div>
+</li>
