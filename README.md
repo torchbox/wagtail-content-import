@@ -55,7 +55,7 @@ Currently supports importing Google Docs into a StreamField.
 
 2. You'll then need to create a Mapper, which maps the parsed document into your StreamField blocks. Create a class deriving from `wagtail_content_import.mappers.streamfield.StreamFieldMapper`:
 
-    ```
+    ```python
    from wagtail_content_import.mappers.converters import ImageConverter, RichTextConverter, TableConverter, TextConverter 
    from wagtail_content_import.mappers.streamfield import StreamFieldMapper
    
@@ -105,7 +105,7 @@ Converter for each {'type': type, 'value': value} element. This returns a Stream
 
 To change how the document's data is imported to the Page model - for example, importing to a StreamField other than `body`,
 you'll need to override the `create_from_import` method. On the `ContentImportMixin`, this is defined as:
-```
+```python
     from django.utils.text import slugify
 
     @classmethod
@@ -136,7 +136,7 @@ a `__call__(self, element, **kwargs)` method which returns a StreamField-compati
 
 In the case of a StructBlock, `content` should be in the form of a dict. For example, for a StructBlock:
 
-```
+```python
 from wagtail.core.blocks import CharBlock, ChoiceBlock, StructBlock
 
 class HeadingBlock(StructBlock):
@@ -158,7 +158,7 @@ class HeadingBlock(StructBlock):
 
 `content` should be:
 
-```
+```python
 {
     'heading_text': heading_text,
     'size': size,
@@ -167,7 +167,7 @@ class HeadingBlock(StructBlock):
 
 To do this, we could write a converter:
 
-```
+```python
 from wagtail_content_import.mappers.converters import BaseConverter
 
 class HeadingBlockConverter(BaseConverter):
