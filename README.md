@@ -18,7 +18,7 @@ The typical flow is as follows, for a Page model with ContentImportMixin:
 
 1. The Create view in the Wagtail Admin provides a button, which calls a picker.
 
-2. The picker enables a document to be selected, and 
+2. The picker enables a document to be selected
 
 ### Customising Content Import
 
