@@ -42,7 +42,7 @@ Currently supports importing Google Docs into a StreamField.
 
  8. Under `Authorised JavaScript origins`, add your domain.
 
- 9. On the Credentials_ page, next to your Client ID, click the download item to download a JSON file of your client
+ 9. On the Credentials page, next to your Client ID, click the download item to download a JSON file of your client
     secret.
 
  10. Copy the text from this file, and use it to set `GOOGLE_OAUTH_CLIENT_CONFIG`.
