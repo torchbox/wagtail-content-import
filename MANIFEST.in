@@ -1,3 +1,4 @@
 recursive-include wagtail_content_import/templates *
 recursive-include wagtail_content_import/pickers/google/templates *
 recursive-include wagtail_content_import/pickers/google/static *
+recursive-include wagtail_content_import/static *
