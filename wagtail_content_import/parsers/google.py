@@ -60,7 +60,6 @@ class GoogleDocumentParser(DocumentParser):
             html = f'<{outer_tag}>' + inner_html + f'</{outer_tag}>' if outer_tag else inner_html
         else:
             html = ''
-
         return {
             'html': html,
             'embeds': embeds,
