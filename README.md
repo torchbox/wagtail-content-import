@@ -195,4 +195,3 @@ Defaults to StreamFieldMapper.
 #### `WAGTAILCONTENTIMPORT_GOOGLE_PARSER`:
 
 The DocumentParser class used for Google Docs. Defaults to `GoogleDocumentParser`.
-
