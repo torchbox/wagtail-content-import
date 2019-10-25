@@ -4,7 +4,8 @@ from .tables import Table, Cell
 
 
 class GoogleDocumentParser(DocumentParser):
-
+    """Default DocumentParser for Google Docs, taking a JSON Google Doc and converting upon parse() into a list of
+    {'type': type, 'value': value} intermediate elements"""
     def __init__(self, document):
         self.document = document
 
@@ -124,6 +125,9 @@ class GoogleDocumentParser(DocumentParser):
 
     @staticmethod
     def get_cell_text(cell):
+        """
+        Get table cell text
+        """
         text = ''
         for content_element in cell['content']:
             if 'paragraph' not in content_element:
@@ -136,7 +140,7 @@ class GoogleDocumentParser(DocumentParser):
 
     def parse(self):
         """
-        Parse the document and return a set of blocks that represent it.
+        Parse the document and return a set of intermediate {'type': type, 'value': value} blocks that represent it.
         """
         current_block = []
         unprocessed_embeds = []
