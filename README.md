@@ -31,7 +31,7 @@ Currently supports importing Google Docs into a StreamField.
 
     1. Under `Scopes for Google APIs`, click `Add scope`.
 
-    2. Add `../auth/documents.readonly` and `..auth/drive.readonly` scopes.
+    2. Add `../auth/documents.readonly` and `../auth/drive.readonly` scopes.
 
         Note: adding these sensitive scopes means that you will need to submit your project for verification by Google to
         avoid user caps and warning pages during use.
