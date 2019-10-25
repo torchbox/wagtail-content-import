@@ -37,7 +37,7 @@ class testConverters(TestCase):
         self.assertEqual(converted_element[0], 'test_block', "Should be 'test_block'")
         self.assertEqual(converted_element[1], {'data': [['0', '1'], ['2', '3']]}, "Should be: {'data': [['0', '1'], ['2', '3']]}")
 
-    def test_image_is_imported(self):
+    def test_image_conversion(self):
         image_converter = ImageConverter('test_block')
         image_converter.fetch_image = MagicMock(return_value=('content_import_test_image', b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x01\x03\x00\x00\x00%\xdbV\xca\x00\x00\x00\x03PLTE\x00\x00\x00\xa7z=\xda\x00\x00\x00\x01tRNS\x00@\xe6\xd8f\x00\x00\x00\nIDAT\x08\xd7c`\x00\x00\x00\x02\x00\x01\xe2!\xbc3\x00\x00\x00\x00IEND\xaeB`\x82"))
         #one pixel image from https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png
