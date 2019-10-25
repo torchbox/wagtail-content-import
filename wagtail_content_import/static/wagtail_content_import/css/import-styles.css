@@ -1,0 +1,15 @@
+.button.content-import {
+    background-color: #fafafa;
+    border: 1px solid #007d7e;
+    color: #262626;
+    }
+
+.button.content-import:hover {
+    background-color: #ececec;
+    border: 1px solid #007d7e;
+    color: #262626;
+    }
+
+.docs-blue.content-import {
+    color: #4387f4;
+}
