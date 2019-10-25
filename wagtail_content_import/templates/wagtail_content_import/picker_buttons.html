@@ -1,6 +1,6 @@
-<li class="actions" style="float:right;">
+<li class="actions import-container content-import">
     <div class="dropdown dropup dropdown-button">
-        <a href="#" data-content-import-picker="{{ default_picker.source }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="content-import button button-longrunning icon icon-doc-full-inverse">Import from {{ default_picker.verbose_source }}</a>
+        <a href="#" data-content-import-picker="{{ default_picker.source }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="content-import button button-longrunning"><i class="icon icon-doc-full-inverse content-import docs-blue"></i>Import from {{ default_picker.verbose_source }}</a>
         {% if pickers %}
             <div class="content-import dropdown-toggle icon icon-arrow-up"></div>
                 <ul>
