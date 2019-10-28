@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from wagtail.images import get_image_model
+from wagtail.images.tests.utils import get_test_image_file
 
 from unittest.mock import MagicMock
 
@@ -39,8 +40,9 @@ class testConverters(TestCase):
 
     def test_image_conversion(self):
         image_converter = ImageConverter('test_block')
-        image_converter.fetch_image = MagicMock(return_value=('content_import_test_image', b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x01\x03\x00\x00\x00%\xdbV\xca\x00\x00\x00\x03PLTE\x00\x00\x00\xa7z=\xda\x00\x00\x00\x01tRNS\x00@\xe6\xd8f\x00\x00\x00\nIDAT\x08\xd7c`\x00\x00\x00\x02\x00\x01\xe2!\xbc3\x00\x00\x00\x00IEND\xaeB`\x82"))
-        #one pixel image from https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png
+        test_image_file = get_test_image_file()
+        test_image_file.seek(0)
+        image_converter.fetch_image = MagicMock(return_value=('content_import_test_image', test_image_file.read()))
         test_user = User.objects.create_user(username='tester', email='test@test', password='top_secret')
         converted_element = image_converter({'type': 'image', 'value': 'url'}, user=test_user)
         Image = get_image_model()
