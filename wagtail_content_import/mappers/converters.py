@@ -51,7 +51,6 @@ class ImageConverter(BaseConverter):
             return
 
         file_name = url.split("/")[-1]
-
         return file_name, response.content
 
     @staticmethod
