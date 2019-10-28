@@ -1,9 +1,9 @@
+import json
+import os
+
 from django.test import TestCase
 
 from .google import GoogleDocumentParser
-
-import json
-import os
 
 
 class TestGoogleDocumentParser(TestCase):

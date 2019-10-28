@@ -1,16 +1,16 @@
+from unittest.mock import MagicMock
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
-from unittest.mock import MagicMock
-
 from .converters import ImageConverter, RichTextConverter, TextConverter, TableConverter
 from ..parsers.tables import Table, Cell
 
 
-class testConverters(TestCase):
+class TestConverters(TestCase):
     def test_text_conversion(self):
         text_converter = TextConverter('test_block')
         test_element = {'type': 'html', 'value': 'test_text'}
@@ -49,12 +49,3 @@ class testConverters(TestCase):
         self.assertEqual(converted_element[0], 'test_block', "Should be 'test_block'")
         self.assertIsInstance(converted_element[1], Image)
         self.assertIn(converted_element[1], Image.objects.filter(title='content_import_test_image'))
-
-
-
-
-
-
-
-
-
