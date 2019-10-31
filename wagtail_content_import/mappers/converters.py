@@ -9,6 +9,8 @@ import requests
 
 
 class BaseConverter:
+    """Base class for all converters, which take a intermediate-form {'type': type, 'value': value} element
+    and return a (self.block_name, content) StreamField-compatible tuple on __call__"""
     def __init__(self, block_name):
         self.block_name = block_name
 
@@ -49,7 +51,6 @@ class ImageConverter(BaseConverter):
             return
 
         file_name = url.split("/")[-1]
-
         return file_name, response.content
 
     @staticmethod
