@@ -1,0 +1,19 @@
+.button.content-import, .content-import.dropdown-toggle {
+    background-color: #fafafa;
+    border: 1px solid #007d7e;
+    color: #262626;
+    }
+
+.button.content-import:hover, .content-import.dropdown-toggle:hover {
+    background-color: #ececec;
+    border: 1px solid #007d7e;
+    color: #262626;
+    }
+
+.docs-blue.content-import {
+    color: #4387f4;
+}
+
+.import-container.content-import {
+    float:right;
+}
