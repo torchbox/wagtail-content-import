@@ -19,10 +19,12 @@ def wagtailcontentimport_pickerjs(context):
 
     return mark_safe('\n'.join(js_snippets))
 
+
 @register.inclusion_tag('wagtail_content_import/picker_buttons.html', takes_context=True)
 def wagtailcontentimport_picker_buttons(context):
-    pickers = [fn() for fn in hooks.get_hooks('register_content_import_picker')]
-    context['default_picker'] = pickers[0]
-    if len(pickers) > 1:
-        context['pickers'] = pickers[1:]
+    pickers = [fn() for fn in hooks.get_hooks('register_content_import_picker') if fn()]
+    if pickers:
+        context['default_picker'] = pickers[0]
+        if len(pickers) > 1:
+            context['picker_options'] = pickers[1:]
     return context
