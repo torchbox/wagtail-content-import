@@ -9,6 +9,7 @@ from .. import Picker
 class MicrosoftPicker(Picker):
     name = "microsoft"
     verbose_name = "OneDrive"
+    icon = "icon-folder-open-inverse"
 
     def get_context(self):
         return {
