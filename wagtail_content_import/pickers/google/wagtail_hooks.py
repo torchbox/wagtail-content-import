@@ -1,10 +1,6 @@
-
 import json
 
 from django.conf import settings
-from django.shortcuts import render
-from django.utils.text import slugify
-
 
 from wagtail.core import hooks
 
