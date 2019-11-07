@@ -2,6 +2,8 @@ import requests
 
 from io import BytesIO
 
+from django.conf import settings
+
 from wagtail.core import hooks
 
 from .utils import MicrosoftPicker, parse_document
@@ -10,7 +12,7 @@ from ...utils import create_page_from_import
 
 @hooks.register('register_content_import_picker')
 def register_content_import_picker():
-    return MicrosoftPicker()
+    return MicrosoftPicker(settings.MICROSOFT_CLIENT_ID)
 
 
 @hooks.register("before_create_page")

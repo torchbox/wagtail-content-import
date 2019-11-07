@@ -15,9 +15,13 @@ class MicrosoftPicker(Picker):
     verbose_name = "OneDrive"
     icon = "icon-folder-open-inverse"
 
+    def __init__(self, client_id):
+        self.client_id = client_id
+
     def get_context(self):
         return {
             'picker': self,
+            'client_id': self.client_id
         }
 
     js_template = 'wagtail_content_import/microsoft_picker_js_init.html'

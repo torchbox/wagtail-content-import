@@ -1,11 +1,10 @@
 (function() {
     class MicrosoftPicker {
-        constructor(authOptions, createPageUrl, csrfToken) {
-            this.authOptions = authOptions;
+        constructor(redirectUri, clientId, createPageUrl, csrfToken) {
+            this.redirectUri = redirectUri;
+            this.clientId = clientId;
             this.createPageUrl = createPageUrl;
             this.csrfToken = csrfToken;
-
-            this.showOnReady = false;
         }
 
         post_url(response) {
@@ -35,10 +34,11 @@
 
         show() {
                 OneDrive.open({
-                                clientId: "4ae1526e-127e-4092-aae7-cda7dd01d3ab",
+                                clientId: this.clientId,
                                 action: "download",
                                 advanced: {
-                                            redirectUri: "http://localhost:8000/testauth/"
+                                            redirectUri: this.redirectUri,
+                                            filter: '.docx'
                                             },
                                 success: response => {this.post_url(response)},
                                 cancel: function() { /* cancel handler */ },
