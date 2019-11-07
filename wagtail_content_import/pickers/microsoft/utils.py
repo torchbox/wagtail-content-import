@@ -12,7 +12,7 @@ def parse_document(document):
 
 class MicrosoftPicker(Picker):
     name = "microsoft"
-    verbose_name = "OneDrive"
+    verbose_name = "SharePoint"
     icon = "icon-folder-open-inverse"
 
     def __init__(self, client_id):

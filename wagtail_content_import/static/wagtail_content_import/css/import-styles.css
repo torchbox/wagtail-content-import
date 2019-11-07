@@ -19,3 +19,10 @@
 .button.content-import {
     border: 1px solid #fafafa;
     }
+
+.content-import.button.button-longrunning.dropdown-toggle {
+    height: 3em;
+    padding-left: 1em;
+    text-align: left;
+    border-radius: 3px;
+}
