@@ -16,3 +16,9 @@ def get_google_parser():
     parser_string = get_google_parser_string()
 
     return import_string(parser_string)
+
+def get_microsoft_parser():
+
+    parser_string = get_google_parser_string()
+
+    return import_string(parser_string)

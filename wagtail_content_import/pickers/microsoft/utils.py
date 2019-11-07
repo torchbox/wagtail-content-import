@@ -1,9 +1,13 @@
-import json
-
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
 from .. import Picker
+from ...parsers import get_microsoft_parser
+
+
+def parse_document(document):
+    parser = get_microsoft_parser()
+    return parser(document).parse()
 
 
 class MicrosoftPicker(Picker):
