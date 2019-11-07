@@ -17,8 +17,16 @@ def get_google_parser():
 
     return import_string(parser_string)
 
-def get_microsoft_parser():
 
-    parser_string = get_google_parser_string()
+def get_docx_parser_string():
+    """
+    Get the dotted ``app.Model`` name for the Google Docs parser as a string.
+    """
+    return getattr(settings, 'WAGTAILCONTENTIMPORT_DOCX_PARSER', 'wagtail_content_import.parsers.microsoft.DocxParser')
+
+
+def get_docx_parser():
+
+    parser_string = get_docx_parser_string()
 
     return import_string(parser_string)

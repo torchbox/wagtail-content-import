@@ -2,11 +2,11 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
 from .. import Picker
-from ...parsers import get_microsoft_parser
+from ...parsers import get_docx_parser
 
 
 def parse_document(document):
-    parser = get_microsoft_parser()
+    parser = get_docx_parser()
     return parser(document).parse()
 
 

@@ -19,9 +19,5 @@ def create_from_microsoft_doc(request, parent_page, page_class):
         document_url = request.POST["microsoft-doc"]
         response = requests.get(document_url)
         if response.status_code == 200:
-            parse_document(BytesIO(response.content))
-            parsed_doc = {
-                'title': 'test',
-                'elements': [{'type': 'html', 'value': request.POST["microsoft-doc"]}]
-            }
+            parsed_doc = parse_document(BytesIO(response.content))
             return create_page_from_import(request, parent_page, page_class, parsed_doc)
