@@ -4,9 +4,7 @@ from django.conf import settings
 
 from wagtail.core import hooks
 
-
 from .utils import parse_document, GooglePicker
-
 from ...utils import create_page_from_import
 
 
