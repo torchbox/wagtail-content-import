@@ -8,27 +8,27 @@
         }
 
         post_url(response) {
-                                // POST the download url of the document to the create page view
-                                // Use a hidden form so the browser reloads with the result of this request
-                                let form = document.createElement('form');
-                                form.action = this.createPageUrl;
-                                form.method = 'POST';
-                                form.style.visibility = 'hidden';
-                                document.body.appendChild(form);
+                             // POST the download url of the document to the create page view
+                             // Use a hidden form so the browser reloads with the result of this request
+                             let form = document.createElement('form');
+                             form.action = this.createPageUrl;
+                             form.method = 'POST';
+                             form.style.visibility = 'hidden';
+                             document.body.appendChild(form);
 
-                                let csrfTokenField = document.createElement('input');
-                                csrfTokenField.type = 'hidden';
-                                csrfTokenField.name = 'csrfmiddlewaretoken';
-                                csrfTokenField.value = this.csrfToken;
-                                form.appendChild(csrfTokenField);
+                             let csrfTokenField = document.createElement('input');
+                             csrfTokenField.type = 'hidden';
+                             csrfTokenField.name = 'csrfmiddlewaretoken';
+                             csrfTokenField.value = this.csrfToken;
+                             form.appendChild(csrfTokenField);
 
-                                let microsoftDocField = document.createElement('input');
-                                microsoftDocField.type = 'hidden';
-                                microsoftDocField.name = 'microsoft-doc';
-                                microsoftDocField.value = response.value[0]["@microsoft.graph.downloadUrl"];
-                                form.appendChild(microsoftDocField);
+                             let microsoftDocField = document.createElement('input');
+                             microsoftDocField.type = 'hidden';
+                             microsoftDocField.name = 'microsoft-doc';
+                             microsoftDocField.value = response.value[0]["@microsoft.graph.downloadUrl"];
+                             form.appendChild(microsoftDocField);
 
-                                form.submit();
+                             form.submit();
         }
 
 
