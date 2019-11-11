@@ -12,7 +12,7 @@ Currently supports importing Google Docs into a StreamField.
 
 ### To install:
  1. Run `python3 pip install wagtail-content-import`.
- 2. Add `'wagtail_content_import'` and `'wagtail_content_import.pickers.google'` to `INSTALLED_APPS`.
+ 2. Add `'wagtail_content_import'` and `'wagtail_content_import.pickers.google'` to `INSTALLED_APPS`, and ensure they are positioned above `wagtail.admin` in the list..
  
 ### To set up:
  Wagtail Google Docs integration relies on Google APIs, which you will first need to enable for your project:
@@ -60,13 +60,32 @@ Currently supports importing Google Docs into a StreamField.
    from wagtail_content_import.mappers.streamfield import StreamFieldMapper
    
     class MyMapper(StreamFieldMapper):
-        html = RichTextConverter('my_RichTextBlock_name')
-        image = ImageConverter('my_ImageBlock_name')
-        heading = TextConverter('my_CharBlock_or_TextBlock_name')
-        table = TableConverter('my_TableBlock_name')    
+        html = RichTextConverter('my_heading_block')
+        image = ImageConverter('my_image_block')
+        heading = TextConverter('my_heading_block')
+        table = TableConverter('my_table_block')    
     ```
+   
+   This would map to an example StreamField defined as:
+   
+   ```python
+   from wagtail.images.blocks import ImageChooserBlock
+   from wagtail.core.blocks import CharBlock, RichTextBlock, StreamBlock
+   from wagtail.contrib.table_block.blocks import TableBlock
+   
+   class BaseStreamBlock(StreamBlock):
+    """
+    Define the custom blocks that `StreamField` will utilize
+    """
+    my_heading_block = CharBlock()
+    my_paragraph_block = RichTextBlock()
+    my_image_block = ImageChooserBlock()
+    my_table_block = TableBlock()
+   ```
+    
+   Note that the converters require the fields rather than the block classes: `'my_heading_block'`, not `CharBlock`.
 
-    The above example assumes use of the simple blocks included with Wagtail. For StructBlocks, see [Working with StructBlocks](#Working-with-StructBlocks).
+   The above example assumes use of the simple blocks included with Wagtail. For StructBlocks, see [Working with StructBlocks](#Working-with-StructBlocks).
 
 3. Set mapper_class on your Page model to your new mapper class (or set it as `WAGTAILCONTENTIMPORT_DEFAULT_MAPPER` to use it for all imports by default).
 
