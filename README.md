@@ -12,7 +12,7 @@ Currently supports importing Google Docs into a StreamField.
 
 ### To install:
  1. Run `python3 pip install wagtail-content-import`.
- 2. Add `'wagtail_content_import'` and `'wagtail_content_import.pickers.google'` to `INSTALLED_APPS`, and ensure they are positioned above `wagtail.admin` in the list..
+ 2. Add `'wagtail_content_import'` and `'wagtail_content_import.pickers.google'` to `INSTALLED_APPS` above `wagtail.admin`.
  
 ### To set up:
  Wagtail Google Docs integration relies on Google APIs, which you will first need to enable for your project:
