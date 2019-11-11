@@ -1,0 +1,16 @@
+site_name: Wagtail Content Import Documentation
+theme:
+  name: 'material'
+nav:
+    - Home: index.md
+    - Getting Started: getting_started.md
+      - Google Docs Setup: google_docs_setup.md
+      - Microsoft Setup: microsoft_setup.md
+    - Basic Usage: basic_usage.md
+    - The Content Import Flow: flow.md
+    - Customisation: customisation.md
+      - Writing Custom Converters: custom_converters.md
+      - Working With StructBlocks: structblocks.md
+      - Changing Import Fields: changing_import_fields.md
+    - Settings Reference: settings.md
+    - Submitting a New Backend: submitting_backend.md
