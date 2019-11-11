@@ -22,7 +22,7 @@ setup(
     name='wagtail_content_import',
     version="0.2.0",
     description='A module for Wagtail that provides functionality for importing page content from third-party sources.',
-    author='Samir Shah, Jacob Topp-Mugglestone,  Karl Hobley, Matthew Westcott',
+    author='Samir Shah, Jacob Topp-Mugglestone, Karl Hobley, Matthew Westcott',
     author_email='jacobtm@torchbox.com',
     url='https://github.com/torchbox/wagtail-content-import',
     packages=find_packages(),
