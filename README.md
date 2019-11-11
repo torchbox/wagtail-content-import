@@ -74,13 +74,13 @@ Currently supports importing Google Docs into a StreamField.
    from wagtail.contrib.table_block.blocks import TableBlock
    
    class BaseStreamBlock(StreamBlock):
-    """
-    Define the custom blocks that `StreamField` will utilize
-    """
-    my_heading_block = CharBlock()
-    my_paragraph_block = RichTextBlock()
-    my_image_block = ImageChooserBlock()
-    my_table_block = TableBlock()
+       """
+       Define the custom blocks that `StreamField` will utilize
+       """
+       my_heading_block = CharBlock()
+       my_paragraph_block = RichTextBlock()
+       my_image_block = ImageChooserBlock()
+       my_table_block = TableBlock()
    ```
     
    Note that the converters require the fields rather than the block classes: `'my_heading_block'`, not `CharBlock`.
