@@ -17,5 +17,3 @@ Currently supports:
 - Docx files with:
     - Text with bold and italics
     - Headings
-
-"for importing page content into Wagtail from third-party sources"
