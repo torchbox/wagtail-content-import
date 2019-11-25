@@ -7,7 +7,7 @@ to the [Wagtail Content Import repository](https://github.com/torchbox/wagtail-c
 If you're planning on submitting a new picker - apps which enable choosing and importing a file from a 
 remote source - you'll need to follow this blueprint:
 
-###Overview and File Structure
+### Overview and File Structure
 
 Inside `wagtail_content_import.pickers`, your app should have the following structure:
 
@@ -39,7 +39,7 @@ to actually take the POST-ed document data and import it, using a parser.
 The following examples will follow a picker which needs a variable `AUTH_PARAMETERS` available in the 
 JavaScript in order to import content.
 
-####`MY_PICKER.js`
+#### `MY_PICKER.js`
 
 This adds the JavaScript class for your picker, and adds it to the window. It should implement
 a method to show the picker, and upon choosing, make a POST request to the page using a hidden form
@@ -91,7 +91,7 @@ Eg:
 })();
 ```
 
-####`MY_PICKER_js_init.html`
+#### `MY_PICKER_js_init.html`
 
 This should provide a Django template which creates an instance of your JS picker class, populated with
 the relevant variables, which can be filled in by the Django side using your Python picker class. It must also add a listener to the 
@@ -135,7 +135,7 @@ class WagtailContentImportMyPickerAppConfig(AppConfig):
     verbose_name = "Wagtail Content Import - My Picker"
 ```
 
-####`utils.py`
+#### `utils.py`
 
 Here, you'll need to create the Python class for your new picker, which will provide the names
 and context needed by the `js_init` template.
@@ -173,7 +173,7 @@ class MyPicker(Picker):
         ]
 ```
 
-###`wagtail_hooks.py`
+### `wagtail_hooks.py`
 
 Finally, here you'll need to register your picker, and add a `before create page` hook to actually
 import posted content.

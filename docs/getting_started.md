@@ -1,7 +1,6 @@
 ## Requirements:
 * Django 2.2
 * Wagtail 2.2
-* Python 3
 
 ### To set up:
  1. Run `python3 pip install wagtail-content-import`.
