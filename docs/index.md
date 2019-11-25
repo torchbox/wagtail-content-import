@@ -1,14 +1,14 @@
 # Welcome to Wagtail Content Import's Documentation
 
-Wagtail Content Import is a module for Wagtail that provides functionality for importing page content from 
-third-party sources. Page content is imported into a StreamField, using a set of customisable mappings.
+Wagtail Content Import is a module for importing page content into Wagtail from third-party sources. 
+Page content is imported into a StreamField, using a set of customisable mappings.
 Currently supports:
 
-###As sources:
+### As sources:
 - Google Docs:
 - OneDrive/SharePoint
 
-###As files:
+### As files:
 - Google Docs documents with:
     - Rich text
     - Tables
@@ -17,3 +17,5 @@ Currently supports:
 - Docx files with:
     - Text with bold and italics
     - Headings
+
+"for importing page content into Wagtail from third-party sources"

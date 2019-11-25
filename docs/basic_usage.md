@@ -1,7 +1,7 @@
 # Basic Usage
 
 1. To enable import for a Page model, it should inherit from `ContentImportMixin` 
-(`wagtail_content_import.models.ContentImportMixin`). By default, content will be imported into into a StreamField called body
+(`wagtail_content_import.models.ContentImportMixin`). By default, content will be imported into into a StreamField called `body`
 (see [Changing Import Fields](changing_import_fields.md) for how to change this).
 
 2. You'll then need to create a Mapper, which maps the parsed document into your StreamField blocks. Create a class deriving from `wagtail_content_import.mappers.streamfield.StreamFieldMapper`:
@@ -22,9 +22,9 @@
         from wagtail.contrib.table_block.blocks import TableBlock
         
         class BaseStreamBlock(StreamBlock):
-        """
-        Define the custom blocks that `StreamField` will utilize
-        """
+            """
+            Define the custom blocks that `StreamField` will utilize
+            """
             my_heading_block = CharBlock()
             my_paragraph_block = RichTextBlock()
             my_image_block = ImageChooserBlock()

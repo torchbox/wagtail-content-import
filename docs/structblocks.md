@@ -41,7 +41,7 @@ class HeadingBlockConverter(BaseConverter):
         return (self.block_name, {'heading_text': element['value'], 'size': 'h2'})
 ```
 
-##A More Complex Example: A Custom ImageBlock
+# #A More Complex Example: A Custom ImageBlock
 
 For a custom ImageBlock:
 

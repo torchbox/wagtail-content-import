@@ -1,4 +1,4 @@
-##General Settings
+## General Settings
 
 #### `WAGTAILCONTENTIMPORT_DEFAULT_MAPPER`:
 
@@ -13,7 +13,7 @@ The DocumentParser class used for Google Docs. Defaults to `GoogleDocumentParser
 
 The DocumentParser class used for .docx files. Defaults to `DocxParser`.
 
-##Google Picker Settings
+## Google Picker Settings
 
 #### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):  
 
@@ -23,7 +23,7 @@ The app's Google client secret. (See: [Google Docs Setup](google_docs_setup.md))
 
 The app's Google Picker API key, allowing selection of Google Docs. (See: [Google Docs Setup](google_docs_setup.md))
 
-##Microsoft Picker Settings
+## Microsoft Picker Settings
 
 #### `MICROSOFT_CLIENT_ID` (Required):  
 
