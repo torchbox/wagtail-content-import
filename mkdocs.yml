@@ -1,6 +1,8 @@
 site_name: Wagtail Content Import Documentation
 theme:
   name: 'material'
+markdown_extensions:
+  - codehilite
 nav:
     - Home: index.md
     - Getting Started:
