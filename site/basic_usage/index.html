@@ -390,29 +390,33 @@
 </li>
 <li>
 <p>You'll then need to create a Mapper, which maps the parsed document into your StreamField blocks. Create a class deriving from <code>wagtail_content_import.mappers.streamfield.StreamFieldMapper</code>:</p>
-<pre><code>from wagtail_content_import.mappers.converters import ImageConverter, RichTextConverter, TableConverter, TextConverter 
-from wagtail_content_import.mappers.streamfield import StreamFieldMapper
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.converters</span> <span class="kn">import</span> <span class="n">ImageConverter</span><span class="p">,</span> <span class="n">RichTextConverter</span><span class="p">,</span> <span class="n">TableConverter</span><span class="p">,</span> <span class="n">TextConverter</span> 
+<span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.streamfield</span> <span class="kn">import</span> <span class="n">StreamFieldMapper</span>
 
-class MyMapper(StreamFieldMapper):
-    html = RichTextConverter('my_heading_block')
-    image = ImageConverter('my_image_block')
-    heading = TextConverter('my_heading_block')
-    table = TableConverter('my_table_block')
-</code></pre>
+<span class="k">class</span> <span class="nc">MyMapper</span><span class="p">(</span><span class="n">StreamFieldMapper</span><span class="p">):</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">RichTextConverter</span><span class="p">(</span><span class="s1">&#39;my_heading_block&#39;</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">ImageConverter</span><span class="p">(</span><span class="s1">&#39;my_image_block&#39;</span><span class="p">)</span>
+    <span class="n">heading</span> <span class="o">=</span> <span class="n">TextConverter</span><span class="p">(</span><span class="s1">&#39;my_heading_block&#39;</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">TableConverter</span><span class="p">(</span><span class="s1">&#39;my_table_block&#39;</span><span class="p">)</span>
+</pre></div>
+
+
 <p>This would map to an example StreamField defined as:</p>
-<pre><code>from wagtail.images.blocks import ImageChooserBlock
-from wagtail.core.blocks import CharBlock, RichTextBlock, StreamBlock
-from wagtail.contrib.table_block.blocks import TableBlock
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail.images.blocks</span> <span class="kn">import</span> <span class="n">ImageChooserBlock</span>
+<span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">CharBlock</span><span class="p">,</span> <span class="n">RichTextBlock</span><span class="p">,</span> <span class="n">StreamBlock</span>
+<span class="kn">from</span> <span class="nn">wagtail.contrib.table_block.blocks</span> <span class="kn">import</span> <span class="n">TableBlock</span>
 
-class BaseStreamBlock(StreamBlock):
-    """
-    Define the custom blocks that `StreamField` will utilize
-    """
-    my_heading_block = CharBlock()
-    my_paragraph_block = RichTextBlock()
-    my_image_block = ImageChooserBlock()
-    my_table_block = TableBlock()
-</code></pre>
+<span class="k">class</span> <span class="nc">BaseStreamBlock</span><span class="p">(</span><span class="n">StreamBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Define the custom blocks that `StreamField` will utilize</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">my_heading_block</span> <span class="o">=</span> <span class="n">CharBlock</span><span class="p">()</span>
+    <span class="n">my_paragraph_block</span> <span class="o">=</span> <span class="n">RichTextBlock</span><span class="p">()</span>
+    <span class="n">my_image_block</span> <span class="o">=</span> <span class="n">ImageChooserBlock</span><span class="p">()</span>
+    <span class="n">my_table_block</span> <span class="o">=</span> <span class="n">TableBlock</span><span class="p">()</span>
+</pre></div>
+
+
 <p>Note that the converters require the fields rather than the block classes: <code>'my_heading_block'</code>, not <code>CharBlock</code>.</p>
 <p>The above example assumes use of the simple blocks included with Wagtail. For StructBlocks, see <a href="../structblocks/">Working with StructBlocks</a>.</p>
 </li>

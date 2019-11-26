@@ -373,12 +373,13 @@ block the converter is creating.</p>
 <p>Converters should implement a <code>__call__(self, element, **kwargs)</code> method which returns a 
 StreamField-compatible tuple of <code>(self.block_name, content)</code> for an <code>element</code> of the form <code>{type: type, 'value': value}</code></p>
 <p>For example, the default TextConverter is implemented simply as:</p>
-<pre><code class="python">from wagtail_content_import.parsers.converters import BaseConverter
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail_content_import.parsers.converters</span> <span class="kn">import</span> <span class="n">BaseConverter</span>
 
-class TextConverter(BaseConverter):
-    def __call__(self, element, **kwargs):
-        return (self.block_name, element['value'])
-</code></pre>
+<span class="k">class</span> <span class="nc">TextConverter</span><span class="p">(</span><span class="n">BaseConverter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+</pre></div>
+
 
 <p>To see how to use a custom converter to map into a StructBlock, see <a href="../structblocks/">working with StructBlocks</a>.</p>
                 

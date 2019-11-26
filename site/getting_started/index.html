@@ -461,12 +461,14 @@
 <li>Add <code>'wagtail_content_import'</code> to <code>INSTALLED_APPS</code> above <code>wagtail.admin</code></li>
 <li>
 <p>Add the urls: include <code>wagtail_import.urls</code> in your <code>urlpatterns</code> in <code>urls.py</code>. This could look like:</p>
-<pre><code>from django.conf.urls import include, url
-from wagtail_content_import import urls as wagtail_content_import_urls
-urlpatterns += [
-    url(r'', include(wagtail_content_import_urls)),
-    ]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">wagtail_content_import</span> <span class="kn">import</span> <span class="n">urls</span> <span class="k">as</span> <span class="n">wagtail_content_import_urls</span>
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">wagtail_content_import_urls</span><span class="p">)),</span>
+    <span class="p">]</span>
+</pre></div>
+
+
 <p>Note that <code>wagtail_content_import.urls</code> must be above <code>wagtail.core.urls</code> in your <code>urlpatterns</code>.</p>
 </li>
 <li>
