@@ -581,144 +581,148 @@ a method to show the picker, and upon choosing, make a POST request to the page 
 with relevant data that allows Wagtail to import the document: for the Google picker, this is a JSON
 containing the document; for the Microsoft picker, this is a temporary url allowing the file to be downloaded.</p>
 <p>Eg:</p>
-<pre><code class="javascript">(function() {
-    class MyPicker {
-        constructor(AUTH_PARAMETERS, createPageUrl, csrfToken) {
-        this.AUTH_PARAMETERS = AUTH_PARAMETERS;
-        this.createPageUrl = createPageUrl;
-        this.csrfToken = csrfToken;
-        }
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">class</span> <span class="nx">MyPicker</span> <span class="p">{</span>
+        <span class="nx">constructor</span><span class="p">(</span><span class="nx">AUTH_PARAMETERS</span><span class="p">,</span> <span class="nx">createPageUrl</span><span class="p">,</span> <span class="nx">csrfToken</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">AUTH_PARAMETERS</span> <span class="o">=</span> <span class="nx">AUTH_PARAMETERS</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">createPageUrl</span> <span class="o">=</span> <span class="nx">createPageUrl</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">csrfToken</span> <span class="o">=</span> <span class="nx">csrfToken</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        post_data(response) {
-            // POST relevant data to the page
-            // Use a hidden form so the browser reloads with the result of this request
-            let form = document.createElement('form');
-            form.action = this.createPageUrl;
-            form.method = 'POST';
-            form.style.visibility = 'hidden';
-            document.body.appendChild(form);
+        <span class="nx">post_data</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// POST relevant data to the page</span>
+            <span class="c1">// Use a hidden form so the browser reloads with the result of this request</span>
+            <span class="kd">let</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">);</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">action</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createPageUrl</span><span class="p">;</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">method</span> <span class="o">=</span> <span class="s1">&#39;POST&#39;</span><span class="p">;</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span><span class="p">;</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">form</span><span class="p">);</span>
 
-            let csrfTokenField = document.createElement('input');
-            csrfTokenField.type = 'hidden';
-            csrfTokenField.name = 'csrfmiddlewaretoken';
-            csrfTokenField.value = this.csrfToken;
-            form.appendChild(csrfTokenField);
+            <span class="kd">let</span> <span class="nx">csrfTokenField</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+            <span class="nx">csrfTokenField</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span><span class="p">;</span>
+            <span class="nx">csrfTokenField</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;csrfmiddlewaretoken&#39;</span><span class="p">;</span>
+            <span class="nx">csrfTokenField</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">csrfToken</span><span class="p">;</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">csrfTokenField</span><span class="p">);</span>
 
-            let myDocField = document.createElement('input');
-            myDocField.type = 'hidden';
-            myDocField.name = 'my-doc';
-            myDocField.value = response.value;
-            form.appendChild(myDocField);
+            <span class="kd">let</span> <span class="nx">myDocField</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+            <span class="nx">myDocField</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span><span class="p">;</span>
+            <span class="nx">myDocField</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;my-doc&#39;</span><span class="p">;</span>
+            <span class="nx">myDocField</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+            <span class="nx">form</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">myDocField</span><span class="p">);</span>
 
-            form.submit();
-        }
+            <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+        <span class="p">}</span>
 
 
-        show() {
-          # Open the picker here, and call this.post_data(response) on successfully getting a file
-        }
-    }
+        <span class="nx">show</span><span class="p">()</span> <span class="p">{</span>
+          <span class="err">#</span> <span class="nx">Open</span> <span class="nx">the</span> <span class="nx">picker</span> <span class="nx">here</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">call</span> <span class="k">this</span><span class="p">.</span><span class="nx">post_data</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="nx">on</span> <span class="nx">successfully</span> <span class="nx">getting</span> <span class="nx">a</span> <span class="nx">file</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    window.MyPicker = MyPicker;
-})();
-</code></pre>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">MyPicker</span> <span class="o">=</span> <span class="nx">MyPicker</span><span class="p">;</span>
+<span class="p">})();</span>
+</pre></div>
+
 
 <h4 id="my_picker_js_inithtml"><code>MY_PICKER_js_init.html</code></h4>
 <p>This should provide a Django template which creates an instance of your JS picker class, populated with
 the relevant variables, which can be filled in by the Django side using your Python picker class. It must also add a listener to the 
 relevant import button, such that when it is clicked, it calls <code>myPicker.show()</code>.</p>
 <p>Eg:</p>
-<pre><code class="html">&lt;script type=&quot;text/javascript&quot;&gt;
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('[data-content-import-picker=&quot;my_picker&quot;]').forEach(function (element) {
-            let myPicker = new MyPicker({{ AUTH_PARAMETERS }}, element.dataset.createPageUrl, '{{ csrf_token|escapejs }}');
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;[data-content-import-picker=&quot;my_picker&quot;]&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">myPicker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPicker</span><span class="p">({{</span> <span class="nx">AUTH_PARAMETERS</span> <span class="p">}},</span> <span class="nx">element</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">createPageUrl</span><span class="p">,</span> <span class="s1">&#39;{{ csrf_token|escapejs }}&#39;</span><span class="p">);</span>
 
-            element.addEventListener('click', function(e) {
-                e.preventDefault();
-                myPicker.show();
-            });
-        });
-    });
-&lt;/script&gt;
+            <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+                <span class="nx">myPicker</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
 
-</code></pre>
 
 <h4 id="__init__py-and-appspy"><code>__init__.py</code> and <code>apps.py</code></h4>
 <p><code>init.py</code>:</p>
-<pre><code class="python">default_app_config = 'wagtail_content_import.pickers.my_picker.apps.WagtailContentImportMyPickerAppConfig'
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">default_app_config</span> <span class="o">=</span> <span class="s1">&#39;wagtail_content_import.pickers.my_picker.apps.WagtailContentImportMyPickerAppConfig&#39;</span>
+</pre></div>
+
 
 <p><code>apps.py</code>: </p>
-<pre><code class="python">from django.apps import AppConfig
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">AppConfig</span>
 
 
-class WagtailContentImportMyPickerAppConfig(AppConfig):
-    name = 'wagtail_content_import.pickers.my_picker'
-    label = 'wagtail_content_import_my_picker'
-    verbose_name = &quot;Wagtail Content Import - My Picker&quot;
-</code></pre>
+<span class="k">class</span> <span class="nc">WagtailContentImportMyPickerAppConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;wagtail_content_import.pickers.my_picker&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;wagtail_content_import_my_picker&#39;</span>
+    <span class="n">verbose_name</span> <span class="o">=</span> <span class="s2">&quot;Wagtail Content Import - My Picker&quot;</span>
+</pre></div>
+
 
 <h4 id="utilspy"><code>utils.py</code></h4>
 <p>Here, you'll need to create the Python class for your new picker, which will provide the names
 and context needed by the <code>js_init</code> template.</p>
-<pre><code class="python">from django.template.loader import render_to_string
-from django.utils.safestring import mark_safe
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">render_to_string</span>
+<span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="kn">import</span> <span class="n">mark_safe</span>
 
-from wagtail_content_import.pickers import Picker
+<span class="kn">from</span> <span class="nn">wagtail_content_import.pickers</span> <span class="kn">import</span> <span class="n">Picker</span>
 
 
-class MyPicker(Picker):
-    name = &quot;my_picker&quot;
-    verbose_name = &quot;My Picker&quot;
+<span class="k">class</span> <span class="nc">MyPicker</span><span class="p">(</span><span class="n">Picker</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;my_picker&quot;</span>
+    <span class="n">verbose_name</span> <span class="o">=</span> <span class="s2">&quot;My Picker&quot;</span>
 
-    def __init__(self, AUTH_PARAMETERS):
-        self.AUTH_PARAMETERS = AUTH_PARAMETERS
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">AUTH_PARAMETERS</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AUTH_PARAMETERS</span> <span class="o">=</span> <span class="n">AUTH_PARAMETERS</span>
 
-    def get_context(self):
-        return {
-            'picker': self,
-            'AUTH_PARAMETERS': self.AUTH_PARAMETERS,
-        }
+    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;picker&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
+            <span class="s1">&#39;AUTH_PARAMETERS&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTH_PARAMETERS</span><span class="p">,</span>
+        <span class="p">}</span>
 
-    js_template = 'wagtail_content_import/MY_PICKER_js_init.html'
+    <span class="n">js_template</span> <span class="o">=</span> <span class="s1">&#39;wagtail_content_import/MY_PICKER_js_init.html&#39;</span>
 
-    def render_js_init(self, request):
-        return mark_safe(render_to_string(self.js_template, self.get_context(), request=request))
+    <span class="k">def</span> <span class="nf">render_js_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">render_to_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">js_template</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_context</span><span class="p">(),</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">))</span>
 
-    class Media:
-        css = {}
-        js = [
-            # ANY EXTRA JS YOU NEED HERE 
-            'wagtail_content_import/MY_PICKER.js',
-        ]
-</code></pre>
+    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># ANY EXTRA JS YOU NEED HERE </span>
+            <span class="s1">&#39;wagtail_content_import/MY_PICKER.js&#39;</span><span class="p">,</span>
+        <span class="p">]</span>
+</pre></div>
+
 
 <h3 id="wagtail_hookspy"><code>wagtail_hooks.py</code></h3>
 <p>Finally, here you'll need to register your picker, and add a <code>before create page</code> hook to actually
 import posted content.</p>
 <p>Eg:</p>
-<pre><code class="python">from django.conf import settings
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 
-from wagtail.core import hooks
+<span class="kn">from</span> <span class="nn">wagtail.core</span> <span class="kn">import</span> <span class="n">hooks</span>
 
-from .utils import MyPicker
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">MyPicker</span>
 
-from ...utils import create_page_from_import
-
-
-@hooks.register(&quot;before_create_page&quot;)
-def create_from_my_doc(request, parent_page, page_class):
-    if &quot;my-doc&quot; in request.POST:
-        parsed_doc = # PARSE THE DOCUMENT HERE
-        return create_page_from_import(request, parent_page, page_class, parsed_doc)
+<span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="n">create_page_from_import</span>
 
 
-@hooks.register('register_content_import_picker')
-def register_content_import_picker():
-    return MyPicker(
-        settings.AUTH_PARAMETERS,
-    )
-</code></pre>
+<span class="nd">@hooks.register</span><span class="p">(</span><span class="s2">&quot;before_create_page&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_from_my_doc</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">parent_page</span><span class="p">,</span> <span class="n">page_class</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s2">&quot;my-doc&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+        <span class="n">parsed_doc</span> <span class="o">=</span> <span class="c1"># PARSE THE DOCUMENT HERE</span>
+        <span class="k">return</span> <span class="n">create_page_from_import</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">parent_page</span><span class="p">,</span> <span class="n">page_class</span><span class="p">,</span> <span class="n">parsed_doc</span><span class="p">)</span>
+
+
+<span class="nd">@hooks.register</span><span class="p">(</span><span class="s1">&#39;register_content_import_picker&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">register_content_import_picker</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">MyPicker</span><span class="p">(</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">AUTH_PARAMETERS</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
                 
                   
                 
