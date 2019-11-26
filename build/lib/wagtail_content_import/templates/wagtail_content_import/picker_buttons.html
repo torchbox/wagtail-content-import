@@ -1,0 +1,18 @@
+{% if default_picker %}
+    <li class="actions import-container content-import">
+        <div class="dropdown dropup dropdown-button match-width">
+                <div class="content-import button button-longrunning dropdown-toggle"><i class="icon icon-folder-open-inverse content-import docs-blue"></i>Import</div>
+                <div class="content-import dropdown-toggle icon icon-arrow-up"></div>
+                <ul>
+                    <li>
+                    <a href="#" data-content-import-picker="{{ default_picker.name }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="content-import button button-longrunning"><i class="icon {{ default_picker.icon }} content-import docs-blue"></i>Import from {{ default_picker.verbose_name }}</a>
+                    </li>
+                        {% for picker in picker_options %}
+                        <li>
+                            <a href="#" data-content-import-picker="{{ picker.name }}" data-create-page-url="{% url 'wagtailadmin_pages:add' content_type.app_label content_type.model parent_page.id %}" class="content-import button button-longrunning"><i class="icon {{ picker.icon }} content-import docs-blue"></i>Import from {{ picker.verbose_name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </li>
+{% endif %}

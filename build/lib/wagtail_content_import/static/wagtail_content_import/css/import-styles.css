@@ -1,0 +1,28 @@
+.button.content-import, .content-import.dropdown-toggle, .dropdown.open .content-import.dropdown-toggle  {
+    background-color: #fafafa;
+    border-left: 1px solid #007d7e;
+    color: #262626;
+    }
+
+.button.content-import:hover, .content-import.dropdown-toggle:hover{
+    background-color: #ececec;
+    }
+
+.docs-blue.content-import {
+    color: #4387f4;
+}
+
+.import-container.content-import {
+    float:right;
+}
+
+.button.content-import {
+    border: 1px solid #fafafa;
+    }
+
+.content-import.button.button-longrunning.dropdown-toggle {
+    height: 3em;
+    padding-left: 1em;
+    text-align: left;
+    border-radius: 3px;
+}

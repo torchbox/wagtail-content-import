@@ -1,0 +1,20 @@
+{% if documents %}
+    <form method="post">
+    {% csrf_token %}
+    <ul class="listing">
+
+        {% for doc in documents %}
+            <li>
+                <div class="row row-flush">
+                    <div class="col8">
+                        <a href="{{ doc.webViewLink }}" target="_blank">{{ doc.name }}</a> - modified {{ doc.modifiedTime }}
+                    </div>
+                    <div class="col4" style="text-align:right">
+                        <button type="submit" class="button" name="docid" value="{{ doc.id }}">Import this document</button>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    </form>
+{% endif %}

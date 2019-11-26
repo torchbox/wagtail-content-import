@@ -1,0 +1,43 @@
+{% extends "wagtailadmin/pages/add_subpage.html" %}
+{% load i18n %}
+{% load wagtailadmin_tags %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+        window.headerSearch = {
+            url: "{% url 'content_import_google:search' %}",
+            termInput: "#id_q",
+            targetOutput: "#document-results"
+        };
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    <header class="nice-padding">
+        <div class="row">
+            <div class="left">
+                <div class="col">
+                    <h1 class="icon icon-doc-full-inverse">
+                    Documents
+                    </h1>
+                </div>
+                <form class="col search-form" action="./{% if query_parameters %}?{{ query_parameters }}{% endif %}" method="get" novalidate>
+                    <ul class="fields">
+                        {% for field in search_form %}
+                            {% include "wagtailadmin/shared/field_as_li.html" with field=field field_classes="field-small iconfield" input_classes="icon-search" %}
+                        {% endfor %}
+                        <li class="submit visuallyhidden"><input type="submit" value="Search" class="button" /></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div class="nice-padding">
+        <div id="document-results">
+            {% include 'wagtail_content_import/google_doc_results.html' %}
+        </div>
+    </div>
+{% endblock %}

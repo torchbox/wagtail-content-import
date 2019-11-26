@@ -1,0 +1,8 @@
+wagtail>=2.2
+python-docx>=0.8.10
+
+[test]
+mock>=1.0.0
+coverage>=3.7.0
+flake8>=2.2.0
+tox==3.9.0
