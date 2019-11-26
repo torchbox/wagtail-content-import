@@ -11,17 +11,19 @@ remote source - you'll need to follow this blueprint:
 
 Inside `wagtail_content_import.pickers`, your app should have the following structure:
 
-- `my_picker`
-    - `static`
-        - `wagtail_content_import`
-            - `MY_PICKER.js`
-    - `templates`
-        - `wagtail_content_import`
-            - `MY_PICKER_js_init.html`
-    - `__init__.py`
-    - `apps.py`
-    - `utils.py`
-    - `wagtail_hooks.py`
+```sh
+- my_picker
+    - static
+        - wagtail_content_import
+            - MY_PICKER.js
+    - templates
+        - wagtail_content_import
+            - MY_PICKER_js_init.html
+    - __init__.py
+    - apps.py
+    - utils.py
+    - wagtail_hooks.py
+```
 
 Where `MY_PICKER` should be replaced with the name of your picker.
 
