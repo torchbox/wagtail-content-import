@@ -1,6 +1,11 @@
 site_name: Wagtail Content Import Documentation
 theme:
   name: 'material'
+  favicon: 'img/wagtail_content_import_icon.svg'
+  logo: 'img/wagtail_content_import_icon.svg'
+  palette:
+    primary: 'teal'
+    accent: 'indigo'
 nav:
     - Home: index.md
     - Getting Started:
