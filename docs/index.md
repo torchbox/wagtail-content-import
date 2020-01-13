@@ -1,5 +1,7 @@
 # Welcome to Wagtail Content Import's Documentation
 
+![Wagtail Content Import logo](img/wagtail_content_import_logo_with_text.svg)
+
 Wagtail Content Import is a module for importing page content into Wagtail from third-party sources. 
 Page content is imported into a StreamField, using a set of customisable mappings.
 Currently supports:

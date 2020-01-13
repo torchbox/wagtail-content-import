@@ -16,6 +16,6 @@ Wagtail OneDrive/SharePoint integration relies on Microsoft APIs, which you will
    The redirect URI will be: `https://BASE_URL/ADDITIONAL_URL_PATH/microsoft/auth/`
    (substituting BASE_URL for your site's url, and ADDITIONAL_URL_PATH for the path under which you have included `wagtail_content_import.urls`)
 
-4. Navigate to `Authentication`. Under `Implicit grant`, add `Access tokens`, and save.
+4. Navigate to `Authentication`. Under `Implicit grant`, add `Access tokens` and `ID tokens`, and save.
 
 5. Finally, navigate to `Overview`, and copy the `Application (client) ID` into the `MICROSOFT_CLIENT_ID` setting.
