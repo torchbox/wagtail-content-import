@@ -16,6 +16,7 @@ def parse_document(document):
 class GooglePicker(Picker):
     name = "google"
     verbose_name = "Google Docs"
+    icon = "icon-doc-full-inverse"
 
     def __init__(self, oauth_client_config, picker_api_key):
         self.oauth_client_config = json.loads(oauth_client_config)

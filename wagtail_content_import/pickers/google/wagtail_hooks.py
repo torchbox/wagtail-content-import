@@ -1,16 +1,10 @@
-
 import json
 
 from django.conf import settings
-from django.shortcuts import render
-from django.utils.text import slugify
-
 
 from wagtail.core import hooks
 
-
 from .utils import parse_document, GooglePicker
-
 from ...utils import create_page_from_import
 
 

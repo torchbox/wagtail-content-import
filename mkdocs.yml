@@ -6,6 +6,8 @@ theme:
   palette:
     primary: 'teal'
     accent: 'indigo'
+markdown_extensions:
+  - codehilite
 nav:
     - Home: index.md
     - Getting Started:
