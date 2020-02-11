@@ -47,6 +47,7 @@
 
             let picker = new google.picker.PickerBuilder()
                 .enableFeature(google.picker.Feature.NAV_HIDDEN)
+                .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
                 .setAppId(this.authOptions.appId)
                 .setDeveloperKey(this.authOptions.pickerApiKey)
                 .setOAuthToken(oauthToken)
