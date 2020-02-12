@@ -42,17 +42,26 @@
         }
 
         picker(oauthToken, callback) {
-            let view = new google.picker.View(google.picker.ViewId.DOCS);
-            view.setMimeTypes("application/vnd.google-apps.document");
+            let docsView = new google.picker.DocsView(google.picker.ViewId.DOCUMENTS);
+            docsView.setMimeTypes("application/vnd.google-apps.document");
+            docsView.setSelectFolderEnabled(true);
+            docsView.setIncludeFolders(true);
+
+
+            let sharedDrivesView = new google.picker.DocsView(google.picker.ViewId.DOCUMENTS);
+            sharedDrivesView.setMimeTypes("application/vnd.google-apps.document");
+            sharedDrivesView.setSelectFolderEnabled(true);
+            sharedDrivesView.setIncludeFolders(true);
+            sharedDrivesView.setEnableDrives(true);
+
 
             let picker = new google.picker.PickerBuilder()
-                .enableFeature(google.picker.Feature.NAV_HIDDEN)
                 .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
                 .setAppId(this.authOptions.appId)
                 .setDeveloperKey(this.authOptions.pickerApiKey)
                 .setOAuthToken(oauthToken)
-                .addView(view)
-                .addView(new google.picker.DocsUploadView())
+                .addView(docsView)
+                .addView(sharedDrivesView)
                 .setCallback(callback)
                 .build();
 
