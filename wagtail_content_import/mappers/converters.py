@@ -41,7 +41,7 @@ class ImageConverter(BaseConverter):
     def __call__(self, element, user, **kwargs):
         image_name, image_content = self.fetch_image(element['value'])
         title = element.get('title', '')
-        image = self.import_as_image_model(title, image_content, owner=user)
+        image = self.import_as_image_model(image_name, image_content, owner=user, title=title)
         return (self.block_name, image)
 
     @staticmethod
@@ -55,9 +55,11 @@ class ImageConverter(BaseConverter):
         return file_name, response.content
 
     @staticmethod
-    def import_as_image_model(name, content, owner):
+    def import_as_image_model(name, content, owner, title=None):
+        if not title:
+            title = name
         Image = get_image_model()
-        image = Image(title=name, uploaded_by_user=owner)
+        image = Image(title=title, uploaded_by_user=owner)
         image.file = ContentFile(content, name=name)
         # Set image file size
         image.file_size = image.file.size
