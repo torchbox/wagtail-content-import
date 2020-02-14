@@ -70,10 +70,12 @@ class GoogleDocumentParser(DocumentParser):
         embed = self.document['inlineObjects'][embed_id]
         # Currently we only handle images
         image_props = embed['inlineObjectProperties']['embeddedObject'].get('imageProperties')
+        title = embed['inlineObjectProperties']['embeddedObject'].get('title', '')
         if image_props:
             return {
                 'type': 'image',
-                'value': image_props['contentUri']
+                'value': image_props['contentUri'],
+                'title': title
             }
 
     def process_list(self, list_items):
