@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def wagtailcontentimport_pickerjs(context):
-    pickers = [fn() for fn in hooks.get_hooks('register_content_import_picker')]
+    pickers = [fn() for fn in hooks.get_hooks('register_content_import_picker') if fn()]
 
     js_snippets = []
 

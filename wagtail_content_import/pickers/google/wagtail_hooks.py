@@ -17,7 +17,10 @@ def create_from_google_doc(request, parent_page, page_class):
 
 @hooks.register('register_content_import_picker')
 def register_content_import_picker():
-    return GooglePicker(
-        settings.GOOGLE_OAUTH_CLIENT_CONFIG,
-        settings.GOOGLE_PICKER_API_KEY,
-    )
+    client_config = getattr(settings, "WAGTAIL_CONTENT_IMPORT_GOOGLE_OAUTH_CLIENT_CONFIG", "")
+    api_key = getattr(settings, "WAGTAIL_CONTENT_IMPORT_GOOGLE_PICKER_API_KEY", "")
+    if client_config and api_key:
+        return GooglePicker(
+            client_config,
+            api_key,
+        )
