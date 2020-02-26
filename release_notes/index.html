@@ -36,7 +36,7 @@
     
     
       
-        <title>Changing Import Fields - Wagtail Content Import Documentation</title>
+        <title>Release Notes - Wagtail Content Import Documentation</title>
       
     
     
@@ -83,6 +83,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#release-notes" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -105,7 +109,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Changing Import Fields
+                Release Notes
               
             </span>
           
@@ -268,12 +272,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Customisation
@@ -313,18 +315,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Changing Import Fields" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../changing_import_fields/" title="Changing Import Fields" class="md-nav__link">
       Changing Import Fields
     </a>
-    
   </li>
 
         
@@ -361,11 +356,49 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../release_notes/" title="Release Notes" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Release Notes
+      </label>
+    
+    <a href="./" title="Release Notes" class="md-nav__link md-nav__link--active">
       Release Notes
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#version-030-26022020" class="md-nav__link">
+    Version 0.3.0 (26/02/2020)
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -376,37 +409,50 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#version-030-26022020" class="md-nav__link">
+    Version 0.3.0 (26/02/2020)
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Changing Import Fields</h1>
-                
-                <p>To change how the document's data is imported to the Page model - for example, importing to a StreamField other than <code>body</code>,
-you'll need to override the <code>create_from_import</code> method. On the <code>ContentImportMixin</code>, this is defined as:</p>
-<div class="codehilite"><pre><span></span><code>    <span class="kn">from</span> <span class="nn">django.utils.text</span> <span class="kn">import</span> <span class="n">slugify</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_from_import</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">parsed_doc</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Factory method to create the Page and populate it from a parsed document.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">parsed_doc</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
-        <span class="n">mapper_class</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mapper_class</span>
-        <span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper_class</span><span class="p">()</span>
-        <span class="n">imported_data</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parsed_doc</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-            <span class="n">slug</span><span class="o">=</span><span class="n">slugify</span><span class="p">(</span><span class="n">title</span><span class="p">),</span>
-            <span class="n">body</span><span class="o">=</span><span class="n">imported_data</span><span class="p">,</span>
-            <span class="n">owner</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-        <span class="p">)</span>
-</code></pre></div>
-
-
-<p>So to import into a different field, simply replace <code>body</code> with the name of your custom field.</p>
+                <h1 id="release-notes">Release Notes</h1>
+<h2 id="version-030-26022020">Version 0.3.0 (26/02/2020)</h2>
+<ul>
+<li>Fix: settings for pickers will no longer cause errors in the edit view when unset or set to blank strings - instead, pickers will hide themselves.</li>
+<li>Update: settings for pickers are now prefixed with <code>WAGTAIL_CONTENT_IMPORT_</code>, so the names are now <code>WAGTAIL_CONTENT_IMPORT_GOOGLE_PICKER_API_KEY</code>,
+  <code>WAGTAIL_CONTENT_IMPORT_GOOGLE_OAUTH_CLIENT_CONFIG</code> and <code>WAGTAIL_CONTENT_IMPORT_MICROSOFT_CLIENT_ID</code>. Make sure to change these when updating!</li>
+</ul>
                 
                   
                 
@@ -428,7 +474,7 @@ you'll need to override the <code>create_from_import</code> method. On the <code
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../structblocks/" title="Working With StructBlocks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../submitting_backend/" title="Submitting a New Backend" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -437,25 +483,11 @@ you'll need to override the <code>create_from_import</code> method. On the <code
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Working With StructBlocks
+                Submitting a New Backend
               </span>
             </div>
           </a>
         
-        
-          <a href="../settings/" title="Settings Reference" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Settings Reference
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
         
       </nav>
     </div>

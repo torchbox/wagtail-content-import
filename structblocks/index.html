@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../img/wagtail_content_import_icon.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -51,12 +51,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -83,7 +83,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#a-more-complex-example-a-custom-imageblock" tabindex="1" class="md-skip">
+      <a href="#a-more-complex-example-a-custom-imageblock" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -92,9 +92,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="Wagtail Content Import Documentation" class="md-header-nav__button md-logo">
+        <a href=".." title="Wagtail Content Import Documentation" aria-label="Wagtail Content Import Documentation" class="md-header-nav__button md-logo">
           
-            <img src="../img/wagtail_content_import_icon.svg" width="24" height="24">
+            <img alt="logo" src="../img/wagtail_content_import_icon.svg" width="24" height="24">
           
         </a>
       </div>
@@ -123,7 +123,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -164,7 +164,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href=".." title="Wagtail Content Import Documentation" class="md-nav__button md-logo">
       
-        <img src="../img/wagtail_content_import_icon.svg" width="48" height="48">
+        <img alt="logo" src="../img/wagtail_content_import_icon.svg" width="48" height="48">
       
     </a>
     Wagtail Content Import Documentation
@@ -363,6 +363,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release_notes/" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -393,53 +405,53 @@
                 
                 <p>To convert elements in the parsed document to a StructBlock, you'll need to write a custom converter (see <a href="../custom_converters/">Writing Custom Converters</a>.)</p>
 <p>For a StructBlock, the converter output of a <code>(self.block_name, content)</code> tuple should provide <code>content</code> as a dict. For example, for a StructBlock:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">CharBlock</span><span class="p">,</span> <span class="n">ChoiceBlock</span><span class="p">,</span> <span class="n">StructBlock</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">CharBlock</span><span class="p">,</span> <span class="n">ChoiceBlock</span><span class="p">,</span> <span class="n">StructBlock</span>
 
 <span class="k">class</span> <span class="nc">HeadingBlock</span><span class="p">(</span><span class="n">StructBlock</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Custom `StructBlock` that allows the user to select h2 - h4 sizes for headers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">heading_text</span> <span class="o">=</span> <span class="n">CharBlock</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">heading_text</span> <span class="o">=</span> <span class="n">CharBlock</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">ChoiceBlock</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Select a header size&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">,</span> <span class="s1">&#39;H2&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span> <span class="s1">&#39;H3&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h4&#39;</span><span class="p">,</span> <span class="s1">&#39;H4&#39;</span><span class="p">)</span>
-    <span class="p">],</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="p">],</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
         <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;blocks/heading_block.html&quot;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p><code>content</code> should be:</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="s1">&#39;heading_text&#39;</span><span class="p">:</span> <span class="n">heading_text</span><span class="p">,</span>
     <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>To do this, we could write a converter:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.converters</span> <span class="kn">import</span> <span class="n">BaseConverter</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.converters</span> <span class="kn">import</span> <span class="n">BaseConverter</span>
 
 <span class="k">class</span> <span class="nc">HeadingBlockConverter</span><span class="p">(</span><span class="n">BaseConverter</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;heading_text&#39;</span><span class="p">:</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="s1">&#39;h2&#39;</span><span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 
 <h1 id="a-more-complex-example-a-custom-imageblock">#A More Complex Example: A Custom ImageBlock</h1>
 <p>For a custom ImageBlock:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="kn">import</span> <span class="n">mark_safe</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="kn">import</span> <span class="n">mark_safe</span>
 <span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">BooleanBlock</span><span class="p">,</span> <span class="n">StructBlock</span>
 <span class="kn">from</span> <span class="nn">wagtail.images.blocks</span> <span class="kn">import</span> <span class="n">ImageChooserBlock</span>
 
 
 <span class="k">class</span> <span class="nc">ImageBlock</span><span class="p">(</span><span class="n">StructBlock</span><span class="p">):</span>
 
-    <span class="n">show_full_image</span> <span class="o">=</span> <span class="n">BooleanBlock</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">show_full_image</span> <span class="o">=</span> <span class="n">BooleanBlock</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">ImageChooserBlock</span><span class="p">()</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -447,29 +459,30 @@
         <span class="n">admin_text</span> <span class="o">=</span> <span class="n">mark_safe</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Image Block&lt;/b&gt;&quot;</span><span class="p">)</span>
         <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Image Block&quot;</span>
         <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;pages/blocks/image_block.html&quot;</span> 
-</pre></div>
+</code></pre></div>
 
 
 <p>In a StreamField:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">StreamBlock</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">wagtail.core.blocks</span> <span class="kn">import</span> <span class="n">StreamBlock</span>
 
 <span class="k">class</span> <span class="nc">BaseBodyStreamBlock</span><span class="p">(</span><span class="n">StreamBlock</span><span class="p">):</span>
     <span class="n">image_block</span> <span class="o">=</span> <span class="n">ImageBlock</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>We can write a custom converter which borrows some of the functionality of <code>ImageConverter</code>:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.converters</span> <span class="kn">import</span> <span class="n">BaseConverter</span><span class="p">,</span> <span class="n">ImageConverter</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">wagtail_content_import.mappers.converters</span> <span class="kn">import</span> <span class="n">BaseConverter</span><span class="p">,</span> <span class="n">ImageConverter</span>
 
 <span class="k">class</span> <span class="nc">ImageBlockConverter</span><span class="p">(</span><span class="n">BaseConverter</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">image_url</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
         <span class="n">image_name</span><span class="p">,</span> <span class="n">image_content</span> <span class="o">=</span> <span class="n">ImageConverter</span><span class="o">.</span><span class="n">fetch_image</span><span class="p">(</span><span class="n">image_url</span><span class="p">)</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">ImageConverter</span><span class="o">.</span><span class="n">import_as_image_model</span><span class="p">(</span><span class="n">image_name</span><span class="p">,</span> <span class="n">image_content</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;show_full_image&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">})</span>
-</pre></div>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;show_full_image&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">})</span>
+</code></pre></div>
                 
                   
+                
                 
               
               
@@ -525,9 +538,9 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
@@ -537,9 +550,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.1",url:{base:".."}})</script>
       
     
   </body>
