@@ -18,4 +18,4 @@ Wagtail OneDrive/SharePoint integration relies on Microsoft APIs, which you will
 
 4. Navigate to `Authentication`. Under `Implicit grant`, add `Access tokens` and `ID tokens`, and save.
 
-5. Finally, navigate to `Overview`, and copy the `Application (client) ID` into the `MICROSOFT_CLIENT_ID` setting.
+5. Finally, navigate to `Overview`, and copy the `Application (client) ID` into the `WAGTAIL_CONTENT_IMPORT_MICROSOFT_CLIENT_ID` setting.
