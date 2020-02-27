@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 0.3.1 (27/02/2020)
+
+- Update: settings for pickers are now prefixed with `WAGTAILCONTENTIMPORT_` for consistency, so the names are 
+  now`WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY`, `WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG` and `WAGTAILCONTENTIMPORT_MICROSOFT_CLIENT_ID`. Make sure to change these when updating!
+
 ## Version 0.3.0 (26/02/2020)
 
 - Fix: settings for pickers will no longer cause errors in the edit view when unset or set to blank strings - instead, pickers will hide themselves.

@@ -6,7 +6,7 @@ Wagtail Google Docs integration relies on Google APIs, which you will first need
 
 2. Find and enable the [Google Docs](https://console.developers.google.com/apis/library/docs.googleapis.com) and [Google Drive](https://console.developers.google.com/apis/library/drive.googleapis.com) APIs.
     
-3. Find and enable the [Google Picker](https://console.developers.google.com/apis/api/picker.googleapis.com) API, and copy its API key to the setting `GOOGLE_PICKER_API_KEY`.
+3. Find and enable the [Google Picker](https://console.developers.google.com/apis/api/picker.googleapis.com) API, and copy its API key to the setting `WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY`.
 
 4. Open the [Credentials](https://console.developers.google.com/apis/credentials) page in the API Console.
 
@@ -30,4 +30,4 @@ Wagtail Google Docs integration relies on Google APIs, which you will first need
  9. On the Credentials page, next to your Client ID, click the download item to download a JSON file of your client
     secret.
 
- 10. Copy the text from this file, and use it to set `GOOGLE_OAUTH_CLIENT_CONFIG`.
+ 10. Copy the text from this file, and use it to set `WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG`.

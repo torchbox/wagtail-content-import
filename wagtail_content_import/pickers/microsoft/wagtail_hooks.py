@@ -12,7 +12,7 @@ from ...utils import create_page_from_import
 
 @hooks.register('register_content_import_picker')
 def register_content_import_picker():
-    client_id = getattr(settings, "WAGTAIL_CONTENT_IMPORT_MICROSOFT_CLIENT_ID", "")
+    client_id = getattr(settings, "WAGTAILCONTENTIMPORT_MICROSOFT_CLIENT_ID", "")
     if client_id:
         return MicrosoftPicker(client_id)
 
