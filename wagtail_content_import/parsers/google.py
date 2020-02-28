@@ -212,13 +212,15 @@ class GoogleDocumentParser(DocumentParser):
                 close_current_list()
 
                 if paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_2':
-                    outer_tag = 'h3'
+                    outer_tag = 'h2'
                 elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_3':
+                    outer_tag = 'h3'
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
                     outer_tag = 'h4'
-                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_5':
                     outer_tag = 'h5'
-                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
-                    outer_tag = 'h5'
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_6':
+                    outer_tag = 'h6'
                 else:
                     outer_tag = 'p'
 
