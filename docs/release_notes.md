@@ -1,5 +1,13 @@
 # Release Notes
 
+## Version 0.3.2 (03/03/2020)
+
+- Update: `GoogleDocumentsParser` parser now parses underline, superscript, subscript, and strikethrough styles. (Note that using nonstandard
+  rich text features requires adding them to both the `RichTextConverter` class and the `RichTextField` or block)
+- Update: `RichTextConverter` now uses the Draftail `ContentstateConverter` to validate imported content, so correctly accepts features available in 
+  Draftail but not Hallo.js
+- Update: `GoogleDocumentsParser` now converts heading styles in Google Docs more straightforwardly to html tags. For example, `HEADING_2` maps to `h2` tags.
+
 ## Version 0.3.1 (27/02/2020)
 
 - Update: settings for pickers are now prefixed with `WAGTAILCONTENTIMPORT_` for consistency, so the names are 

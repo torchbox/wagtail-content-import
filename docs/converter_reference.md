@@ -17,6 +17,6 @@ Passes the element's `value` field directly through as the block content. Note t
 Imports an image found at the url given by the element's `value`, setting the title to the element's `title` if given, and the owner to the `user` kwarg if
 provided on calling, and returns the image as the block content.
 
-## `TableConverter(block_name)
+## `TableConverter(block_name)`
 
 Produces a text table from the intermediate table representation, compatible with `wagtail.contrib.table_block.blocks.TableBlock`.
