@@ -385,6 +385,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#version-032-03032020" class="md-nav__link">
+    Version 0.3.2 (03/03/2020)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#version-031-27022020" class="md-nav__link">
     Version 0.3.1 (27/02/2020)
   </a>
@@ -409,6 +416,42 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../converter_reference/" title="Converters" class="md-nav__link">
+      Converters
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -428,6 +471,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#version-032-03032020" class="md-nav__link">
+    Version 0.3.2 (03/03/2020)
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#version-031-27022020" class="md-nav__link">
@@ -461,6 +511,14 @@
                 
                 
                 <h1 id="release-notes">Release Notes</h1>
+<h2 id="version-032-03032020">Version 0.3.2 (03/03/2020)</h2>
+<ul>
+<li>Update: <code>GoogleDocumentsParser</code> parser now parses underline, superscript, subscript, and strikethrough styles. (Note that using nonstandard
+  rich text features requires adding them to both the <code>RichTextConverter</code> class and the <code>RichTextField</code> or block)</li>
+<li>Update: <code>RichTextConverter</code> now uses the Draftail <code>ContentstateConverter</code> to validate imported content, so correctly accepts features available in 
+  Draftail but not Hallo.js</li>
+<li>Update: <code>GoogleDocumentsParser</code> now converts heading styles in Google Docs more straightforwardly to html tags. For example, <code>HEADING_2</code> maps to <code>h2</code> tags.</li>
+</ul>
 <h2 id="version-031-27022020">Version 0.3.1 (27/02/2020)</h2>
 <ul>
 <li>Update: settings for pickers are now prefixed with <code>WAGTAILCONTENTIMPORT_</code> for consistency, so the names are 
@@ -507,6 +565,20 @@
             </div>
           </a>
         
+        
+          <a href="../converter_reference/" title="Converters" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Converters
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
