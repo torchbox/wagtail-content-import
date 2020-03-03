@@ -44,6 +44,18 @@ class GoogleDocumentParser(DocumentParser):
             if style.get('italic'):
                 prefixes.append('<i>')
                 suffixes.append('</i>')
+            if style.get('underline'):
+                prefixes.append('<u>')
+                suffixes.append('</u>')
+            if style.get('baselineOffset') == 'SUPERSCRIPT':
+                prefixes.append('<sup>')
+                suffixes.append('</sup>')
+            elif style.get('baselineOffset') == 'SUBSCRIPT':
+                prefixes.append('<sub>')
+                suffixes.append('</sub>')
+            if style.get('strikethrough'):
+                prefixes.append('<s>')
+                suffixes.append('</s>')                
             if style.get('link'):
                 url = style['link'].get('url')
                 # Links without a 'url' field are local bookmark/heading references;
@@ -212,13 +224,15 @@ class GoogleDocumentParser(DocumentParser):
                 close_current_list()
 
                 if paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_2':
-                    outer_tag = 'h3'
+                    outer_tag = 'h2'
                 elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_3':
+                    outer_tag = 'h3'
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
                     outer_tag = 'h4'
-                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_5':
                     outer_tag = 'h5'
-                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_4':
-                    outer_tag = 'h5'
+                elif paragraph['paragraphStyle']['namedStyleType'] == 'HEADING_6':
+                    outer_tag = 'h6'
                 else:
                     outer_tag = 'p'
 

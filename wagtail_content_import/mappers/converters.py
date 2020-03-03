@@ -1,9 +1,9 @@
-from wagtail.core.rich_text import RichText
+from wagtail.core.rich_text import features as feature_registry, RichText
 
 from django.utils.functional import cached_property
 from django.core.files.base import ContentFile
 from wagtail.images import get_image_model
-from wagtail.admin.rich_text.converters.editor_html import EditorHTMLConverter
+from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
 
 import requests
 
@@ -24,11 +24,15 @@ class RichTextConverter(BaseConverter):
         super().__init__(block_name)
 
     @cached_property
-    def editor_html_converter(self):
-        return EditorHTMLConverter(self.features)
+    def contentstate_converter(self):
+        if self.features is None:
+            features = feature_registry.get_default_features()
+        else:
+            features = self.features
+        return ContentstateConverter(features=features)
 
     def __call__(self, element, **kwargs):
-        cleaned_html = self.editor_html_converter.to_database_format(element['value'])
+        cleaned_html = self.contentstate_converter.to_database_format(self.contentstate_converter.from_database_format(element['value']))
         return (self.block_name, RichText(cleaned_html))
 
 

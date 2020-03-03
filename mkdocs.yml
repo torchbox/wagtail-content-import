@@ -23,3 +23,5 @@ nav:
     - Settings Reference: settings.md
     - Submitting a New Backend: submitting_backend.md
     - Release Notes: release_notes.md
+    - Reference:
+      - Converters: converter_reference.md
