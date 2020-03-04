@@ -65,6 +65,7 @@ class GoogleDocumentParser(DocumentParser):
                     prefixes.append('<a href="{}">'.format(escape(url)))
                     suffixes.append('</a>')
 
+            suffixes.reverse()
             html = ''.join(prefixes) + escape(content) + ''.join(suffixes)
             output.append(html)
 
