@@ -1,5 +1,8 @@
 # Release Notes
 
+## Version 0.3.3 (04/03/2020)
+- Fix: Google documents with nested or multiple text styles are now parsed correctly
+
 ## Version 0.3.2 (03/03/2020)
 
 - Update: `GoogleDocumentsParser` parser now parses underline, superscript, subscript, and strikethrough styles. (Note that using nonstandard
