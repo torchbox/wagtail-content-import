@@ -19,5 +19,6 @@
   then follow the steps given in [Google Docs Setup](google_docs_setup.md)
      - To import from OneDrive/SharePoint, add`'wagtail_content_import.pickers.microsoft'` to `INSTALLED_APPS` above `wagtail.admin`,
   then follow the steps given in [Microsoft Setup](microsoft_setup.md)
+     - To import from local files, add`'wagtail_content_import.pickers.local'` to `INSTALLED_APPS` above `wagtail.admin`,
   
  4. You're now ready to set up how content will be imported to your Page models: see [Basic Usage](basic_usage.md)

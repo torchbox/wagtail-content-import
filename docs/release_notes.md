@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.4.0 (04/03/2020)
+- Feature: an additional picker allowing `docx` import from local files is now included. To use it, add `wagtail_content_import.pickers.local` to
+  `INSTALLED_APPS` above `wagtail.admin`.
+
 ## Version 0.3.3 (04/03/2020)
 - Fix: Google documents with nested or multiple text styles are now parsed correctly
 

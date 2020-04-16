@@ -1,0 +1,22 @@
+
+<form action="." method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" accept=".docx" name="local-doc" style="display:none" data-content-import-input="local">
+</form>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        let localFileInput = document.querySelector('[data-content-import-input="local"]');
+        let localForm = localFileInput.parentElement;
+        localFileInput.addEventListener('change', function(e) {
+                localForm.submit();
+            });
+        
+        document.querySelectorAll('[data-content-import-picker="local"]').forEach(function (element) {
+            element.addEventListener('click', function(e) {
+                e.preventDefault();
+                localFileInput.click();
+            });
+        });
+
+    });
+</script>
