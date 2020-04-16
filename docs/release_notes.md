@@ -1,6 +1,9 @@
 # Release Notes
 
-## Version 0.4.0 (04/03/2020)
+## Version 0.4.1 (16/04/2020)
+- Fix: include templates for local picker
+
+## Version 0.4.0 (16/04/2020)
 - Feature: an additional picker allowing `docx` import from local files is now included. To use it, add `wagtail_content_import.pickers.local` to
   `INSTALLED_APPS` above `wagtail.admin`.
 
