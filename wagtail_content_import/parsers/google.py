@@ -9,6 +9,12 @@ class GoogleDocumentParser(DocumentParser):
 
     def __init__(self, document):
         self.document = document
+        self.current_block = []
+        self.unprocessed_embeds = []
+        self.blocks = []
+        # List parsing is rather messy because list items are returned as a
+        # series of paragaph objects rather than a nested structure.
+        self.current_list = []
 
     def elements_to_html(self, paragraph, outer_tag="p"):
         """
@@ -28,35 +34,31 @@ class GoogleDocumentParser(DocumentParser):
                 continue
 
             text_run = element.get("textRun")
-            if not text_run:
-                continue
-
-            content = text_run["content"].strip("\n")
-            if not content:
+            content = text_run.get("content", "").strip("\n")
+            if not content or not text_run:
                 continue
 
             prefixes = []
             suffixes = []
-
             style = text_run["textStyle"]
-            if style.get("bold"):
-                prefixes.append("<b>")
-                suffixes.append("</b>")
-            if style.get("italic"):
-                prefixes.append("<i>")
-                suffixes.append("</i>")
-            if style.get("underline"):
-                prefixes.append("<u>")
-                suffixes.append("</u>")
+
+            tag_for_style = {
+                'bold': 'b',
+                'italic': 'i',
+                'underline': 'u',
+                'strikethrough': 's',
+            }
+            for style_key, tag in tag_for_style.items():
+                if style.get(style_key):
+                    prefixes.append("<{}>".format(tag))
+                    suffixes.append("</{}>".format(tag))
+
             if style.get("baselineOffset") == "SUPERSCRIPT":
                 prefixes.append("<sup>")
                 suffixes.append("</sup>")
             elif style.get("baselineOffset") == "SUBSCRIPT":
                 prefixes.append("<sub>")
                 suffixes.append("</sub>")
-            if style.get("strikethrough"):
-                prefixes.append("<s>")
-                suffixes.append("</s>")
             if style.get("link"):
                 url = style["link"].get("url")
                 # Links without a 'url' field are local bookmark/heading references;
@@ -70,17 +72,14 @@ class GoogleDocumentParser(DocumentParser):
             html = "".join(prefixes) + escape(content) + "".join(suffixes)
             output.append(html)
 
-        if output:
-            inner_html = "".join(output)
-            html = (
-                f"<{outer_tag}>" + inner_html + f"</{outer_tag}>"
-                if outer_tag
-                else inner_html
-            )
-        else:
-            html = ""
+        inner_html = "".join(output)
+
         return {
-            "html": html,
+            "html": (
+                f"<{outer_tag}>{inner_html}</{outer_tag}>"
+                if outer_tag and inner_html
+                else inner_html
+            ),
             "embeds": embeds,
         }
 
@@ -160,45 +159,38 @@ class GoogleDocumentParser(DocumentParser):
                 text += paragraph_element["textRun"]["content"]
         return text.strip()
 
+    def close_current_block(self):
+        if self.current_block:
+            self.blocks.append({"type": "html", "value": "".join(self.current_block)})
+            self.current_block.clear()
+        if self.unprocessed_embeds:
+            for embed_id in self.unprocessed_embeds:
+                embed = self.process_embedded_object(embed_id)
+                if embed:
+                    self.blocks.append(embed)
+            self.unprocessed_embeds.clear()
+
+    def close_current_list(self):
+        if self.current_list:
+            html = self.process_list(self.current_list)
+            self.current_block.append(html)
+            self.current_list.clear()
+
     def parse(self):
         """
         Parse the document and return a set of intermediate {'type': type, 'value': value} blocks that represent it.
         """
-        current_block = []
-        unprocessed_embeds = []
-        blocks = []
-
-        def close_current_block():
-            if current_block:
-                blocks.append({"type": "html", "value": "".join(current_block)})
-                current_block.clear()
-            if unprocessed_embeds:
-                for embed_id in unprocessed_embeds:
-                    embed = self.process_embedded_object(embed_id)
-                    if embed:
-                        blocks.append(embed)
-                unprocessed_embeds.clear()
 
         body = self.document["body"]
-
-        # List parsing is rather messy because list items are returned as a
-        # series of paragaph objects rather than a nested structure.
-        current_list = []
-
-        def close_current_list():
-            if current_list:
-                html = self.process_list(current_list)
-                current_block.append(html)
-                current_list.clear()
 
         for part in body["content"]:
             # Part can contain one of sectionBreak, table, tableOfContents, paragraph
             # Currently we only process paragraph and table
             if "table" in part:
-                close_current_block()
-                close_current_list()
+                self.close_current_block()
+                self.close_current_list()
                 table = self.process_table(part["table"])
-                blocks.append({"type": "table", "value": table})
+                self.blocks.append({"type": "table", "value": table})
 
             if "paragraph" not in part:
                 continue
@@ -206,10 +198,10 @@ class GoogleDocumentParser(DocumentParser):
             paragraph = part["paragraph"]
             style = paragraph["paragraphStyle"].get("namedStyleType")
             if style == "HEADING_1":
-                close_current_list()
-                close_current_block()
+                self.close_current_list()
+                self.close_current_block()
                 try:
-                    blocks.append(
+                    self.blocks.append(
                         {
                             "type": "heading",
                             "value": paragraph["elements"][0]["textRun"][
@@ -221,42 +213,39 @@ class GoogleDocumentParser(DocumentParser):
                     pass
             elif "bullet" in paragraph:  # We're in a list
                 content = self.elements_to_html(paragraph, outer_tag=None)
-                current_list.append(
+                self.current_list.append(
                     {
                         "html": content["html"],
                         "level": paragraph["bullet"].get("nestingLevel", 0),
                         "list_id": paragraph["bullet"]["listId"],
                     }
                 )
-                unprocessed_embeds += content["embeds"]
+                self.unprocessed_embeds += content["embeds"]
             else:
-                close_current_list()
+                self.close_current_list()
 
-                if paragraph["paragraphStyle"]["namedStyleType"] == "HEADING_2":
-                    outer_tag = "h2"
-                elif paragraph["paragraphStyle"]["namedStyleType"] == "HEADING_3":
-                    outer_tag = "h3"
-                elif paragraph["paragraphStyle"]["namedStyleType"] == "HEADING_4":
-                    outer_tag = "h4"
-                elif paragraph["paragraphStyle"]["namedStyleType"] == "HEADING_5":
-                    outer_tag = "h5"
-                elif paragraph["paragraphStyle"]["namedStyleType"] == "HEADING_6":
-                    outer_tag = "h6"
-                else:
-                    outer_tag = "p"
+                tag_for_style = {
+                    'HEADING_2': 'h2',
+                    'HEADING_3': 'h3',
+                    'HEADING_4': 'h4',
+                    'HEADING_5': 'h5',
+                    'HEADING_6': 'h6',
+                }
+
+                outer_tag = tag_for_style.get(style, 'p')
 
                 content = self.elements_to_html(paragraph, outer_tag=outer_tag)
-                unprocessed_embeds += content["embeds"]
+                self.unprocessed_embeds += content["embeds"]
                 if content["html"]:
-                    current_block.append(content["html"])
+                    self.current_block.append(content["html"])
 
                 # If any embeds were encountered since the last paragraph processed
                 # (including within headings / list items that aren't processed as
                 # standard paragraphs), close this block and start a new one so that
                 # the embed block is in the correct place in the text
-                if unprocessed_embeds:
-                    close_current_block()
+                if self.unprocessed_embeds:
+                    self.close_current_block()
 
-        close_current_list()
-        close_current_block()
-        return {"title": self.document["title"], "elements": blocks}
+        self.close_current_list()
+        self.close_current_block()
+        return {"title": self.document["title"], "elements": self.blocks}
