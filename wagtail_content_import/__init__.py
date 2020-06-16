@@ -1,3 +1,3 @@
-__version__ = '0.1a0'
+__version__ = "0.1a0"
 
-default_app_config = 'wagtail_content_import.apps.WagtailContentImportAppConfig'
+default_app_config = "wagtail_content_import.apps.WagtailContentImportAppConfig"

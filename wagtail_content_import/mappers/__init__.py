@@ -1,11 +1,16 @@
 from django.conf import settings
 from django.utils.module_loading import import_string
 
+
 def get_default_mapper_string():
     """
     Get the dotted ``app.Model`` name for the default mapper as a string.
     """
-    return getattr(settings, 'WAGTAILCONTENTIMPORT_DEFAULT_MAPPER', 'wagtail_content_import.mappers.streamfield.StreamFieldMapper')
+    return getattr(
+        settings,
+        "WAGTAILCONTENTIMPORT_DEFAULT_MAPPER",
+        "wagtail_content_import.mappers.streamfield.StreamFieldMapper",
+    )
 
 
 def get_default_mapper():

@@ -11,6 +11,7 @@ import requests
 class BaseConverter:
     """Base class for all converters, which take a intermediate-form {'type': type, 'value': value} element
     and return a (self.block_name, content) StreamField-compatible tuple on __call__"""
+
     def __init__(self, block_name):
         self.block_name = block_name
 
@@ -32,20 +33,24 @@ class RichTextConverter(BaseConverter):
         return ContentstateConverter(features=features)
 
     def __call__(self, element, **kwargs):
-        cleaned_html = self.contentstate_converter.to_database_format(self.contentstate_converter.from_database_format(element['value']))
+        cleaned_html = self.contentstate_converter.to_database_format(
+            self.contentstate_converter.from_database_format(element["value"])
+        )
         return (self.block_name, RichText(cleaned_html))
 
 
 class TextConverter(BaseConverter):
     def __call__(self, element, **kwargs):
-        return (self.block_name, element['value'])
+        return (self.block_name, element["value"])
 
 
 class ImageConverter(BaseConverter):
     def __call__(self, element, user, **kwargs):
-        image_name, image_content = self.fetch_image(element['value'])
-        title = element.get('title', '')
-        image = self.import_as_image_model(image_name, image_content, owner=user, title=title)
+        image_name, image_content = self.fetch_image(element["value"])
+        title = element.get("title", "")
+        image = self.import_as_image_model(
+            image_name, image_content, owner=user, title=title
+        )
         return (self.block_name, image)
 
     @staticmethod
@@ -79,6 +84,6 @@ class ImageConverter(BaseConverter):
 
 class TableConverter(BaseConverter):
     def __call__(self, element, **kwargs):
-        table = element['value']
+        table = element["value"]
         text_table = [[cell.get_text() for cell in row] for row in table.rows]
-        return (self.block_name, {'data': text_table})
+        return (self.block_name, {"data": text_table})

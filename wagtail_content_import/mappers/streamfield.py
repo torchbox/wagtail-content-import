@@ -10,7 +10,7 @@ class StreamFieldMapper(BaseMapper):
     def map(self, intermediate_stream, **kwargs):
         output_streamfield = []
         for element in intermediate_stream:
-            conversion_method = getattr(self, element['type'], None)
+            conversion_method = getattr(self, element["type"], None)
             if conversion_method:
                 converted_element = conversion_method(element, **kwargs)
                 output_streamfield.append(converted_element)

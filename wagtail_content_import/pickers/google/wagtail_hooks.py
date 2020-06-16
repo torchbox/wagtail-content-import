@@ -15,12 +15,11 @@ def create_from_google_doc(request, parent_page, page_class):
         return create_page_from_import(request, parent_page, page_class, parsed_doc)
 
 
-@hooks.register('register_content_import_picker')
+@hooks.register("register_content_import_picker")
 def register_content_import_picker():
-    client_config = getattr(settings, "WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG", "")
+    client_config = getattr(
+        settings, "WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG", ""
+    )
     api_key = getattr(settings, "WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY", "")
     if client_config and api_key:
-        return GooglePicker(
-            client_config,
-            api_key,
-        )
+        return GooglePicker(client_config, api_key,)

@@ -17,16 +17,16 @@ class LocalPicker(Picker):
 
     def get_context(self):
         return {
-            'picker': self,
+            "picker": self,
         }
 
-    js_template = 'wagtail_content_import/local_picker_js_init.html'
+    js_template = "wagtail_content_import/local_picker_js_init.html"
 
     def render_js_init(self, request):
-        return mark_safe(render_to_string(self.js_template, self.get_context(), request=request))
+        return mark_safe(
+            render_to_string(self.js_template, self.get_context(), request=request)
+        )
 
     class Media:
         css = {}
         js = []
-
-

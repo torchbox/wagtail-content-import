@@ -1,11 +1,16 @@
 from django.conf import settings
 from django.utils.module_loading import import_string
 
+
 def get_google_parser_string():
     """
     Get the dotted ``app.Model`` name for the Google Docs parser as a string.
     """
-    return getattr(settings, 'WAGTAILCONTENTIMPORT_GOOGLE_PARSER', 'wagtail_content_import.parsers.google.GoogleDocumentParser')
+    return getattr(
+        settings,
+        "WAGTAILCONTENTIMPORT_GOOGLE_PARSER",
+        "wagtail_content_import.parsers.google.GoogleDocumentParser",
+    )
 
 
 def get_google_parser():
@@ -21,7 +26,11 @@ def get_docx_parser_string():
     """
     Get the dotted ``app.Model`` name for the Office Open XML parser as a string.
     """
-    return getattr(settings, 'WAGTAILCONTENTIMPORT_DOCX_PARSER', 'wagtail_content_import.parsers.microsoft.DocxParser')
+    return getattr(
+        settings,
+        "WAGTAILCONTENTIMPORT_DOCX_PARSER",
+        "wagtail_content_import.parsers.microsoft.DocxParser",
+    )
 
 
 def get_docx_parser():

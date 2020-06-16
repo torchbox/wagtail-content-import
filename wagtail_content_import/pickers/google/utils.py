@@ -24,30 +24,30 @@ class GooglePicker(Picker):
 
     @property
     def app_id(self):
-        return self.oauth_client_config['web']['project_id']
+        return self.oauth_client_config["web"]["project_id"]
 
     @property
     def client_id(self):
-        return self.oauth_client_config['web']['client_id']
+        return self.oauth_client_config["web"]["client_id"]
 
     def get_context(self):
         return {
-            'picker': self,
-            'app_id': self.app_id,
-            'client_id': self.client_id,
-            'picker_api_key': self.picker_api_key,
+            "picker": self,
+            "app_id": self.app_id,
+            "client_id": self.client_id,
+            "picker_api_key": self.picker_api_key,
         }
 
-    js_template = 'wagtail_content_import/google_picker_js_init.html'
+    js_template = "wagtail_content_import/google_picker_js_init.html"
 
     def render_js_init(self, request):
-        return mark_safe(render_to_string(self.js_template, self.get_context(), request=request))
+        return mark_safe(
+            render_to_string(self.js_template, self.get_context(), request=request)
+        )
 
     class Media:
         css = {}
         js = [
-            'https://apis.google.com/js/api.js',
-            'wagtail_content_import/google_picker.js',
+            "https://apis.google.com/js/api.js",
+            "wagtail_content_import/google_picker.js",
         ]
-
-

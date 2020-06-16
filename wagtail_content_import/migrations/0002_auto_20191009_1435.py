@@ -6,15 +6,10 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtail_content_import', '0001_initial'),
+        ("wagtail_content_import", "0001_initial"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='oauthcredentials',
-            name='user',
-        ),
-        migrations.DeleteModel(
-            name='OAuthCredentials',
-        ),
+        migrations.RemoveField(model_name="oauthcredentials", name="user",),
+        migrations.DeleteModel(name="OAuthCredentials",),
     ]

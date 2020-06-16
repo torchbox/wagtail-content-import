@@ -19,21 +19,18 @@ class MicrosoftPicker(Picker):
         self.client_id = client_id
 
     def get_context(self):
-        return {
-            'picker': self,
-            'client_id': self.client_id
-        }
+        return {"picker": self, "client_id": self.client_id}
 
-    js_template = 'wagtail_content_import/microsoft_picker_js_init.html'
+    js_template = "wagtail_content_import/microsoft_picker_js_init.html"
 
     def render_js_init(self, request):
-        return mark_safe(render_to_string(self.js_template, self.get_context(), request=request))
+        return mark_safe(
+            render_to_string(self.js_template, self.get_context(), request=request)
+        )
 
     class Media:
         css = {}
         js = [
-            'https://js.live.net/v7.2/OneDrive.js',
-            'wagtail_content_import/microsoft_picker.js',
+            "https://js.live.net/v7.2/OneDrive.js",
+            "wagtail_content_import/microsoft_picker.js",
         ]
-
-
