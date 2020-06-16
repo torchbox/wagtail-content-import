@@ -44,6 +44,6 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
     install_requires=["wagtail>=2.2", "python-docx>=0.8.10"],
-    extras_require={"test": test_requires,},
+    extras_require={"test": test_requires, },
     zip_safe=False,
 )

@@ -1,9 +1,3 @@
-import requests
-
-from io import BytesIO
-
-from django.conf import settings
-
 from wagtail.core import hooks
 
 from .utils import LocalPicker, parse_document

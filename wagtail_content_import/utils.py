@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.utils.text import slugify
 
 from wagtail.admin.action_menu import PageActionMenu
 from wagtail.admin.views.pages import get_valid_next_url_from_request
