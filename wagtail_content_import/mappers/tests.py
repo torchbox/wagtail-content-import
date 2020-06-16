@@ -22,7 +22,7 @@ class TestConverters(TestCase):
         test_element = {'type': 'html', 'value': 'test_text'}
         converted_element = text_converter(test_element)
         self.assertEqual(converted_element[0], 'test_block', "Should be: 'test_block'")
-        self.assertEqual(converted_element[1].source, 'test_text', "Should be: 'test_text")
+        self.assertEqual(converted_element[1].source, '<p>test_text</p>', "Should be: 'test_text")
 
     def test_rich_text_script_tags_removed(self):
         text_converter = RichTextConverter('test_block')

@@ -35,4 +35,4 @@ class TestGoogleDocumentParser(TestCase):
 
     def test_process_image(self):
         embed = self.parser.process_embedded_object('kix.xrypng5vuptx')
-        self.assertEqual(embed, {'type': 'image', 'value': 'https://lh5.googleusercontent.com/dmK7P36vTNwm4Q4pdHO5uofPH6hrnAyX5wtMOO-X09VIs9eTefWBWBdvJmUiVfOzc4TsqbDgouCyah-fvzCXbWcm1PvEjRUoxXgdOte1-G23ccLE_-JX0ZU_tbyXqPdQn3Z4uDcJ5PL8ipN9VA'})
+        self.assertEqual(embed, {'type': 'image', 'title': '', 'value': 'https://lh5.googleusercontent.com/dmK7P36vTNwm4Q4pdHO5uofPH6hrnAyX5wtMOO-X09VIs9eTefWBWBdvJmUiVfOzc4TsqbDgouCyah-fvzCXbWcm1PvEjRUoxXgdOte1-G23ccLE_-JX0ZU_tbyXqPdQn3Z4uDcJ5PL8ipN9VA'})
