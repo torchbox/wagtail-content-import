@@ -9,7 +9,7 @@ Defaults to StreamFieldMapper.
 
 The DocumentParser class used for Google Docs. Defaults to `GoogleDocumentParser`.
 
-#### `WAGTAILCONTENTIMPORT_GOOGLE_PARSER`:
+#### `WAGTAILCONTENTIMPORT_DOCX_PARSER`:
 
 The DocumentParser class used for .docx files. Defaults to `DocxParser`.
 
