@@ -31,3 +31,7 @@ Wagtail Google Docs integration relies on Google APIs, which you will first need
     secret.
 
  10. Copy the text from this file, and use it to set `WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG`.
+
+## Note
+
+For users to authenticate with Google and import documents from their Drives, they must either allow third party cookies or add `accounts.google.com` to their allowed domains ([Settings/Privacy and Security/Cookies and other site data in Chrome](chrome://settings/cookies) or [Preferences/Privacy & Security in Firefox](about:preferences#privacy)).
