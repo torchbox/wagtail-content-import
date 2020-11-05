@@ -23,3 +23,7 @@ Currently supports:
 * Wagtail 2.2
 
 For the full documentation, see: https://torchbox.github.io/wagtail-content-import/
+
+### Note for Google Import
+
+If using Google Docs import, for users to authenticate with Google they must either allow third party cookies or add `accounts.google.com` to their allowed domains ([Settings/Privacy and Security/Cookies and other site data in Chrome](chrome://settings/cookies) or [Preferences/Privacy & Security in Firefox](about:preferences#privacy)).
