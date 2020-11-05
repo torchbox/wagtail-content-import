@@ -766,14 +766,14 @@ import posted content.</p>
 <span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="n">create_page_from_import</span>
 
 
-<span class="nd">@hooks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;before_create_page&quot;</span><span class="p">)</span>
+<span class="nd">@hooks.register</span><span class="p">(</span><span class="s2">&quot;before_create_page&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_from_my_doc</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">parent_page</span><span class="p">,</span> <span class="n">page_class</span><span class="p">):</span>
     <span class="k">if</span> <span class="s2">&quot;my-doc&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
         <span class="n">parsed_doc</span> <span class="o">=</span> <span class="c1"># PARSE THE DOCUMENT HERE</span>
         <span class="k">return</span> <span class="n">create_page_from_import</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">parent_page</span><span class="p">,</span> <span class="n">page_class</span><span class="p">,</span> <span class="n">parsed_doc</span><span class="p">)</span>
 
 
-<span class="nd">@hooks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;register_content_import_picker&#39;</span><span class="p">)</span>
+<span class="nd">@hooks.register</span><span class="p">(</span><span class="s1">&#39;register_content_import_picker&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">register_content_import_picker</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">MyPicker</span><span class="p">(</span>
         <span class="n">settings</span><span class="o">.</span><span class="n">AUTH_PARAMETERS</span><span class="p">,</span>

@@ -447,13 +447,13 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Custom `StructBlock` that allows the user to select h2 - h4 sizes for headers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">heading_text</span> <span class="o">=</span> <span class="n">CharBlock</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">heading_text</span> <span class="o">=</span> <span class="n">CharBlock</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">ChoiceBlock</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Select a header size&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">,</span> <span class="s1">&#39;H2&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span> <span class="s1">&#39;H3&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;h4&#39;</span><span class="p">,</span> <span class="s1">&#39;H4&#39;</span><span class="p">)</span>
-    <span class="p">],</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">],</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
@@ -487,7 +487,7 @@
 
 <span class="k">class</span> <span class="nc">ImageBlock</span><span class="p">(</span><span class="n">StructBlock</span><span class="p">):</span>
 
-    <span class="n">show_full_image</span> <span class="o">=</span> <span class="n">BooleanBlock</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">show_full_image</span> <span class="o">=</span> <span class="n">BooleanBlock</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">ImageChooserBlock</span><span class="p">()</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -514,7 +514,7 @@
         <span class="n">image_url</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
         <span class="n">image_name</span><span class="p">,</span> <span class="n">image_content</span> <span class="o">=</span> <span class="n">ImageConverter</span><span class="o">.</span><span class="n">fetch_image</span><span class="p">(</span><span class="n">image_url</span><span class="p">)</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">ImageConverter</span><span class="o">.</span><span class="n">import_as_image_model</span><span class="p">(</span><span class="n">image_name</span><span class="p">,</span> <span class="n">image_content</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;show_full_image&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">})</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_name</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;show_full_image&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">})</span>
 </code></pre></div>
                 
                   
