@@ -1,5 +1,8 @@
 # Release Notes
 
+## Version 0.4.2 (10/11/2020)
+- Fix: Wagtail 2.11 compatibility
+
 ## Version 0.4.1 (16/04/2020)
 - Fix: include templates for local picker
 
