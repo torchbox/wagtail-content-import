@@ -1,7 +1,11 @@
 from django.shortcuts import render
 
 from wagtail.admin.action_menu import PageActionMenu
-from wagtail.admin.views.pages import get_valid_next_url_from_request
+
+try:
+    from wagtail.admin.views.pages import get_valid_next_url_from_request
+except ImportError:
+    from wagtail.admin.views.pages.utils import get_valid_next_url_from_request
 
 
 def create_page_from_import(request, parent_page, page_class, parsed_doc):
