@@ -41,3 +41,24 @@ def get_docx_parser():
     parser_string = get_docx_parser_string()
 
     return import_string(parser_string)
+
+
+def get_pdf_parser_string():
+    """
+    Get the dotted ``app.Model`` name for the pdf parser as a string.
+    """
+    return getattr(
+        settings,
+        "WAGTAILCONTENTIMPORT_PDF_PARSER",
+        "wagtail_content_import.parsers.pdf.PDFParser",
+    )
+
+
+def get_parser_for_content_type(content_type):
+    parser_by_content_type = {
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': get_docx_parser_string(),
+        'application/pdf': get_pdf_parser_string(),
+        'application/vnd.google-apps.document': get_google_parser_string()
+    }
+
+    return import_string(parser_by_content_type.get(content_type))

@@ -43,7 +43,7 @@ setup(
         "Framework :: Wagtail :: 2",
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
-    install_requires=["wagtail>=2.2", "python-docx>=0.8.10"],
+    install_requires=["wagtail>=2.2", "python-docx>=0.8.10", "pdfplumber>=0.5.25"],
     extras_require={"test": test_requires, },
     zip_safe=False,
 )
