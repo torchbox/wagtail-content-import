@@ -46,12 +46,20 @@ class TextConverter(BaseConverter):
 
 class ImageConverter(BaseConverter):
     def __call__(self, element, user, **kwargs):
-        image_name, image_content = self.fetch_image(element["value"])
+        value = element['value']
+        if type(value) == str:
+            image_name, image_content = self.fetch_image(value)
+        else:
+            image_name = 'imported-image'
+            image_content = value
         title = element.get("title", "")
-        image = self.import_as_image_model(
-            image_name, image_content, owner=user, title=title
-        )
-        return (self.block_name, image)
+        try:
+            image = self.import_as_image_model(
+                image_name, image_content, owner=user, title=title
+            )
+            return (self.block_name, image)
+        except:
+            return None
 
     @staticmethod
     def fetch_image(url):

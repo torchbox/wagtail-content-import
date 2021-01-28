@@ -13,5 +13,6 @@ class StreamFieldMapper(BaseMapper):
             conversion_method = getattr(self, element["type"], None)
             if conversion_method:
                 converted_element = conversion_method(element, **kwargs)
-                output_streamfield.append(converted_element)
+                if converted_element:
+                    output_streamfield.append(converted_element)
         return output_streamfield
