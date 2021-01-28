@@ -1,7 +1,7 @@
 
 <form action="." method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" accept=".docx" name="local-doc" style="display:none" data-content-import-input="local">
+    <input type="file" accept=".docx, .pdf" name="local-doc" style="display:none" data-content-import-input="local">
 </form>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {

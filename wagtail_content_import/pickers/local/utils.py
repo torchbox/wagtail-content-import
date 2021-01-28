@@ -2,12 +2,12 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
 from .. import Picker
-from ...parsers import get_docx_parser
+from ...parsers import get_parser_for_content_type
 
 
 def parse_document(document):
-    parser = get_docx_parser()
-    return parser(document).parse()
+    parser = get_parser_for_content_type(document.content_type)
+    return parser(document.file).parse()
 
 
 class LocalPicker(Picker):

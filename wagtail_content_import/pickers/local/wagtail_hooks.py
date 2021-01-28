@@ -12,5 +12,5 @@ def register_content_import_picker():
 @hooks.register("before_create_page")
 def create_from_local_doc(request, parent_page, page_class):
     if "local-doc" in request.FILES:
-        parsed_doc = parse_document(request.FILES["local-doc"].file)
+        parsed_doc = parse_document(request.FILES["local-doc"])
         return create_page_from_import(request, parent_page, page_class, parsed_doc)
