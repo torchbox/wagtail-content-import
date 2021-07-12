@@ -1,0 +1,9 @@
+{% load wagtailimages_tags wagtailadmin_tags %}
+{% load i18n %}
+
+{% include "wagtailadmin/shared/header.html" with title="Replace content with import" %}
+
+<div class="nice-padding">
+    <p>Importing will override the content of this page. Do you want to continue?</p>
+    <button class="button" data-content-import-confirm>{% trans 'Import' %}</button>
+</div>
