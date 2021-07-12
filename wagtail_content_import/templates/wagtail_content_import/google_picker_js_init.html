@@ -7,8 +7,7 @@
                 pickerApiKey: '{{ picker_api_key|escapejs }}',
             }, element.dataset.createPageUrl, '{{ csrf_token|escapejs }}');
 
-            element.addEventListener('click', function(e) {
-                e.preventDefault();
+            element.addEventListener('openPicker', function() {
                 googlePicker.show();
             });
         });

@@ -3,7 +3,7 @@
         document.querySelectorAll('[data-content-import-picker="microsoft"]').forEach(function (element) {
             let microsoftPicker = new MicrosoftPicker('{{ request.scheme }}://{{ request.get_host }}{% url 'wagtailcontentimport:wagtailcontentimport_microsoft:auth_view' %}', '{{ client_id|escapejs }}', element.dataset.createPageUrl, '{{ csrf_token|escapejs }}');
 
-            element.addEventListener('click', function(e) {
+            element.addEventListener('openPicker', function(e) {
                 e.preventDefault();
                 microsoftPicker.show();
             });

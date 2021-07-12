@@ -10,9 +10,9 @@
         localFileInput.addEventListener('change', function(e) {
                 localForm.submit();
             });
-        
+
         document.querySelectorAll('[data-content-import-picker="local"]').forEach(function (element) {
-            element.addEventListener('click', function(e) {
+            element.addEventListener('openPicker', function(e) {
                 e.preventDefault();
                 localFileInput.click();
             });
