@@ -10,7 +10,7 @@
                 <li>
                     <a href="#"
                     data-content-import-picker="{{ default_picker.name }}"
-                    data-edit-page-url="{% url 'wagtailadmin_pages:edit' page.id %}"
+                    data-import-page-url="{% url 'wagtailadmin_pages:edit' page.id %}"
                     data-dialog-url="{% url 'wagtail_content_import_admin:confirm_dialog' %}"
                     class="content-import button button-longrunning">
                         <i class="icon {{ default_picker.icon }} content-import docs-blue"></i>
@@ -21,7 +21,7 @@
                     <li>
                         <a href="#"
                            data-content-import-picker="{{ picker.name }}"
-                           data-edit-page-url="{% url 'wagtailadmin_pages:edit' page.id %}"
+                           data-import-page-url="{% url 'wagtailadmin_pages:edit' page.id %}"
                            data-dialog-url="{% url 'wagtail_content_import_admin:confirm_dialog' %}"
                            class="content-import button button-longrunning">
                             <i class="icon {{ picker.icon }} content-import docs-blue"></i>
