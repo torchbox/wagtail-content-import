@@ -58,7 +58,7 @@ def update_page_from_import(request, page, parsed_doc):
     next_url = get_valid_next_url_from_request(request)
 
     form = form_class(instance=page)
-    has_unsaved_changes = False
+    has_unsaved_changes = True
 
     edit_handler = edit_handler.bind_to(form=form)
 
