@@ -105,8 +105,7 @@ Eg:
         document.querySelectorAll('[data-content-import-picker="my_picker"]').forEach(function (element) {
             let myPicker = new MyPicker({{ AUTH_PARAMETERS }}, element.dataset.importPageUrl, '{{ csrf_token|escapejs }}');
 
-            element.addEventListener('click', function(e) {
-                e.preventDefault();
+            element.addEventListener('openPicker', function() {
                 myPicker.show();
             });
         });
