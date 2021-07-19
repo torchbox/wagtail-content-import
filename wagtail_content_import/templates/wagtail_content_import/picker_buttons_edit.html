@@ -1,0 +1,7 @@
+{% extends "./picker_buttons_base.html" %}
+
+{% block default_import_page_url %}{% url 'wagtailadmin_pages:edit' page.id %}{% endblock %}
+{% block default_extra_attrs %}data-dialog-url="{% url 'wagtail_content_import_admin:confirm_dialog' %}"{% endblock %}
+
+{% block import_page_url %}{% url 'wagtailadmin_pages:edit' page.id %}{% endblock %}
+{% block extra_attrs %}data-dialog-url="{% url 'wagtail_content_import_admin:confirm_dialog' %}"{% endblock %}

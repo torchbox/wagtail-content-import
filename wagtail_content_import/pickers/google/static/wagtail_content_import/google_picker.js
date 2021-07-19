@@ -2,9 +2,9 @@
     const GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/documents.readonly https://www.googleapis.com/auth/drive.readonly';
 
     class GooglePicker {
-        constructor(authOptions, createPageUrl, csrfToken) {
+        constructor(authOptions, importPageUrl, csrfToken) {
             this.authOptions = authOptions;
-            this.createPageUrl = createPageUrl;
+            this.importPageUrl = importPageUrl;
             this.csrfToken = csrfToken;
 
             this.googleApisLoaded = false;
@@ -85,7 +85,7 @@
                                 // POST the JSON content of the document to the create page view
                                 // Use a hidden form so the browser reloads with the result of this request
                                 let form = document.createElement('form');
-                                form.action = this.createPageUrl;
+                                form.action = this.importPageUrl;
                                 form.method = 'POST';
                                 form.style.visibility = 'hidden';
                                 document.body.appendChild(form);

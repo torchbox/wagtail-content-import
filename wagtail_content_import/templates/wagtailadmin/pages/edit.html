@@ -1,10 +1,10 @@
-{% extends "wagtailadmin/pages/create.html" %}
+{% extends "wagtailadmin/pages/edit.html" %}
 {% load i18n %}
 {% load wagtailadmin_tags wagtailcontentimport_tags %}
 
 {% block extra_footer_actions %}
 {% if content_type.model_class.can_import %}
-    {% wagtailcontentimport_picker_buttons_create %}
+    {% wagtailcontentimport_picker_buttons_edit %}
 {% endif %}
 {% endblock %}
 
