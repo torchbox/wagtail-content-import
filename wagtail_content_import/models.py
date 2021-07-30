@@ -16,10 +16,9 @@ class ContentImportMixin:
         """
         Factory method to create the Page and populate it from a parsed document.
         """
-        title = parsed_doc["title"]
-        mapper = cls.mapper_class()
-        imported_data = mapper.map(parsed_doc["elements"], user=user)
-        return cls(title=title, slug=slugify(title), body=imported_data, owner=user,)
+        page = cls(owner=user)
+        page.update_from_import(parsed_doc, user)
+        return page
 
     def update_from_import(self, parsed_doc, user):
         self.title = parsed_doc["title"]
