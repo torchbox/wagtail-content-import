@@ -1,9 +1,9 @@
 (function() {
     class MicrosoftPicker {
-        constructor(redirectUri, clientId, createPageUrl, csrfToken) {
+        constructor(redirectUri, clientId, importPageUrl, csrfToken) {
             this.redirectUri = redirectUri;
             this.clientId = clientId;
-            this.createPageUrl = createPageUrl;
+            this.importPageUrl = importPageUrl;
             this.csrfToken = csrfToken;
         }
 
@@ -11,7 +11,7 @@
             // POST the download url of the document to the create page view
             // Use a hidden form so the browser reloads with the result of this request
             let form = document.createElement('form');
-            form.action = this.createPageUrl;
+            form.action = this.importPageUrl;
             form.method = 'POST';
             form.style.visibility = 'hidden';
             document.body.appendChild(form);

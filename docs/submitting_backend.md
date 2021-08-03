@@ -4,7 +4,7 @@ to the [Wagtail Content Import repository](https://github.com/torchbox/wagtail-c
 
 ## Submitting a New Picker
 
-If you're planning on submitting a new picker - apps which enable choosing and importing a file from a 
+If you're planning on submitting a new picker - apps which enable choosing and importing a file from a
 remote source - you'll need to follow this blueprint:
 
 ### Overview and File Structure
@@ -36,7 +36,7 @@ a POST request to the page with relevant data using a hidden form
 - `wagtail_hooks.py` registers your picker using a Wagtail hook, and adds a `before_create_page` hook
 to actually take the POST-ed document data and import it, using a parser.
 
-The following examples will follow a picker which needs a variable `AUTH_PARAMETERS` available in the 
+The following examples will follow a picker which needs a variable `AUTH_PARAMETERS` available in the
 JavaScript in order to import content.
 
 #### `MY_PICKER.js`
@@ -51,9 +51,9 @@ Eg:
 ```javascript
 (function() {
     class MyPicker {
-        constructor(AUTH_PARAMETERS, createPageUrl, csrfToken) {
+        constructor(AUTH_PARAMETERS, importPageUrl, csrfToken) {
         this.AUTH_PARAMETERS = AUTH_PARAMETERS;
-        this.createPageUrl = createPageUrl;
+        this.importPageUrl = importPageUrl;
         this.csrfToken = csrfToken;
         }
 
@@ -61,7 +61,7 @@ Eg:
             // POST relevant data to the page
             // Use a hidden form so the browser reloads with the result of this request
             let form = document.createElement('form');
-            form.action = this.createPageUrl;
+            form.action = this.importPageUrl;
             form.method = 'POST';
             form.style.visibility = 'hidden';
             document.body.appendChild(form);
@@ -94,7 +94,7 @@ Eg:
 #### `MY_PICKER_js_init.html`
 
 This should provide a Django template which creates an instance of your JS picker class, populated with
-the relevant variables, which can be filled in by the Django side using your Python picker class. It must also add a listener to the 
+the relevant variables, which can be filled in by the Django side using your Python picker class. It must also add a listener to the
 relevant import button, such that when it is clicked, it calls `myPicker.show()`.
 
 Eg:
@@ -103,10 +103,9 @@ Eg:
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('[data-content-import-picker="my_picker"]').forEach(function (element) {
-            let myPicker = new MyPicker({{ AUTH_PARAMETERS }}, element.dataset.createPageUrl, '{{ csrf_token|escapejs }}');
+            let myPicker = new MyPicker({{ AUTH_PARAMETERS }}, element.dataset.importPageUrl, '{{ csrf_token|escapejs }}');
 
-            element.addEventListener('click', function(e) {
-                e.preventDefault();
+            element.addEventListener('openPicker', function() {
                 myPicker.show();
             });
         });
@@ -123,7 +122,7 @@ Eg:
 default_app_config = 'wagtail_content_import.pickers.my_picker.apps.WagtailContentImportMyPickerAppConfig'
 ```
 
-`apps.py`: 
+`apps.py`:
 
 ```python
 from django.apps import AppConfig
@@ -168,7 +167,7 @@ class MyPicker(Picker):
     class Media:
         css = {}
         js = [
-            # ANY EXTRA JS YOU NEED HERE 
+            # ANY EXTRA JS YOU NEED HERE
             'wagtail_content_import/MY_PICKER.js',
         ]
 ```
