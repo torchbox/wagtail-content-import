@@ -385,6 +385,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#version-050-03082021" class="md-nav__link">
+    Version 0.5.0 (03/08/2021)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-042-10112020" class="md-nav__link">
+    Version 0.4.2 (10/11/2020)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#version-041-16042020" class="md-nav__link">
     Version 0.4.1 (16/04/2020)
   </a>
@@ -494,6 +508,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#version-050-03082021" class="md-nav__link">
+    Version 0.5.0 (03/08/2021)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-042-10112020" class="md-nav__link">
+    Version 0.4.2 (10/11/2020)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#version-041-16042020" class="md-nav__link">
     Version 0.4.1 (16/04/2020)
   </a>
@@ -553,6 +581,39 @@
                 
                 
                 <h1 id="release-notes">Release Notes</h1>
+<h2 id="version-050-03082021">Version 0.5.0 (03/08/2021)</h2>
+<ul>
+<li>
+<p>Feature: The import button has been added to the page editor on existing pages, allowing editors to update them with imported content.</p>
+</li>
+<li>
+<p>Upgrade consideration: Picker trigger event</p>
+<p>If you have created a custom picker, you should update the event that it uses to trigger it to open. Previously, pickers listened for the 'click' event on the import button but we have now added a new event called 'openPicker'.</p>
+<p>For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">document</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">document</span><span class="p">.</span><span class="n">querySelectorAll</span><span class="p">(</span><span class="s">&#39;[data-content-import-picker=&quot;</span><span class="n">my_picker</span><span class="s">&quot;]&#39;</span><span class="p">).</span><span class="n">forEach</span><span class="p">(</span><span class="kr">function</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="n">element</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s">&#39;click&#39;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>  <span class="c1">// &lt;----- Change this from &#39;click&#39; to &#39;openPicker&#39;</span>
+      <span class="c1">// ...</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>See: <a href="../submitting_backend/">Submitting a new backend</a></p>
+</li>
+<li>
+<p>Upgrade consideration: Customised <code>.create_from_import()</code> method</p>
+<p>If you have customised the <code>.create_from_import()</code> method on any page, you should replace this with a customisation of <code>.update_from_import()</code> instead. This will allow your customisation to work when the page is being updated or created.</p>
+<p>See: <a href="../changing_import_fields/">Changing Import Fields</a></p>
+</li>
+</ul>
+<h2 id="version-042-10112020">Version 0.4.2 (10/11/2020)</h2>
+<ul>
+<li>Fix: Wagtail 2.11 compatibility</li>
+</ul>
 <h2 id="version-041-16042020">Version 0.4.1 (16/04/2020)</h2>
 <ul>
 <li>Fix: include templates for local picker</li>
@@ -570,13 +631,13 @@
 <ul>
 <li>Update: <code>GoogleDocumentsParser</code> parser now parses underline, superscript, subscript, and strikethrough styles. (Note that using nonstandard
   rich text features requires adding them to both the <code>RichTextConverter</code> class and the <code>RichTextField</code> or block)</li>
-<li>Update: <code>RichTextConverter</code> now uses the Draftail <code>ContentstateConverter</code> to validate imported content, so correctly accepts features available in 
+<li>Update: <code>RichTextConverter</code> now uses the Draftail <code>ContentstateConverter</code> to validate imported content, so correctly accepts features available in
   Draftail but not Hallo.js</li>
 <li>Update: <code>GoogleDocumentsParser</code> now converts heading styles in Google Docs more straightforwardly to html tags. For example, <code>HEADING_2</code> maps to <code>h2</code> tags.</li>
 </ul>
 <h2 id="version-031-27022020">Version 0.3.1 (27/02/2020)</h2>
 <ul>
-<li>Update: settings for pickers are now prefixed with <code>WAGTAILCONTENTIMPORT_</code> for consistency, so the names are 
+<li>Update: settings for pickers are now prefixed with <code>WAGTAILCONTENTIMPORT_</code> for consistency, so the names are
   now<code>WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY</code>, <code>WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG</code> and <code>WAGTAILCONTENTIMPORT_MICROSOFT_CLIENT_ID</code>. Make sure to change these when updating!</li>
 </ul>
 <h2 id="version-030-26022020">Version 0.3.0 (26/02/2020)</h2>

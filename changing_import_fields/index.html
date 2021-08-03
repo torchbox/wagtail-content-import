@@ -421,28 +421,24 @@
                   <h1>Changing Import Fields</h1>
                 
                 <p>To change how the document's data is imported to the Page model - for example, importing to a StreamField other than <code>body</code>,
-you'll need to override the <code>create_from_import</code> method. On the <code>ContentImportMixin</code>, this is defined as:</p>
-<div class="codehilite"><pre><span></span><code>    <span class="kn">from</span> <span class="nn">django.utils.text</span> <span class="kn">import</span> <span class="n">slugify</span>
+you'll need to override the <code>update_from_import</code> method. On the <code>ContentImportMixin</code>, these are defined as:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.utils.text</span> <span class="kn">import</span> <span class="n">slugify</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_from_import</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">parsed_doc</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Factory method to create the Page and populate it from a parsed document.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">parsed_doc</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
-        <span class="n">mapper_class</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mapper_class</span>
-        <span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper_class</span><span class="p">()</span>
-        <span class="n">imported_data</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parsed_doc</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-            <span class="n">slug</span><span class="o">=</span><span class="n">slugify</span><span class="p">(</span><span class="n">title</span><span class="p">),</span>
-            <span class="n">body</span><span class="o">=</span><span class="n">imported_data</span><span class="p">,</span>
-            <span class="n">owner</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-        <span class="p">)</span>
+<span class="k">class</span> <span class="nc">ContentImportMixin</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="c1"># Called whenever a page is created or updated from an import</span>
+    <span class="c1"># (note, when creating, self would be unsaved)</span>
+    <span class="k">def</span> <span class="nf">update_from_import</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parsed_doc</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">parsed_doc</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="n">mapper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper_class</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parsed_doc</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p>So to import into a different field, simply replace <code>body</code> with the name of your custom field.</p>
+<p>To import into a different field, replace <code>body</code> with the name of your custom field.</p>
                 
                   
                 
