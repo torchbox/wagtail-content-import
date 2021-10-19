@@ -1,16 +1,14 @@
 import re
-
 from unittest.mock import MagicMock
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
-from .converters import ImageConverter, RichTextConverter, TextConverter, TableConverter
-from ..parsers.tables import Table, Cell
-
+from ..parsers.tables import Cell, Table
+from .converters import (
+    ImageConverter, RichTextConverter, TableConverter, TextConverter)
 
 FIND_BLOCK_KEYS = re.compile('( ?data-block-key="[^"]+")')
 

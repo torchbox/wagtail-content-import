@@ -1,5 +1,5 @@
-from django.utils.safestring import mark_safe
 from django.http import HttpResponse
+from django.utils.safestring import mark_safe
 
 
 def auth(request, *args, **kwargs):

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from wagtail.admin.action_menu import PageActionMenu
 
 try:

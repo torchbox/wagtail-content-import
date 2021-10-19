@@ -1,7 +1,5 @@
-from django.templatetags.static import static
-from django.utils.html import format_html
 from django.urls import include, path
-
+from django.utils.html import format_html
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.core import hooks
 

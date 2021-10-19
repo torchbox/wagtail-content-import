@@ -47,6 +47,12 @@ jobs:
       - name: flake8
         run: |
           flake8 .
+      - name: Install isort
+        run: |
+          python -m pip install isort
+      - name: isort
+        run: |
+          isort .
 
   test-postgres:
     runs-on: ubuntu-latest

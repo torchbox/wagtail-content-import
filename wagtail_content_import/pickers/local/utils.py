@@ -1,8 +1,8 @@
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
-from .. import Picker
 from ...parsers import get_docx_parser
+from .. import Picker
 
 
 def parse_document(document):
