@@ -5,7 +5,21 @@ from wagtail.admin.rich_text.converters.contentstate import (
     ContentstateConverter)
 from wagtail.core.rich_text import RichText
 from wagtail.core.rich_text import features as feature_registry
+from django.contrib.auth.models import Permission
 from wagtail.images import get_image_model
+
+
+USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
+
+def get_user_needs_image_choose_permission():
+    global USER_NEEDS_IMAGE_CHOOSE_PERMISSION
+    if USER_NEEDS_IMAGE_CHOOSE_PERMISSION is None:
+        USER_NEEDS_IMAGE_CHOOSE_PERMISSION = Permission.objects.filter(
+            content_type__model='image',
+            content_type__app_label='wagtailimages',
+            codename='choose_image'
+        ).exists()
+    return USER_NEEDS_IMAGE_CHOOSE_PERMISSION
 
 
 class BaseConverter:
@@ -77,6 +91,30 @@ class ImageConverter(BaseConverter):
         image.file.seek(0)
         image._set_file_hash(image.file.read())
         image.file.seek(0)
+
+        # Before we save the image, let's check if there are any choosable images with the same hash
+        # so we can avoid importing a duplicate
+
+        from wagtail.images.permissions import permission_policy
+
+        if USER_NEEDS_IMAGE_CHOOSE_PERMISSION:
+            existing_images = permission_policy.instances_user_has_any_permission_for(
+                owner, ['choose']
+            )
+        else:
+            existing_images = Image.objects.all()
+
+        existing_images = existing_images.filter(file_hash=image.file_hash).iterator(chunk_size=1)
+        for potential_duplicate in existing_images:
+            # Check the file contents actually match - hash collisions are extremely unlikely by default
+            # hence the chunk_size=1, but could happen if someone is using a custom image model with
+            # some other hashing scheme
+            if potential_duplicate.file.size == image.file.size and all(
+                a == b for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
+            ):
+                # We've found an existing image in the library
+                # so let's not save our new image, and return this one instead
+                return potential_duplicate
 
         image.save()
         return image
