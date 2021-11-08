@@ -1,11 +1,11 @@
-from wagtail.core.rich_text import features as feature_registry, RichText
-
-from django.utils.functional import cached_property
-from django.core.files.base import ContentFile
-from wagtail.images import get_image_model
-from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
-
 import requests
+from django.core.files.base import ContentFile
+from django.utils.functional import cached_property
+from wagtail.admin.rich_text.converters.contentstate import (
+    ContentstateConverter)
+from wagtail.core.rich_text import RichText
+from wagtail.core.rich_text import features as feature_registry
+from wagtail.images import get_image_model
 
 
 class BaseConverter:

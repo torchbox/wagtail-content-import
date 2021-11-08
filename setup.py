@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import io
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 test_requires = [
     # Required for running the tests
@@ -11,6 +11,7 @@ test_requires = [
     "flake8>=2.2.0",
     # Required for matrix build on Travis
     "tox==3.9.0",
+    "dj-database-url==0.5.0"
 ]
 
 with io.open("README.md", encoding="utf-8") as readme_file:
@@ -44,6 +45,6 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
     install_requires=["wagtail>=2.2", "python-docx>=0.8.10"],
-    extras_require={"test": test_requires, },
+    extras_require={"testing": test_requires, },
     zip_safe=False,
 )

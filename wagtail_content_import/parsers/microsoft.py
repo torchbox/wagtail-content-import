@@ -1,8 +1,8 @@
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from docx import Document
 
 from .base import DocumentParser
-from django.utils.html import format_html
-from django.utils.safestring import mark_safe
 
 
 class DocxParser(DocumentParser):

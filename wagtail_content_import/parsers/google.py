@@ -1,6 +1,7 @@
-from .base import DocumentParser
 from django.utils.html import escape
-from .tables import Table, Cell
+
+from .base import DocumentParser
+from .tables import Cell, Table
 
 
 class GoogleDocumentParser(DocumentParser):

@@ -1,5 +1,6 @@
-from .mappers import get_default_mapper
 from django.utils.text import slugify
+
+from .mappers import get_default_mapper
 
 
 class ContentImportMixin:

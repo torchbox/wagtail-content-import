@@ -1,13 +1,16 @@
+import re
 from unittest.mock import MagicMock
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file
 
-from .converters import ImageConverter, RichTextConverter, TextConverter, TableConverter
-from ..parsers.tables import Table, Cell
+from ..parsers.tables import Cell, Table
+from .converters import (
+    ImageConverter, RichTextConverter, TableConverter, TextConverter)
+
+FIND_BLOCK_KEYS = re.compile('( ?data-block-key="[^"]+")')
 
 
 class TestConverters(TestCase):
@@ -26,8 +29,10 @@ class TestConverters(TestCase):
         test_element = {"type": "html", "value": "test_text"}
         converted_element = text_converter(test_element)
         self.assertEqual(converted_element[0], "test_block", "Should be: 'test_block'")
+        rich_text = converted_element[1].source
+        rich_text_without_block_keys = FIND_BLOCK_KEYS.sub('', rich_text)
         self.assertEqual(
-            converted_element[1].source, "<p>test_text</p>", "Should be: 'test_text"
+            rich_text_without_block_keys, "<p>test_text</p>", "Should be: 'test_text"
         )
 
     def test_rich_text_script_tags_removed(self):

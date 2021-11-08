@@ -1,7 +1,7 @@
 from wagtail.core import hooks
 
-from .utils import LocalPicker, parse_document
 from ...utils import create_page_from_import, update_page_from_import
+from .utils import LocalPicker, parse_document
 
 
 @hooks.register("register_content_import_picker")

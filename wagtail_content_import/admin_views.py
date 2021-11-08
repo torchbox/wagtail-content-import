@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from wagtail.admin.modal_workflow import render_modal_workflow
 
 
