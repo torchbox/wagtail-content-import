@@ -4,7 +4,8 @@ from unittest.mock import MagicMock
 from django.contrib.auth.models import User
 from django.test import TestCase
 from wagtail.images import get_image_model
-from wagtail.images.tests.utils import get_test_image_file, get_test_image_file_jpeg
+from wagtail.images.tests.utils import (
+    get_test_image_file, get_test_image_file_jpeg)
 
 from ..parsers.tables import Cell, Table
 from .converters import (

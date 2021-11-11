@@ -1,15 +1,16 @@
 import requests
+from django.conf import settings
+from django.contrib.auth.models import Permission
 from django.core.files.base import ContentFile
 from django.utils.functional import cached_property
 from wagtail.admin.rich_text.converters.contentstate import (
     ContentstateConverter)
 from wagtail.core.rich_text import RichText
 from wagtail.core.rich_text import features as feature_registry
-from django.contrib.auth.models import Permission
 from wagtail.images import get_image_model
 
-
 USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
+
 
 def get_user_needs_image_choose_permission():
     global USER_NEEDS_IMAGE_CHOOSE_PERMISSION
@@ -106,6 +107,9 @@ class ImageConverter(BaseConverter):
 
         existing_images = existing_images.filter(file_hash=image.file_hash).iterator(chunk_size=1)
         for potential_duplicate in existing_images:
+            if not getattr(settings, "WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT", False):
+                # We don't need to check the file content
+                return potential_duplicate
             # Check the file contents actually match - hash collisions are extremely unlikely by default
             # hence the chunk_size=1, but could happen if someone is using a custom image model with
             # some other hashing scheme
