@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.6.0 (11/11/2021)
+
+- Feature: Wagtail Content Import now tries to identify if an imported image already exists in your library, and if so, reuses the existing image instead.
+
 ## Version 0.5.0 (03/08/2021)
 
 - Feature: The import button has been added to the page editor on existing pages, allowing editors to update them with imported content.
