@@ -13,9 +13,14 @@ The DocumentParser class used for Google Docs. Defaults to `GoogleDocumentParser
 
 The DocumentParser class used for .docx files. Defaults to `DocxParser`.
 
+#### `WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT`:
+
+Whether Wagtail Content Import should check the file content as well as the hash when determining duplicate images.
+Defaults to `False`.
+
 ## Google Picker Settings
 
-#### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):  
+#### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):
 
 The app's Google client secret. (See: [Google Docs Setup](google_docs_setup.md))
 
@@ -25,6 +30,6 @@ The app's Google Picker API key, allowing selection of Google Docs. (See: [Googl
 
 ## Microsoft Picker Settings
 
-#### `MICROSOFT_CLIENT_ID` (Required):  
+#### `MICROSOFT_CLIENT_ID` (Required):
 
 The app's Microsoft Azure client ID. (See: [Microsoft Setup](microsoft_setup.md))
