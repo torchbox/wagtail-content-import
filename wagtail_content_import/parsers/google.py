@@ -34,6 +34,10 @@ class GoogleDocumentParser(DocumentParser):
                 embeds.append(element["inlineObjectElement"]["inlineObjectId"])
                 continue
 
+            if not element:
+                # paragraph["elements"] may contain `NoneType` values, if it does, just skip it.
+                continue
+
             text_run = element.get("textRun")
             content = text_run.get("content", "").strip("\n")
             if not content or not text_run:
