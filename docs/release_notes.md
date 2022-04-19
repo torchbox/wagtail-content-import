@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.7.0 (19/4/2022)
+
+- Fix: Importing empty paragraph elements from Google Docs (now included in the serialized format) no longer fails.
+
 ## Version 0.6.0 (11/11/2021)
 
 - Feature: Wagtail Content Import now tries to identify if an imported image already exists in your library, and if so, reuses the existing image instead.
