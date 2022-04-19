@@ -46,35 +46,9 @@ class GoogleDocumentParser(DocumentParser):
             if not content:
                 continue
 
-            prefixes = []
-            suffixes = []
             style = text_run["textStyle"]
 
-            tag_for_style = {
-                'bold': 'b',
-                'italic': 'i',
-                'underline': 'u',
-                'strikethrough': 's',
-            }
-            for style_key, tag in tag_for_style.items():
-                if style.get(style_key):
-                    prefixes.append("<{}>".format(tag))
-                    suffixes.append("</{}>".format(tag))
-
-            if style.get("baselineOffset") == "SUPERSCRIPT":
-                prefixes.append("<sup>")
-                suffixes.append("</sup>")
-            elif style.get("baselineOffset") == "SUBSCRIPT":
-                prefixes.append("<sub>")
-                suffixes.append("</sub>")
-            if style.get("link"):
-                url = style["link"].get("url")
-                # Links without a 'url' field are local bookmark/heading references;
-                # skip these as there's no direct equivalent in Wagtail content
-                # https://developers.google.com/docs/api/reference/rest/v1/documents#Link
-                if url:
-                    prefixes.append('<a href="{}">'.format(escape(url)))
-                    suffixes.append("</a>")
+            prefixes, suffixes = self.get_tags_for_style(style)
 
             suffixes.reverse()
             html = "".join(prefixes) + escape(content) + "".join(suffixes)
@@ -90,6 +64,41 @@ class GoogleDocumentParser(DocumentParser):
             ),
             "embeds": embeds,
         }
+
+    def get_tags_for_style(self, style):
+        """
+        Given a textStyle dictionary, return a pair of lists of prefix and suffix html tags
+        """
+        prefixes = []
+        suffixes = []
+
+        tag_for_style = {
+            'bold': 'b',
+            'italic': 'i',
+            'underline': 'u',
+            'strikethrough': 's',
+        }
+        for style_key, tag in tag_for_style.items():
+            if style.get(style_key):
+                prefixes.append("<{}>".format(tag))
+                suffixes.append("</{}>".format(tag))
+
+        if style.get("baselineOffset") == "SUPERSCRIPT":
+            prefixes.append("<sup>")
+            suffixes.append("</sup>")
+        elif style.get("baselineOffset") == "SUBSCRIPT":
+            prefixes.append("<sub>")
+            suffixes.append("</sub>")
+        if style.get("link"):
+            url = style["link"].get("url")
+            # Links without a 'url' field are local bookmark/heading references;
+            # skip these as there's no direct equivalent in Wagtail content
+            # https://developers.google.com/docs/api/reference/rest/v1/documents#Link
+            if url:
+                prefixes.append('<a href="{}">'.format(escape(url)))
+                suffixes.append("</a>")
+
+        return prefixes, suffixes
 
     def process_embedded_object(self, embed_id):
         embed = self.document["inlineObjects"][embed_id]
