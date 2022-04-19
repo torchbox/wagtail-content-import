@@ -14,6 +14,13 @@ class TestGoogleDocumentParser(TestCase):
             test_document = json.load(test_document_file)
             self.parser = GoogleDocumentParser(test_document)
 
+    def test_paragraph_with_empty_elements(self):
+        # Test that attempting to parse a paragraph with empty elements, or elements with no textRun
+        # is successful, as Google will now include them in the serialized format
+        plain_paragraph = self.parser.document["body"]["content"][1]["paragraph"]
+        parsed_paragraph = self.parser.elements_to_html(plain_paragraph, outer_tag="p")
+        self.assertEqual(parsed_paragraph["html"], "<p>A</p>")
+
     def test_plain_paragraph_to_html(self):
         plain_paragraph = self.parser.document["body"]["content"][5]["paragraph"]
         parsed_paragraph = self.parser.elements_to_html(plain_paragraph, outer_tag="p")

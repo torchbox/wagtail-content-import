@@ -30,13 +30,20 @@ class GoogleDocumentParser(DocumentParser):
         embeds = []
 
         for element in paragraph["elements"]:
+            if not element:
+                continue
+
             if "inlineObjectElement" in element:
                 embeds.append(element["inlineObjectElement"]["inlineObjectId"])
                 continue
 
             text_run = element.get("textRun")
+
+            if not text_run:
+                continue
+
             content = text_run.get("content", "").strip("\n")
-            if not content or not text_run:
+            if not content:
                 continue
 
             prefixes = []
