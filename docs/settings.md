@@ -18,6 +18,11 @@ The DocumentParser class used for .docx files. Defaults to `DocxParser`.
 Whether Wagtail Content Import should check the file content as well as the hash when determining duplicate images.
 Defaults to `False`.
 
+#### `WAGTAILCONTENTIMPORT_CONVERT_EXTERNAL_LINKS`
+
+Whether Wagtail Content Import should automatically convert links that exactly match a page url to internal page links.
+Defaults to `True`.
+
 ## Google Picker Settings
 
 #### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):

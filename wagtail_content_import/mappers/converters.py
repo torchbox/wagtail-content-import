@@ -1,3 +1,5 @@
+import re
+
 import requests
 from django.conf import settings
 from django.contrib.auth.models import Permission
@@ -5,8 +7,10 @@ from django.core.files.base import ContentFile
 from django.utils.functional import cached_property
 from wagtail.admin.rich_text.converters.contentstate import (
     ContentstateConverter)
+from wagtail.core.models import Page, Site
 from wagtail.core.rich_text import RichText
 from wagtail.core.rich_text import features as feature_registry
+from wagtail.core.rich_text.rewriters import LinkRewriter
 from wagtail.images import get_image_model
 
 USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
@@ -47,10 +51,54 @@ class RichTextConverter(BaseConverter):
             features = self.features
         return ContentstateConverter(features=features)
 
+    @cached_property
+    def site_root_paths(self):
+        return Site.get_site_root_paths()
+
+    def convert_external_links(self, html):
+        rewriter = LinkRewriter({'external': self.convert_external_link_tag})
+        return rewriter(html)
+
+    def convert_external_link_tag(self, attrs):
+        # Convert any external link tags that exactly match internal urls to page links
+        href = attrs.get('href', '')
+        page = self.get_page_for_url(href)
+        if page:
+            return f'<a linktype="page" id="{page.pk}">'
+        return f'<a linktype="external" href="{href}">'
+
+    def get_page_for_url(self, submitted_url):
+        # Strip the url of its query/fragment link parameters - these won't match a page
+        url_without_query = re.split(r"\?|#", submitted_url)[0]
+
+        if url_without_query != submitted_url:
+            # We only want to convert exact matches
+            return
+
+        # Start by finding any sites the url could potentially match
+        sites = self.site_root_paths
+
+        possible_sites = [
+            (path, url_without_query[len(url) + 1:])
+            for pk, path, url, language_code in sites
+            if submitted_url.startswith(url)
+        ]
+
+        # Loop over possible sites to identify a page match
+        for root_path, url in possible_sites:
+            matched_pages = Page.objects.filter(url_path=root_path + url).specific()
+            page = matched_pages.first()
+            if page:
+                return page
+
     def __call__(self, element, **kwargs):
         cleaned_html = self.contentstate_converter.to_database_format(
             self.contentstate_converter.from_database_format(element["value"])
         )
+
+        if getattr(settings, "WAGTAILCONTENTIMPORT_CONVERT_EXTERNAL_LINKS", True):
+            cleaned_html = self.convert_external_links(cleaned_html)
+
         return (self.block_name, RichText(cleaned_html))
 
 
