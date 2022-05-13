@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from wagtail.core.models import Page
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import (
     get_test_image_file, get_test_image_file_jpeg)
@@ -15,6 +16,15 @@ FIND_BLOCK_KEYS = re.compile('( ?data-block-key="[^"]+")')
 
 
 class TestConverters(TestCase):
+    def setUp(self):
+        self.page = Page(
+            title='test',
+            slug='test'
+        )
+        Page.objects.last().add_child(
+            instance=self.page
+        )
+
     def test_text_conversion(self):
         text_converter = TextConverter("test_block")
         test_element = {"type": "html", "value": "test_text"}
@@ -31,7 +41,7 @@ class TestConverters(TestCase):
         converted_element = text_converter(test_element)
         self.assertEqual(converted_element[0], "test_block", "Should be: 'test_block'")
         rich_text = converted_element[1].source
-        rich_text_without_block_keys = FIND_BLOCK_KEYS.sub('', rich_text)
+        rich_text_without_block_keys = FIND_BLOCK_KEYS.sub("", rich_text)
         self.assertEqual(
             rich_text_without_block_keys, "<p>test_text</p>", "Should be: 'test_text"
         )
@@ -42,6 +52,25 @@ class TestConverters(TestCase):
         converted_element = text_converter(test_element)
         self.assertNotIn(
             "script", converted_element[1].source, "Should not contain script tags."
+        )
+
+    def test_rich_text_converts_links(self):
+        # Test that links exactly matching page urls are converted to internal links
+        text_converter = RichTextConverter("test_block")
+        exact_link_element = {"type": "html", "value": f'<p><a href="{self.page.get_full_url()}">a link</a></p>'}
+        converted_element = text_converter(exact_link_element)
+        self.assertEqual(
+            f'<p><a linktype="page" id="{self.page.id}">a link</a></p>',
+            FIND_BLOCK_KEYS.sub("", converted_element[1].source),
+            "Should be converted to page link"
+        )
+        inexact_url = f'{self.page.get_full_url()}?this=that'
+        inexact_link_element = {"type": "html", "value": f'<p><a href="{inexact_url}">a link</a></p>'}
+        converted_element = text_converter(inexact_link_element)
+        self.assertEqual(
+            f'<p><a linktype="external" href="{inexact_url}">a link</a></p>',
+            FIND_BLOCK_KEYS.sub("", converted_element[1].source),
+            "Should not be converted to page link"
         )
 
     def test_table_conversion(self):
