@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "wagtailcontentimport_microsoft"
-urlpatterns = [url(r"auth/", views.auth, name="auth_view")]
+urlpatterns = [path("auth/", views.auth, name="auth_view")]
