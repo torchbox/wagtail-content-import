@@ -19,7 +19,7 @@ with io.open("README.md", encoding="utf-8") as readme_file:
 
 setup(
     name="wagtail_content_import",
-    version="0.7.0",
+    version="0.8.0",
     description="A module for Wagtail that provides functionality for importing page content from third-party sources.",
     author="Samir Shah, Jacob Topp-Mugglestone, Karl Hobley, Matthew Westcott",
     author_email="jacobtm@torchbox.com",
@@ -44,7 +44,7 @@ setup(
         "Framework :: Wagtail :: 2",
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
-    install_requires=["wagtail>=2.2", "python-docx>=0.8.10"],
+    install_requires=["wagtail>=2.11", "python-docx>=0.8.10"],
     extras_require={"testing": test_requires, },
     zip_safe=False,
 )
