@@ -186,12 +186,13 @@ from wagtail.core import hooks
 
 from .utils import MyPicker
 
-from ...utils import create_page_from_import
+from ...utils import create_page_from_import, is_importing, set_importing
 
 
 @hooks.register("before_create_page")
 def create_from_my_doc(request, parent_page, page_class):
-    if "my-doc" in request.POST:
+    if "my-doc" in request.POST and not is_importing(request):
+        set_importing(request)
         parsed_doc = # PARSE THE DOCUMENT HERE
         return create_page_from_import(request, parent_page, page_class, parsed_doc)
 
