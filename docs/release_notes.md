@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 0.8.0 (19/5/2022)
+
+- Feature: Wagtail 3.0 and Django 4.0 support
+- Feature: Links matching internal pages in rich text are now automatically converted to page links
+- Upgrade consideration: Wagtail versions below 2.11 are no longer supported
+
 ## Version 0.7.0 (19/4/2022)
 
 - Fix: Importing empty paragraph elements from Google Docs (now included in the serialized format) no longer fails.
