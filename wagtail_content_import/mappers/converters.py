@@ -86,7 +86,7 @@ class RichTextConverter(BaseConverter):
 
         # Loop over possible sites to identify a page match
         for root_path, url in possible_sites:
-            matched_pages = Page.objects.filter(url_path=root_path + url).specific()
+            matched_pages = Page.objects.filter(url_path=root_path + url)
             page = matched_pages.first()
             if page:
                 return page
