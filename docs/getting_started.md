@@ -12,7 +12,7 @@
         urlpatterns += [
             path('', include(wagtail_content_import_urls)),
             ]
-    Note that `wagtail_content_import.urls` must be above `wagtail.core.urls` in your `urlpatterns`.
+    Note that `wagtail_content_import.urls` must be above `wagtail.urls` in your `urlpatterns`.
 
  3. Add the relevant pickers:
      - To import from Google Docs, add`'wagtail_content_import.pickers.google'` to `INSTALLED_APPS` above `wagtail.admin`,

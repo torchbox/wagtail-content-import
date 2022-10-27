@@ -1,7 +1,6 @@
 from wagtail.admin.views.pages.create import CreateView
 from wagtail.admin.views.pages.edit import EditView
 
-
 IS_IMPORTING_ATTRIBUTE = "_is_importing"
 
 

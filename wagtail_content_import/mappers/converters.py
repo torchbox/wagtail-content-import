@@ -5,12 +5,21 @@ from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.core.files.base import ContentFile
 from django.utils.functional import cached_property
+from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.rich_text.converters.contentstate import (
     ContentstateConverter)
-from wagtail.core.models import Page, Site
-from wagtail.core.rich_text import RichText
-from wagtail.core.rich_text import features as feature_registry
-from wagtail.core.rich_text.rewriters import LinkRewriter
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Page, Site
+    from wagtail.rich_text import RichText
+    from wagtail.rich_text import features as feature_registry
+    from wagtail.rich_text.rewriters import LinkRewriter
+else:
+    from wagtail.core.models import Page, Site
+    from wagtail.core.rich_text import RichText
+    from wagtail.core.rich_text import features as feature_registry
+    from wagtail.core.rich_text.rewriters import LinkRewriter
+
 from wagtail.images import get_image_model
 
 USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
