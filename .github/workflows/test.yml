@@ -87,31 +87,31 @@ jobs:
         include:
           - wagtail: '2.15'
             django: '3.2'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.7'
           - wagtail: '2.15'
             django: '3.2'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.8'
           - wagtail: '2.15'
             django: '3.2'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.9'
           - wagtail: '2.15'
             django: '3.2'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.10'
           - wagtail: '4.0'
             django: '4.1'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.8'
           - wagtail: '4.0'
             django: '4.1'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.9'
           - wagtail: '4.0'
             django: '4.1'
-            postgres: ['10.8']
+            postgres: '10.8'
             python: '3.10'
 
     services:
