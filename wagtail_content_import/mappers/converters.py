@@ -6,7 +6,9 @@ from django.contrib.auth.models import Permission
 from django.core.files.base import ContentFile
 from django.utils.functional import cached_property
 from wagtail import VERSION as WAGTAIL_VERSION
-from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
+from wagtail.admin.rich_text.converters.contentstate import (
+    ContentstateConverter,
+)
 
 if WAGTAIL_VERSION >= (3, 0):
     from wagtail.models import Page, Site
