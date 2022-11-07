@@ -11,7 +11,7 @@ test_requires = [
     "flake8>=2.2.0",
     # Required for matrix build on Travis
     "tox==3.9.0",
-    "dj-database-url==0.5.0"
+    "dj-database-url==0.5.0",
 ]
 
 with io.open("README.md", encoding="utf-8") as readme_file:
@@ -52,6 +52,8 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
     install_requires=["wagtail>=2.15", "python-docx>=0.8.10"],
-    extras_require={"testing": test_requires, },
+    extras_require={
+        "testing": test_requires,
+    },
     zip_safe=False,
 )

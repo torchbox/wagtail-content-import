@@ -73,10 +73,10 @@ class GoogleDocumentParser(DocumentParser):
         suffixes = []
 
         tag_for_style = {
-            'bold': 'b',
-            'italic': 'i',
-            'underline': 'u',
-            'strikethrough': 's',
+            "bold": "b",
+            "italic": "i",
+            "underline": "u",
+            "strikethrough": "s",
         }
         for style_key, tag in tag_for_style.items():
             if style.get(style_key):
@@ -242,14 +242,14 @@ class GoogleDocumentParser(DocumentParser):
                 self.close_current_list()
 
                 tag_for_style = {
-                    'HEADING_2': 'h2',
-                    'HEADING_3': 'h3',
-                    'HEADING_4': 'h4',
-                    'HEADING_5': 'h5',
-                    'HEADING_6': 'h6',
+                    "HEADING_2": "h2",
+                    "HEADING_3": "h3",
+                    "HEADING_4": "h4",
+                    "HEADING_5": "h5",
+                    "HEADING_6": "h6",
                 }
 
-                outer_tag = tag_for_style.get(style, 'p')
+                outer_tag = tag_for_style.get(style, "p")
 
                 content = self.elements_to_html(paragraph, outer_tag=outer_tag)
                 self.unprocessed_embeds += content["embeds"]
