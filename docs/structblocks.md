@@ -3,7 +3,7 @@ To convert elements in the parsed document to a StructBlock, you'll need to writ
 For a StructBlock, the converter output of a `(self.block_name, content)` tuple should provide `content` as a dict. For example, for a StructBlock:
 
 ```python
-from wagtail.core.blocks import CharBlock, ChoiceBlock, StructBlock
+from wagtail.blocks import CharBlock, ChoiceBlock, StructBlock
 
 class HeadingBlock(StructBlock):
     """
@@ -47,7 +47,7 @@ For a custom ImageBlock:
 
 ```python
 from django.utils.safestring import mark_safe
-from wagtail.core.blocks import BooleanBlock, StructBlock
+from wagtail.blocks import BooleanBlock, StructBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 
@@ -66,7 +66,7 @@ class ImageBlock(StructBlock):
 In a StreamField:
 
 ```python
-from wagtail.core.blocks import StreamBlock
+from wagtail.blocks import StreamBlock
 
 class BaseBodyStreamBlock(StreamBlock):
     image_block = ImageBlock()

@@ -3,7 +3,13 @@ from unittest.mock import MagicMock
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from wagtail.core.models import Page
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Page
+else:
+    from wagtail.core.models import Page
+
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import (
     get_test_image_file, get_test_image_file_jpeg)

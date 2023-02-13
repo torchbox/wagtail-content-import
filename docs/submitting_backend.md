@@ -182,7 +182,7 @@ Eg:
 ```python
 from django.conf import settings
 
-from wagtail.core import hooks
+from wagtail import hooks
 
 from .utils import MyPicker
 

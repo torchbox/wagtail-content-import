@@ -1,9 +1,16 @@
 import json
 
 from django.conf import settings
-from wagtail.core import hooks
+from wagtail import VERSION as WAGTAIL_VERSION
 
-from ...utils import create_page_from_import, is_importing, set_importing, update_page_from_import
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import hooks
+else:
+    from wagtail.core import hooks
+
+from ...utils import (
+    create_page_from_import, is_importing, set_importing,
+    update_page_from_import)
 from .utils import GooglePicker, parse_document
 
 
