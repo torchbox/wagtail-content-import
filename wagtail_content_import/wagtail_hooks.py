@@ -15,7 +15,7 @@ from . import admin_views
 def global_admin_css():
     return format_html(
         '<link rel="stylesheet" href="{}">',
-        versioned_static('wagtail_content_import/css/import-styles.css'),
+        versioned_static("wagtail_content_import/css/import-styles.css"),
     )
 
 
@@ -23,14 +23,14 @@ def global_admin_css():
 def global_admin_js():
     return format_html(
         '<script src="{}"></script>',
-        versioned_static('wagtail_content_import/js/picker.js'),
+        versioned_static("wagtail_content_import/js/picker.js"),
     )
 
 
 @hooks.register("register_admin_urls")
 def register_admin_urls():
     urls = [
-        path("confirm-dialog/", admin_views.confirm_dialog, name='confirm_dialog'),
+        path("confirm-dialog/", admin_views.confirm_dialog, name="confirm_dialog"),
     ]
 
     return [

@@ -13,7 +13,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail_content_import import urls as wagtail_content_import_urls
 
 urlpatterns = [
-    path('', include(wagtail_content_import_urls)),
+    path("", include(wagtail_content_import_urls)),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),

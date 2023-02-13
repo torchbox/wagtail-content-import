@@ -10,6 +10,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="oauthcredentials", name="user",),
-        migrations.DeleteModel(name="OAuthCredentials",),
+        migrations.RemoveField(
+            model_name="oauthcredentials",
+            name="user",
+        ),
+        migrations.DeleteModel(
+            name="OAuthCredentials",
+        ),
     ]

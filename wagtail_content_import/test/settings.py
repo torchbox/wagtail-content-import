@@ -109,7 +109,9 @@ PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(default="sqlite:///test_wagtail_content_import.db"),
+    "default": dj_database_url.config(
+        default="sqlite:///test_wagtail_content_import.db"
+    ),
 }
 
 
@@ -162,4 +164,4 @@ WAGTAIL_SITE_NAME = "Wagtail Content Import test site"
 
 # This is the base URL used by the Wagtail admin site.
 # It is typically used for generating URLs to include in notification emails.
-WAGTAILADMIN_BASE_URL = 'http://example.com'
+WAGTAILADMIN_BASE_URL = "http://example.com"

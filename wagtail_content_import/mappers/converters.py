@@ -7,7 +7,8 @@ from django.core.files.base import ContentFile
 from django.utils.functional import cached_property
 from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.rich_text.converters.contentstate import (
-    ContentstateConverter)
+    ContentstateConverter,
+)
 
 if WAGTAIL_VERSION >= (3, 0):
     from wagtail.models import Page, Site
@@ -29,9 +30,9 @@ def get_user_needs_image_choose_permission():
     global USER_NEEDS_IMAGE_CHOOSE_PERMISSION
     if USER_NEEDS_IMAGE_CHOOSE_PERMISSION is None:
         USER_NEEDS_IMAGE_CHOOSE_PERMISSION = Permission.objects.filter(
-            content_type__model='image',
-            content_type__app_label='wagtailimages',
-            codename='choose_image'
+            content_type__model="image",
+            content_type__app_label="wagtailimages",
+            codename="choose_image",
         ).exists()
     return USER_NEEDS_IMAGE_CHOOSE_PERMISSION
 
@@ -65,12 +66,12 @@ class RichTextConverter(BaseConverter):
         return Site.get_site_root_paths()
 
     def convert_external_links(self, html):
-        rewriter = LinkRewriter({'external': self.convert_external_link_tag})
+        rewriter = LinkRewriter({"external": self.convert_external_link_tag})
         return rewriter(html)
 
     def convert_external_link_tag(self, attrs):
         # Convert any external link tags that exactly match internal urls to page links
-        href = attrs.get('href', '')
+        href = attrs.get("href", "")
         page = self.get_page_for_url(href)
         if page:
             return f'<a linktype="page" id="{page.pk}">'
@@ -88,7 +89,7 @@ class RichTextConverter(BaseConverter):
         sites = self.site_root_paths
 
         possible_sites = [
-            (path, url_without_query[len(url) + 1:])
+            (path, url_without_query[len(url) + 1 :])
             for pk, path, url, language_code in sites
             if submitted_url.startswith(url)
         ]
@@ -157,21 +158,26 @@ class ImageConverter(BaseConverter):
 
         if USER_NEEDS_IMAGE_CHOOSE_PERMISSION:
             existing_images = permission_policy.instances_user_has_any_permission_for(
-                owner, ['choose']
+                owner, ["choose"]
             )
         else:
             existing_images = Image.objects.all()
 
-        existing_images = existing_images.filter(file_hash=image.file_hash).iterator(chunk_size=1)
+        existing_images = existing_images.filter(file_hash=image.file_hash).iterator(
+            chunk_size=1
+        )
         for potential_duplicate in existing_images:
-            if not getattr(settings, "WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT", False):
+            if not getattr(
+                settings, "WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT", False
+            ):
                 # We don't need to check the file content
                 return potential_duplicate
             # Check the file contents actually match - hash collisions are extremely unlikely by default
             # hence the chunk_size=1, but could happen if someone is using a custom image model with
             # some other hashing scheme
             if potential_duplicate.file.size == image.file.size and all(
-                a == b for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
+                a == b
+                for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
             ):
                 # We've found an existing image in the library
                 # so let's not save our new image, and return this one instead

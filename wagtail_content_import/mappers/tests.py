@@ -12,24 +12,25 @@ else:
 
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import (
-    get_test_image_file, get_test_image_file_jpeg)
+    get_test_image_file,
+    get_test_image_file_jpeg,
+)
 
 from ..parsers.tables import Cell, Table
 from .converters import (
-    ImageConverter, RichTextConverter, TableConverter, TextConverter)
+    ImageConverter,
+    RichTextConverter,
+    TableConverter,
+    TextConverter,
+)
 
 FIND_BLOCK_KEYS = re.compile('( ?data-block-key="[^"]+")')
 
 
 class TestConverters(TestCase):
     def setUp(self):
-        self.page = Page(
-            title='test',
-            slug='test'
-        )
-        Page.objects.last().add_child(
-            instance=self.page
-        )
+        self.page = Page(title="test", slug="test")
+        Page.objects.last().add_child(instance=self.page)
 
     def test_text_conversion(self):
         text_converter = TextConverter("test_block")
@@ -63,20 +64,26 @@ class TestConverters(TestCase):
     def test_rich_text_converts_links(self):
         # Test that links exactly matching page urls are converted to internal links
         text_converter = RichTextConverter("test_block")
-        exact_link_element = {"type": "html", "value": f'<p><a href="{self.page.get_full_url()}">a link</a></p>'}
+        exact_link_element = {
+            "type": "html",
+            "value": f'<p><a href="{self.page.get_full_url()}">a link</a></p>',
+        }
         converted_element = text_converter(exact_link_element)
         self.assertEqual(
             f'<p><a linktype="page" id="{self.page.id}">a link</a></p>',
             FIND_BLOCK_KEYS.sub("", converted_element[1].source),
-            "Should be converted to page link"
+            "Should be converted to page link",
         )
-        inexact_url = f'{self.page.get_full_url()}?this=that'
-        inexact_link_element = {"type": "html", "value": f'<p><a href="{inexact_url}">a link</a></p>'}
+        inexact_url = f"{self.page.get_full_url()}?this=that"
+        inexact_link_element = {
+            "type": "html",
+            "value": f'<p><a href="{inexact_url}">a link</a></p>',
+        }
         converted_element = text_converter(inexact_link_element)
         self.assertEqual(
             f'<p><a linktype="external" href="{inexact_url}">a link</a></p>',
             FIND_BLOCK_KEYS.sub("", converted_element[1].source),
-            "Should not be converted to page link"
+            "Should not be converted to page link",
         )
 
     def test_table_conversion(self):
@@ -139,10 +146,7 @@ class TestConverters(TestCase):
         self.assertIsInstance(converted_element[1], Image)
 
         # Check we reuse the first imported instance, rather than importing a duplicate
-        self.assertEqual(
-            converted_element[1],
-            imported_image
-        )
+        self.assertEqual(converted_element[1], imported_image)
 
         # Now import a different image by running the converter again
         image_converter.fetch_image = MagicMock(
@@ -154,7 +158,4 @@ class TestConverters(TestCase):
         self.assertIsInstance(new_converted_element[1], Image)
 
         # Check we recognise the new image as a non-duplicate, and import it separately
-        self.assertNotEqual(
-            new_converted_element[1],
-            imported_image
-        )
+        self.assertNotEqual(new_converted_element[1], imported_image)
