@@ -1,9 +1,4 @@
-from wagtail import VERSION as WAGTAIL_VERSION
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail import hooks
-else:
-    from wagtail.core import hooks
+from wagtail import hooks
 
 from ...utils import (
     create_page_from_import, is_importing, set_importing,
