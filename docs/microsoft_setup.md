@@ -19,3 +19,5 @@ Wagtail OneDrive/SharePoint integration relies on Microsoft APIs, which you will
 4. Navigate to `Authentication`. Under `Implicit grant`, add `Access tokens` and `ID tokens`, and save.
 
 5. Finally, navigate to `Overview`, and copy the `Application (client) ID` into the `WAGTAILCONTENTIMPORT_MICROSOFT_CLIENT_ID` setting.
+
+Note: you may need to configure your server to set a [Cross-Origin-Opener-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy) of "unsafe-none" for the file picker popup to function correctly. On applications running Django versions >= 4 and using `django.middleware.security.SecurityMiddleware`, this can be done by setting `SECURE_CROSS_ORIGIN_OPENER_POLICY = "unsafe-none"`.
