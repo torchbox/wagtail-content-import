@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.9.0 (17/2/2023)
+
+- Wagtail 4.2 support, drop support for versions < 4.1
+
 ## Version 0.8.1 (17/2/2023)
 
 - Wagtail 4 support
