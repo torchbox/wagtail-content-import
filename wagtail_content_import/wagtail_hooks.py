@@ -1,12 +1,7 @@
 from django.urls import include, path
 from django.utils.html import format_html
-from wagtail import VERSION as WAGTAIL_VERSION
+from wagtail import hooks
 from wagtail.admin.staticfiles import versioned_static
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail import hooks
-else:
-    from wagtail.core import hooks
 
 from . import admin_views
 
