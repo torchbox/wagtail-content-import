@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.8.1 (17/2/2023)
+
+- Wagtail 4 support
+
 ## Version 0.8.0 (19/5/2022)
 
 - Feature: Wagtail 3.0 and Django 4.0 support
