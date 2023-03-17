@@ -25,16 +25,16 @@ Defaults to `True`.
 
 ## Google Picker Settings
 
-#### `GOOGLE_OAUTH_CLIENT_CONFIG` (Required):
+#### `WAGTAILCONTENTIMPORT_GOOGLE_OAUTH_CLIENT_CONFIG` (Required):
 
 The app's Google client secret. (See: [Google Docs Setup](google_docs_setup.md))
 
-#### `GOOGLE_PICKER_API_KEY` (Required):
+#### `WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY` (Required):
 
 The app's Google Picker API key, allowing selection of Google Docs. (See: [Google Docs Setup](google_docs_setup.md))
 
 ## Microsoft Picker Settings
 
-#### `MICROSOFT_CLIENT_ID` (Required):
+#### `WAGTAILCONTENTIMPORT_MICROSOFT_CLIENT_ID` (Required):
 
 The app's Microsoft Azure client ID. (See: [Microsoft Setup](microsoft_setup.md))
