@@ -47,6 +47,9 @@ class GooglePicker(Picker):
     class Media:
         css = {}
         js = [
-            "https://apis.google.com/js/api.js",
             "wagtail_content_import/google_picker.js",
+            mark_safe(
+                '<script async defer src="https://apis.google.com/js/api.js" onload="window.googlepicker_api_loaded = true;"></script>'),
+            mark_safe(
+                '<script async defer src="https://accounts.google.com/gsi/client" onload="window.googlepicker_client_loaded = true;"></script>'),
         ]
