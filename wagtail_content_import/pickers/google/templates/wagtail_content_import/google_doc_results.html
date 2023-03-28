@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if documents %}
     <form method="post">
     {% csrf_token %}
@@ -7,10 +8,10 @@
             <li>
                 <div class="row row-flush">
                     <div class="col8">
-                        <a href="{{ doc.webViewLink }}" target="_blank">{{ doc.name }}</a> - modified {{ doc.modifiedTime }}
+                        <a href="{{ doc.webViewLink }}" target="_blank">{{ doc.name }}</a> - {% translate "modified at" %} {{ doc.modifiedTime }}
                     </div>
                     <div class="col4" style="text-align:right">
-                        <button type="submit" class="button" name="docid" value="{{ doc.id }}">Import this document</button>
+                        <button type="submit" class="button" name="docid" value="{{ doc.id }}">{% translate "Import this document" %}</button>
                     </div>
                 </div>
             </li>

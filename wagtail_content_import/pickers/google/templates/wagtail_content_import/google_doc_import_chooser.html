@@ -20,7 +20,7 @@
             <div class="left">
                 <div class="col">
                     <h1 class="icon icon-doc-full-inverse">
-                    Documents
+                        {% translate "Documents" %}
                     </h1>
                 </div>
                 <form class="col search-form" action="./{% if query_parameters %}?{{ query_parameters }}{% endif %}" method="get" novalidate>
@@ -28,7 +28,7 @@
                         {% for field in search_form %}
                             {% include "wagtailadmin/shared/field_as_li.html" with field=field field_classes="field-small iconfield" input_classes="icon-search" %}
                         {% endfor %}
-                        <li class="submit visuallyhidden"><input type="submit" value="Search" class="button" /></li>
+                        <li class="submit visuallyhidden"><input type="submit" value="{% translate "Search" %}" class="button" /></li>
                     </ul>
                 </form>
             </div>
