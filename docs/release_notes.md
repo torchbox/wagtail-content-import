@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.9.2 (6/4/2023)
+
+- Wagtail 4.2.2 support, fixing a bug that prevented image import due to a change in function signature
+
 ## Version 0.9.0 (17/2/2023)
 
 - Wagtail 4.2 support, drop support for versions < 4.1
