@@ -138,7 +138,13 @@ class ImageConverter(BaseConverter):
 
         # Set image file hash
         image.file.seek(0)
-        image._set_file_hash(image.file.read())
+        try:
+            image._set_file_hash(image.file.read())
+        except TypeError:
+            # This argumentless version was introduced in Wagtail 4.2.2
+            # https://github.com/wagtail/wagtail/commit/3c0c64642b9e5b8d28b111263c7f4bddad6c3880
+            # we can probably drop this try/except pattern when it's in a new major version
+            image._set_file_hash()
         image.file.seek(0)
 
         # Before we save the image, let's check if there are any choosable images with the same hash
