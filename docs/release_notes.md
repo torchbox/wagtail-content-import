@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 0.10.0 (31/7/2023)
+
+- Move to new Google Identity Service authentication to allow new projects to use the package
+
 ## Version 0.9.2 (6/4/2023)
 
 - Wagtail 4.2.2 support, fixing a bug that prevented image import due to a change in function signature
