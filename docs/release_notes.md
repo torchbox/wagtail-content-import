@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 0.11.0 (6/11/2023)
+
+- Add support for Wagtail 5
+- Drop Python 3.7, Django 4.0 from official support
+
 ## Version 0.10.0 (31/7/2023)
 
 - Move to new Google Identity Service authentication to allow new projects to use the package
