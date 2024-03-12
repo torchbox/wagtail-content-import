@@ -116,13 +116,7 @@ Eg:
 
 ```
 
-#### `__init__.py` and `apps.py`
-
-`init.py`:
-
-```python
-default_app_config = 'wagtail_content_import.pickers.my_picker.apps.WagtailContentImportMyPickerAppConfig'
-```
+#### `apps.py`
 
 `apps.py`:
 
