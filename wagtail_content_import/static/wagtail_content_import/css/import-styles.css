@@ -4,9 +4,22 @@
     color: #262626;
     }
 
+.button.content-import + .w-dropdown--dropdown-button button,
+.button.content-import + .dropdown-toggle {
+    background-color: #fafafa;
+    border: none;
+    border-left: 1px solid #007d7e;
+    color: #262626;
+}
+
 .button.content-import:hover, .content-import.dropdown-toggle:hover{
     background-color: #ececec;
-    }
+}
+
+.button.content-import + .w-dropdown--dropdown-button button:hover,
+.button.content-import + .dropdown-toggle:hover {
+    background-color: #ececec;
+}
 
 .docs-blue.content-import {
     color: #4387f4;
