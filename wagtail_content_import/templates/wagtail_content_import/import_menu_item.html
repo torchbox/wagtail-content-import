@@ -1,0 +1,9 @@
+{% load wagtailadmin_tags %}
+<a href="#"
+   data-content-import-picker="{{ name }}"
+   data-import-page-url="{{ url }}"
+   {% if show_dialog %}data-dialog-url="{% url 'wagtail_content_import_admin:confirm_dialog' %}"{% endif %}
+   class="content-import button button-longrunning">
+    {% if icon_name %}{% icon name=icon_name classname="icon content-import docs-blue" %}{% endif %}
+    {{ label }}
+</a>
