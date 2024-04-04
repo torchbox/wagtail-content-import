@@ -20,7 +20,7 @@ Currently supports:
 
 ### Requirements:
 * Django >= 4.2
-* Wagtail >= 5.2
+* Wagtail >= 5.2 (for 6.0.x, 6.0.2 or later is required)
 
 For the full documentation, see: https://torchbox.github.io/wagtail-content-import/
 
