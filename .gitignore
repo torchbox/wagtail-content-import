@@ -6,6 +6,8 @@ __pycache__
 /build/
 
 # venv
+/venv/
+/.venv/
 /bin/
 /lib/
 /share
@@ -22,6 +24,7 @@ __pycache__
 .~lock.*
 *.DS_Store
 .python-version
+/test-media/
 
 # IDE files
 .project
