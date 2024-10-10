@@ -2,7 +2,7 @@ import re
 from unittest.mock import MagicMock
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from wagtail.images import get_image_model
 from wagtail.images.tests.utils import (
     get_test_image_file, get_test_image_file_jpeg)
@@ -55,6 +55,26 @@ class TestConverters(TestCase):
         )
 
     def test_rich_text_converts_links(self):
+        # Test that links exactly matching page urls are converted to internal links
+        text_converter = RichTextConverter("test_block")
+        exact_link_element = {"type": "html", "value": f'<p><a href="{self.page.get_full_url()}">a link</a></p>'}
+        converted_element = text_converter(exact_link_element)
+        self.assertEqual(
+            f'<p><a linktype="page" id="{self.page.id}">a link</a></p>',
+            FIND_BLOCK_KEYS.sub("", converted_element[1].source),
+            "Should be converted to page link"
+        )
+        inexact_url = f'{self.page.get_full_url()}?this=that'
+        inexact_link_element = {"type": "html", "value": f'<p><a href="{inexact_url}">a link</a></p>'}
+        converted_element = text_converter(inexact_link_element)
+        self.assertEqual(
+            f'<p><a linktype="external" href="{inexact_url}">a link</a></p>',
+            FIND_BLOCK_KEYS.sub("", converted_element[1].source),
+            "Should not be converted to page link"
+        )
+
+    @override_settings(ROOT_URLCONF="wagtail_content_import.test.non_root_urls")
+    def test_rich_text_converts_links_with_non_root_url(self):
         # Test that links exactly matching page urls are converted to internal links
         text_converter = RichTextConverter("test_block")
         exact_link_element = {"type": "html", "value": f'<p><a href="{self.page.get_full_url()}">a link</a></p>'}
