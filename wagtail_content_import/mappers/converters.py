@@ -4,6 +4,7 @@ import requests
 from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.core.files.base import ContentFile
+from django.urls import reverse
 from django.utils.functional import cached_property
 from wagtail.admin.rich_text.converters.contentstate import (
     ContentstateConverter)
@@ -77,12 +78,13 @@ class RichTextConverter(BaseConverter):
 
         # Start by finding any sites the url could potentially match
         sites = self.site_root_paths
+        possible_sites = []
+        serve_path = reverse("wagtail_serve", args=("",))
 
-        possible_sites = [
-            (path, url_without_query[len(url) + 1:])
-            for pk, path, url, language_code in sites
-            if submitted_url.startswith(url)
-        ]
+        for pk, path, root_url, language_code in sites:
+            base_url = root_url + serve_path
+            if submitted_url.startswith(base_url):
+                possible_sites.append((path, submitted_url[len(base_url):]))
 
         # Loop over possible sites to identify a page match
         for root_path, url in possible_sites:
