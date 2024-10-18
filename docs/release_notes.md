@@ -1,5 +1,13 @@
 # Release Notes
 
+## Version 0.12.1 (18/10/2024)
+
+- Fix converting external to internal links when wagtail urls are not served at the root
+
+## Version 0.12.1 (4/4/2024)
+
+- Wagtail 6 compatibility
+
 ## Version 0.11.0 (6/11/2023)
 
 - Add support for Wagtail 5
