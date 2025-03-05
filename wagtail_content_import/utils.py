@@ -34,8 +34,8 @@ def update_page_from_import(request, page, parsed_doc):
     page.update_from_import(parsed_doc, request.user)
 
     class CustomEditView(EditView):
-        def post(self, request):
+        def post(self, request, *args, **kwargs):
             self.page = page
-            return self.get(request)
+            return self.get(request, *args, **kwargs)
 
     return CustomEditView.as_view()(request, page.pk)
