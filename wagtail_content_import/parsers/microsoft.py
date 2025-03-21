@@ -1,5 +1,4 @@
-from django.utils.html import format_html
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html, format_html_join
 from docx import Document
 
 from .base import DocumentParser
@@ -21,7 +20,7 @@ class DocxParser(DocumentParser):
 
     def paragraph_to_html(self, paragraph, outer_tag="p"):
         """
-        Compile a paragraph into a HTML string, optionally with semantic markup for styles.
+        Compile a paragraph into an HTML string, optionally with semantic markup for styles.
         Returns a dictionary of the form:
         {
             'type': 'html',
@@ -35,9 +34,9 @@ class DocxParser(DocumentParser):
                 text = self.generate_simple_tag(text, "b")
             if run.italic:
                 text = self.generate_simple_tag(text, "em")
-            text_list.append(text)
+            text_list.append((text,))
 
-        content = mark_safe("".join(text_list))
+        content = format_html_join("", "{}", text_list)
 
         return {"type": "html", "value": self.generate_simple_tag(content, outer_tag)}
 

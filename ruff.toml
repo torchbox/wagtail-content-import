@@ -23,6 +23,9 @@ extend-ignore = [
 ]
 fixable = ["C4", "E", "F", "I", "UP"]
 
+[lint.per-file-ignores]
+"tests/**.py" = ["S105", "S106"]
+"**/tests.py" = ["S105", "S106"]
 
 [lint.isort]
 known-first-party = ["src", "wagtail_content_import"]

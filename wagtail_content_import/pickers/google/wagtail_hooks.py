@@ -4,8 +4,11 @@ from django.conf import settings
 from wagtail import hooks
 
 from ...utils import (
-    create_page_from_import, is_importing, set_importing,
-    update_page_from_import)
+    create_page_from_import,
+    is_importing,
+    set_importing,
+    update_page_from_import,
+)
 from .utils import GooglePicker, parse_document
 
 
@@ -32,4 +35,7 @@ def register_content_import_picker():
     )
     api_key = getattr(settings, "WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY", "")
     if client_config and api_key:
-        return GooglePicker(client_config, api_key,)
+        return GooglePicker(
+            client_config,
+            api_key,
+        )

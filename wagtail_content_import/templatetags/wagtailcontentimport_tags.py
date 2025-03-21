@@ -1,9 +1,12 @@
 import re
+
 from django import template
 from django.urls import reverse
-from django.utils.safestring import mark_safe
-from wagtail import hooks, VERSION as WAGTAIL_VERSION
+from django.utils.html import format_html_join
+from wagtail import VERSION as WAGTAIL_VERSION
+from wagtail import hooks
 from wagtail.admin.action_menu import ActionMenuItem
+
 
 register = template.Library()
 
@@ -18,7 +21,7 @@ def wagtailcontentimport_pickerjs(context):
         js_snippets.extend(picker.media.render_js())
         js_snippets.append(picker.render_js_init(context["request"]))
 
-    return mark_safe("\n".join(js_snippets))
+    return format_html_join("\n", "{}", [(js_snippet,) for js_snippet in js_snippets])
 
 
 class ImportMenuItem(ActionMenuItem):
@@ -26,22 +29,25 @@ class ImportMenuItem(ActionMenuItem):
 
     def __init__(self, picker):
         super().__init__()
-        self.label = "Import from %s" % picker.verbose_name
-        self.icon_name = re.sub(r'^icon-', '', picker.icon)
+        self.label = f"Import from {picker.verbose_name}"
+        self.icon_name = re.sub(r"^icon-", "", picker.icon)
         self.name = picker.name
 
     def get_context_data(self, parent_context):
         context = super().get_context_data(parent_context)
-        context["show_dialog"] = (parent_context["view"] != "create")
+        context["show_dialog"] = parent_context["view"] != "create"
         return context
 
     def get_url(self, parent_context):
         if parent_context["view"] == "create":
-            return reverse("wagtailadmin_pages:add", args=[
-                parent_context["content_type"].app_label,
-                parent_context["content_type"].model,
-                parent_context["parent_page"].id
-            ])
+            return reverse(
+                "wagtailadmin_pages:add",
+                args=[
+                    parent_context["content_type"].app_label,
+                    parent_context["content_type"].model,
+                    parent_context["parent_page"].id,
+                ],
+            )
         else:
             return reverse("wagtailadmin_pages:edit", args=[parent_context["page"].id])
 

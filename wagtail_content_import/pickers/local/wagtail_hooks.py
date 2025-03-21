@@ -1,8 +1,11 @@
 from wagtail import hooks
 
 from ...utils import (
-    create_page_from_import, is_importing, set_importing,
-    update_page_from_import)
+    create_page_from_import,
+    is_importing,
+    set_importing,
+    update_page_from_import,
+)
 from .utils import LocalPicker, parse_document
 
 

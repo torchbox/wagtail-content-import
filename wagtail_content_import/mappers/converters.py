@@ -1,18 +1,21 @@
 import re
 
+from http import HTTPStatus
+
 import requests
+
 from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.core.files.base import ContentFile
 from django.urls import reverse
 from django.utils.functional import cached_property
-from wagtail.admin.rich_text.converters.contentstate import (
-    ContentstateConverter)
+from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
 from wagtail.images import get_image_model
 from wagtail.models import Page, Site
 from wagtail.rich_text import RichText
 from wagtail.rich_text import features as feature_registry
 from wagtail.rich_text.rewriters import LinkRewriter
+
 
 USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
 
@@ -21,9 +24,9 @@ def get_user_needs_image_choose_permission():
     global USER_NEEDS_IMAGE_CHOOSE_PERMISSION
     if USER_NEEDS_IMAGE_CHOOSE_PERMISSION is None:
         USER_NEEDS_IMAGE_CHOOSE_PERMISSION = Permission.objects.filter(
-            content_type__model='image',
-            content_type__app_label='wagtailimages',
-            codename='choose_image'
+            content_type__model="image",
+            content_type__app_label="wagtailimages",
+            codename="choose_image",
         ).exists()
     return USER_NEEDS_IMAGE_CHOOSE_PERMISSION
 
@@ -57,12 +60,12 @@ class RichTextConverter(BaseConverter):
         return Site.get_site_root_paths()
 
     def convert_external_links(self, html):
-        rewriter = LinkRewriter({'external': self.convert_external_link_tag})
+        rewriter = LinkRewriter({"external": self.convert_external_link_tag})
         return rewriter(html)
 
     def convert_external_link_tag(self, attrs):
         # Convert any external link tags that exactly match internal urls to page links
-        href = attrs.get('href', '')
+        href = attrs.get("href", "")
         page = self.get_page_for_url(href)
         if page:
             return f'<a linktype="page" id="{page.pk}">'
@@ -81,10 +84,10 @@ class RichTextConverter(BaseConverter):
         possible_sites = []
         serve_path = reverse("wagtail_serve", args=("",))
 
-        for pk, path, root_url, language_code in sites:
+        for _pk, path, root_url, _language_code in sites:
             base_url = root_url + serve_path
             if submitted_url.startswith(base_url):
-                possible_sites.append((path, submitted_url[len(base_url):]))
+                possible_sites.append((path, submitted_url[len(base_url) :]))
 
         # Loop over possible sites to identify a page match
         for root_path, url in possible_sites:
@@ -120,9 +123,9 @@ class ImageConverter(BaseConverter):
 
     @staticmethod
     def fetch_image(url):
-        response = requests.get(url)
+        response = requests.get(url, timeout=25)
 
-        if not response.status_code == 200:
+        if response.status_code != HTTPStatus.OK:
             return
 
         file_name = url.split("/")[-1]
@@ -156,21 +159,26 @@ class ImageConverter(BaseConverter):
 
         if USER_NEEDS_IMAGE_CHOOSE_PERMISSION:
             existing_images = permission_policy.instances_user_has_any_permission_for(
-                owner, ['choose']
+                owner, ["choose"]
             )
         else:
             existing_images = Image.objects.all()
 
-        existing_images = existing_images.filter(file_hash=image.file_hash).iterator(chunk_size=1)
+        existing_images = existing_images.filter(file_hash=image.file_hash).iterator(
+            chunk_size=1
+        )
         for potential_duplicate in existing_images:
-            if not getattr(settings, "WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT", False):
+            if not getattr(
+                settings, "WAGTAILCONTENTIMPORT_CHECK_DUPLICATE_IMAGE_CONTENT", False
+            ):
                 # We don't need to check the file content
                 return potential_duplicate
             # Check the file contents actually match - hash collisions are extremely unlikely by default
             # hence the chunk_size=1, but could happen if someone is using a custom image model with
             # some other hashing scheme
             if potential_duplicate.file.size == image.file.size and all(
-                a == b for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
+                a == b
+                for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
             ):
                 # We've found an existing image in the library
                 # so let's not save our new image, and return this one instead

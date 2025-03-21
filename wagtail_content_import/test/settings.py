@@ -11,6 +11,7 @@ import os
 
 import dj_database_url
 
+
 # Build paths inside the project like this: os.path.join(PROJECT_DIR, ...)
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -19,7 +20,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "c6u0-9c!7nilj_ysatsda0(f@e_2mws2f!6m0n^o*4#*q#kzp)"
+SECRET_KEY = "not-a-secret"  # noqa: S105
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,7 +108,9 @@ PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(default="sqlite:///test_wagtail_content_import.db"),
+    "default": dj_database_url.config(
+        default="sqlite:///test_wagtail_content_import.db"
+    ),
 }
 
 
@@ -160,4 +163,4 @@ WAGTAIL_SITE_NAME = "Wagtail Content Import test site"
 
 # This is the base URL used by the Wagtail admin site.
 # It is typically used for generating URLs to include in notification emails.
-WAGTAILADMIN_BASE_URL = 'http://example.com'
+WAGTAILADMIN_BASE_URL = "http://example.com"

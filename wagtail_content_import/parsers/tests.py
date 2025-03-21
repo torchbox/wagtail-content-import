@@ -9,7 +9,7 @@ from .google import GoogleDocumentParser
 class TestGoogleDocumentParser(TestCase):
     def setUp(self):
         with open(
-            os.path.join(os.path.dirname(__file__), "test_document.json"), "r"
+            os.path.join(os.path.dirname(__file__), "test_document.json")
         ) as test_document_file:
             test_document = json.load(test_document_file)
             self.parser = GoogleDocumentParser(test_document)

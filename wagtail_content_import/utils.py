@@ -1,6 +1,7 @@
 from wagtail.admin.views.pages.create import CreateView
 from wagtail.admin.views.pages.edit import EditView
 
+
 IS_IMPORTING_ATTRIBUTE = "_is_importing"
 
 
@@ -24,7 +25,9 @@ def create_page_from_import(request, parent_page, page_class, parsed_doc):
             self.page = page
             return self.get(request)
 
-    return CustomCreateView.as_view()(request, *page_class._meta.label_lower.split("."), parent_page.pk)
+    return CustomCreateView.as_view()(
+        request, *page_class._meta.label_lower.split("."), parent_page.pk
+    )
 
 
 def update_page_from_import(request, page, parsed_doc):

@@ -1,3 +1,5 @@
+import contextlib
+
 from django.utils.html import escape
 
 from .base import DocumentParser
@@ -73,15 +75,15 @@ class GoogleDocumentParser(DocumentParser):
         suffixes = []
 
         tag_for_style = {
-            'bold': 'b',
-            'italic': 'i',
-            'underline': 'u',
-            'strikethrough': 's',
+            "bold": "b",
+            "italic": "i",
+            "underline": "u",
+            "strikethrough": "s",
         }
         for style_key, tag in tag_for_style.items():
             if style.get(style_key):
-                prefixes.append("<{}>".format(tag))
-                suffixes.append("</{}>".format(tag))
+                prefixes.append(f"<{tag}>")
+                suffixes.append(f"</{tag}>")
 
         if style.get("baselineOffset") == "SUPERSCRIPT":
             prefixes.append("<sup>")
@@ -95,7 +97,7 @@ class GoogleDocumentParser(DocumentParser):
             # skip these as there's no direct equivalent in Wagtail content
             # https://developers.google.com/docs/api/reference/rest/v1/documents#Link
             if url:
-                prefixes.append('<a href="{}">'.format(escape(url)))
+                prefixes.append(f'<a href="{escape(url)}">')
                 suffixes.append("</a>")
 
         return prefixes, suffixes
@@ -149,7 +151,7 @@ class GoogleDocumentParser(DocumentParser):
         for part in parts:
             html += "<li>" + part["html"]
             html += f"<{list_tag}>" if part.get("has_children") else "</li>"
-            for i in range(0, part.get("num_to_close", 0)):
+            for _i in range(part.get("num_to_close", 0)):
                 html += f"</{list_tag}></li>"
         html += f"</{list_tag}>"
         return html
@@ -217,7 +219,7 @@ class GoogleDocumentParser(DocumentParser):
             if style == "HEADING_1":
                 self.close_current_list()
                 self.close_current_block()
-                try:
+                with contextlib.suppress(KeyError):
                     self.blocks.append(
                         {
                             "type": "heading",
@@ -226,8 +228,6 @@ class GoogleDocumentParser(DocumentParser):
                             ].strip(),
                         }
                     )
-                except KeyError:
-                    pass
             elif "bullet" in paragraph:  # We're in a list
                 content = self.elements_to_html(paragraph, outer_tag=None)
                 self.current_list.append(
@@ -242,14 +242,14 @@ class GoogleDocumentParser(DocumentParser):
                 self.close_current_list()
 
                 tag_for_style = {
-                    'HEADING_2': 'h2',
-                    'HEADING_3': 'h3',
-                    'HEADING_4': 'h4',
-                    'HEADING_5': 'h5',
-                    'HEADING_6': 'h6',
+                    "HEADING_2": "h2",
+                    "HEADING_3": "h3",
+                    "HEADING_4": "h4",
+                    "HEADING_5": "h5",
+                    "HEADING_6": "h6",
                 }
 
-                outer_tag = tag_for_style.get(style, 'p')
+                outer_tag = tag_for_style.get(style, "p")
 
                 content = self.elements_to_html(paragraph, outer_tag=outer_tag)
                 self.unprocessed_embeds += content["embeds"]

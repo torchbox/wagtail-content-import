@@ -24,7 +24,7 @@ class MicrosoftPicker(Picker):
     js_template = "wagtail_content_import/microsoft_picker_js_init.html"
 
     def render_js_init(self, request):
-        return mark_safe(
+        return mark_safe(  # noqa: S308
             render_to_string(self.js_template, self.get_context(), request=request)
         )
 
