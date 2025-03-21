@@ -52,8 +52,6 @@ testing = [
     "mock>=1.0.0",
     # For coverage and PEP8 linting
     "coverage>=3.7.0",
-    "flake8>=2.2.0",
-    # Required for matrix build on Travis
     "tox==3.9.0",
     "dj-database-url==0.5.0"
 ]
