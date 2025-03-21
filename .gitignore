@@ -41,3 +41,7 @@ nosetests.xml
 /.pytest_cache/
 /htmlcov/*
 /.tox/*
+
+/venv/
+/.venv/
+/test-media/

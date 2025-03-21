@@ -9,10 +9,10 @@ Wagtail OneDrive/SharePoint integration relies on Microsoft APIs, which you will
 3. Either while creating your registration, or by selecting your project and navigating to `Authentication`, add a new `redirect URI`:
 
     If you have included `wagtail_content_import.urls` as follows:
-    
+
         url(r'ADDITIONAL_URL_PATH/', include(wagtail_content_import_urls))
 
-   
+
    The redirect URI will be: `https://BASE_URL/ADDITIONAL_URL_PATH/microsoft/auth/`
    (substituting BASE_URL for your site's url, and ADDITIONAL_URL_PATH for the path under which you have included `wagtail_content_import.urls`)
 

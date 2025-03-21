@@ -60,7 +60,7 @@ class ImageBlock(StructBlock):
         icon = "image / picture"
         admin_text = mark_safe("<b>Image Block</b>")
         label = "Image Block"
-        template = "pages/blocks/image_block.html" 
+        template = "pages/blocks/image_block.html"
 ```
 
 In a StreamField:

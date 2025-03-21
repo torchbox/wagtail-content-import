@@ -5,7 +5,7 @@ Wagtail Google Docs integration relies on Google APIs, which you will first need
 1. Navigate to the [Google API Library](https://console.developers.google.com/apis/library). Select a project for your Wagtail site, or create a new one now.
 
 2. Find and enable the [Google Docs](https://console.developers.google.com/apis/library/docs.googleapis.com) and [Google Drive](https://console.developers.google.com/apis/library/drive.googleapis.com) APIs.
-    
+
 3. Find and enable the [Google Picker](https://console.developers.google.com/apis/api/picker.googleapis.com) API, and copy its API key to the setting `WAGTAILCONTENTIMPORT_GOOGLE_PICKER_API_KEY`.
 
 4. Open the [Credentials](https://console.developers.google.com/apis/credentials) page in the API Console.
@@ -20,7 +20,7 @@ Wagtail Google Docs integration relies on Google APIs, which you will first need
 
         Note: adding these sensitive scopes means that you will need to submit your project for verification by Google to
         avoid user caps and warning pages during use.
-        
+
     3. Add your domain to `Authorised domains`.
 
  7. For `Application type`, choose `Web application`
