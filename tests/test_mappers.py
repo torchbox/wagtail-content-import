@@ -8,8 +8,13 @@ from wagtail.images import get_image_model
 from wagtail.images.tests.utils import get_test_image_file, get_test_image_file_jpeg
 from wagtail.models import Page
 
-from ..parsers.tables import Cell, Table
-from .converters import ImageConverter, RichTextConverter, TableConverter, TextConverter
+from wagtail_content_import.mappers.converters import (
+    ImageConverter,
+    RichTextConverter,
+    TableConverter,
+    TextConverter,
+)
+from wagtail_content_import.parsers.tables import Cell, Table
 
 
 FIND_BLOCK_KEYS = re.compile('( ?data-block-key="[^"]+")')
@@ -74,7 +79,7 @@ class TestConverters(TestCase):
             "Should not be converted to page link",
         )
 
-    @override_settings(ROOT_URLCONF="wagtail_content_import.test.non_root_urls")
+    @override_settings(ROOT_URLCONF="testapp.non_root_urls")
     def test_rich_text_converts_links_with_non_root_url(self):
         # Test that links exactly matching page urls are converted to internal links
         text_converter = RichTextConverter("test_block")

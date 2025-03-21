@@ -3,7 +3,7 @@ import os
 
 from django.test import TestCase
 
-from .google import GoogleDocumentParser
+from wagtail_content_import.parsers.google import GoogleDocumentParser
 
 
 class TestGoogleDocumentParser(TestCase):
