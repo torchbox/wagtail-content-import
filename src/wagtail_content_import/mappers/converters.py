@@ -16,6 +16,8 @@ from wagtail.rich_text import RichText
 from wagtail.rich_text import features as feature_registry
 from wagtail.rich_text.rewriters import LinkRewriter
 
+from wagtail_content_import import WAGTAIL_CONTENT_IMPORT_REQUEST_TIMEOUT
+
 
 USER_NEEDS_IMAGE_CHOOSE_PERMISSION = None
 
@@ -123,7 +125,7 @@ class ImageConverter(BaseConverter):
 
     @staticmethod
     def fetch_image(url):
-        response = requests.get(url, timeout=25)
+        response = requests.get(url, timeout=WAGTAIL_CONTENT_IMPORT_REQUEST_TIMEOUT)
 
         if response.status_code != HTTPStatus.OK:
             return
