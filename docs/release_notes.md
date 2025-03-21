@@ -1,10 +1,15 @@
 # Release Notes
 
+## Version 0.12.2 (2025-03-21)
+
+- Fix method signature for Wagtail 6.4 (@andylolz)
+- Add LICENSE file (@rxm7706)
+
 ## Version 0.12.1 (18/10/2024)
 
 - Fix converting external to internal links when wagtail urls are not served at the root
 
-## Version 0.12.1 (4/4/2024)
+## Version 0.12.0 (4/4/2024)
 
 - Wagtail 6 compatibility
 

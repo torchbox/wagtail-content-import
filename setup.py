@@ -19,7 +19,7 @@ with io.open("README.md", encoding="utf-8") as readme_file:
 
 setup(
     name="wagtail_content_import",
-    version="0.12.1",
+    version="0.12.2",
     description="A module for Wagtail that provides functionality for importing page content from third-party sources.",
     author="Samir Shah, Jacob Topp-Mugglestone, Karl Hobley, Matthew Westcott",
     author_email="jacobtm@torchbox.com",
