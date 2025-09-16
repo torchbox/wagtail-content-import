@@ -64,6 +64,8 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.module]
 name = "wagtail_content_import"
+path = "src/wagtail_content_import"
+
 
 [tool.flit.sdist]
 exclude = [
