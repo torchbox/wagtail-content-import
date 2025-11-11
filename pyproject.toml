@@ -63,7 +63,7 @@ requires = ["flit_core >=3.11,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.module]
-name = "wagtail_content_import"
+name = "src/wagtail_content_import"
 
 [tool.flit.sdist]
 exclude = [
