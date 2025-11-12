@@ -1,0 +1,82 @@
+[project]
+name = "wagtail_content_import"
+description = "A module for Wagtail that provides functionality for importing page content from third-party sources."
+authors = [
+
+    {name = "Samir Shah", email = "solaris.smoke@gmail.com"},
+    {name = "Emily Topp-Mugglestone", email = "emilytm@torchbox.com"},
+    {name = "Karl Hobley", email = "karl@kaed.uk"},
+    {name = "Matthew Westcott", email = "matthew.westcott@torchbox.com"},
+]
+maintainers = [
+    {name = "Emily Topp-Mugglestone", email = "emilytm@torchbox.com"},
+]
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+keywords = ["Wagtail", "Django", "content import", "Google Docs", "OneDrive", "SharePoint", "docx"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.1",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 6",
+]
+
+dynamic = ["version"]
+requires-python = ">=3.9"
+dependencies = [
+    "Wagtail>=6.3",
+    "python-docx>=0.8.10"
+]
+
+[project.optional-dependencies]
+testing = [
+    # Required for running the tests
+    "mock>=1.0.0",
+    # For coverage and PEP8 linting
+    "coverage>=7.7.0",
+    "tox==4.11",
+    "dj-database-url>=2.3.0,<3.0"
+]
+
+[project.urls]
+Source = "https://github.com/torchbox/wagtail-content-import"
+Documentation = "https://torchbox.github.io/wagtail-content-import/index.html"
+Changelog = "https://github.com/torchbox/wagtail-content-import/blob/main/docs/release_notes.md"
+
+
+[build-system]
+requires = ["flit_core >=3.11,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "wagtail_content_import"
+
+[tool.flit.sdist]
+exclude = [
+    ".*",
+    "*.db",
+    "*.json",
+    "*.ini",
+    "*.sqlite3",
+    "*.yaml",
+    "docs/",
+    "tests/",
+    "wagtail_content_import/test/",
+    "CHANGELOG.md",
+    "ruff.toml",
+    "testmanage.py",
+]
