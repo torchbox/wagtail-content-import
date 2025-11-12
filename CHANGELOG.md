@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Maintenance update for Wagtail 7.0 & 7.1 compatibility
+- Maintenance update for Wagtail 7.0, 7.1 & 7.2 compatibility
 
 ## [0.12.2] - 2025-03-21
 
