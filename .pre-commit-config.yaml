@@ -2,11 +2,11 @@ ci:
   autofix_prs: false
 
 default_language_version:
-  python: python3.13
+  python: python3.14
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -20,8 +20,8 @@ repos:
       - id: trailing-whitespace
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # keep in sync with .github/workflows/ruff.yml
-    rev: 'v0.11.1'
+    rev: 'v0.14.4'
     hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-check
+        args: [ --fix ]
       - id: ruff-format
