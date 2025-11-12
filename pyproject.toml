@@ -64,10 +64,6 @@ Changelog = "https://github.com/torchbox/wagtail-content-import/blob/main/docs/r
 requires = ["flit_core >=3.11,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.module]
-path = "src/wagtail_content_import"
-
-
 [tool.flit.sdist]
 exclude = [
     ".*",
