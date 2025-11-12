@@ -23,11 +23,11 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Site Management",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Framework :: Django",
     "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.1",
@@ -49,8 +49,8 @@ testing = [
     # Required for running the tests
     "mock>=5.2.0",
     # For coverage and PEP8 linting
-    "coverage>=7.10.6",
-    "tox>=4.30.2",
+    "coverage>=7.11.3",
+    "tox>=4.32.0",
     "dj-database-url>=3,<4"
 ]
 

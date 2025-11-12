@@ -29,8 +29,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.12", "3.13"]
-        django: [ "4.2" ]
-        wagtail: [ "6.3" ]
+        django: [ "5.2" ]
+        wagtail: [ "7.0" ]
         database: [ "sqlite" ]
     steps:
       - uses: actions/checkout@v4
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
         database: ["postgres"]
 
     services:
