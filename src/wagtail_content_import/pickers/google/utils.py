@@ -1,7 +1,6 @@
 import json
 
 from django.template.loader import render_to_string
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from ...parsers import get_google_parser
@@ -49,10 +48,10 @@ class GooglePicker(Picker):
         css = {}
         js = [
             "wagtail_content_import/google_picker.js",
-            format_html(
+            mark_safe(
                 '<script async defer src="https://apis.google.com/js/api.js" onload="window.googlepicker_api_loaded = true;"></script>'
             ),
-            format_html(
+            mark_safe(
                 '<script async defer src="https://accounts.google.com/gsi/client" onload="window.googlepicker_client_loaded = true;"></script>'
             ),
         ]
