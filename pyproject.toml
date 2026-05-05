@@ -30,18 +30,16 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Framework :: Django",
     "Framework :: Django :: 4.2",
-    "Framework :: Django :: 5.1",
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Framework :: Wagtail",
-    "Framework :: Wagtail :: 6",
     "Framework :: Wagtail :: 7",
 ]
 
 dynamic = ["version"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "Wagtail>=6.3",
+    "Wagtail>=7.0",
     "python-docx>=1.2.0"
 ]
 
@@ -50,7 +48,7 @@ testing = [
     # Required for running the tests
     "mock>=5.2.0",
     # For coverage and PEP8 linting
-    "coverage>=7.11.3",
+    "coverage>=7.13",
     "tox>=4.32.0",
     "dj-database-url>=3,<4"
 ]
