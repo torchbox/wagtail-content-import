@@ -1,3 +1,3 @@
-__version__ = "0.14.0"
+__version__ = "0.13.2"
 
 WAGTAIL_CONTENT_IMPORT_REQUEST_TIMEOUT = 25
