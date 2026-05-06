@@ -174,7 +174,9 @@ class ImageConverter(BaseConverter):
             # some other hashing scheme
             if potential_duplicate.file.size == image.file.size and all(
                 a == b
-                for a, b in zip(potential_duplicate.file.chunks(), image.file.chunks())
+                for a, b in zip(
+                    potential_duplicate.file.chunks(), image.file.chunks(), strict=False
+                )
             ):
                 # We've found an existing image in the library
                 # so let's not save our new image, and return this one instead
