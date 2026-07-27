@@ -3,7 +3,6 @@ import re
 from django import template
 from django.urls import reverse
 from django.utils.html import format_html_join
-from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail import hooks
 from wagtail.admin.action_menu import ActionMenuItem
 
@@ -70,10 +69,7 @@ def get_picker_buttons_context(context, view):
     return context
 
 
-if WAGTAIL_VERSION >= (6, 0):
-    action_menu_template = "wagtailadmin/pages/action_menu/menu.html"
-else:
-    action_menu_template = "wagtail_content_import/action_menu_wrapper.html"
+action_menu_template = "wagtailadmin/pages/action_menu/menu.html"
 
 
 @register.inclusion_tag(action_menu_template, takes_context=True)

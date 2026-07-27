@@ -1,5 +1,18 @@
 # Release Notes
 
+## Unreleased
+
+- Add support for Wagtail 7.3 and 7.4 LTS
+- Drop support for Wagtail < 7.3, Python < 3.10 and Django < 5.2
+
+## Version 0.13.2 (2026-02-19)
+
+- Compatibility fix for Django 6.0
+
+## Version 0.13.1 (2025-12-10)
+
+- Maintenance update for Wagtail 7.0, 7.1 & 7.2 compatibility
+
 ## Version 0.12.2 (2025-03-21)
 
 - Fix method signature for Wagtail 6.4 (@andylolz)

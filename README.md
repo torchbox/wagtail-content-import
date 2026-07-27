@@ -24,9 +24,9 @@ Currently, it supports:
     - Headings
 
 ### Requirements:
-* Python >= 3.9
+* Python >= 3.10
 * Django >= 4.2
-* Wagtail >= 6.3
+* Wagtail >= 7.0
 
 For the full documentation, see: https://torchbox.github.io/wagtail-content-import/
 
